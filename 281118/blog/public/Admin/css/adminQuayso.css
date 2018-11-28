@@ -1,0 +1,52 @@
+.icon {
+	width: 20%;
+	float: left;
+}
+.icon img{
+	width: 100px;
+	height: 100px;
+}
+.title{
+	width: 60%;
+	float: left;
+	font-size: 45px;
+	font-weight: bold;
+	text-align: center;
+	color: red;
+	margin-top: 20px;
+}
+.date{
+	color: black;
+	font-size: 30px;
+}
+.ball1{
+	color: #ff00d2;
+	font-size: 30px;
+	font-weight: bold;
+}
+.ball2{
+	color: #990000;
+	font-size: 30px;
+	font-weight: bold;
+}
+.ball3{
+	color: #5d2a2a;
+	font-size: 30px;
+	font-weight: bold;
+}
+#Nhapso{
+	color: black;
+	font-weight: bold;
+}
+.import{
+	font-weight: bold;
+}
+.test{
+	width: 50%;
+}
+.test1{
+	margin-top: 5px;
+}
+.import-form{
+	width: 30%;
+}

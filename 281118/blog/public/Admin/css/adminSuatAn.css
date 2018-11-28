@@ -1,0 +1,19 @@
+.hTitle{
+	text-align: center;
+}
+.tada{
+	width: 80%;
+	margin-left: 100px;
+	margin-bottom: 10px;
+}
+.tada tr td{
+	width: 33.33%;
+	border: 1px solid black;
+	text-align: center;
+	font-weight: bold;
+}
+.tada input{
+	border: 0px;
+	font-weight: bold;
+	margin-left: 5px;
+}
