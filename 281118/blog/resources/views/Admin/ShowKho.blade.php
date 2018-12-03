@@ -172,6 +172,8 @@
             <input  name="Luuy" type="text" class="form-control" />
             <label for="Ghichu">Ghi chú</label>
             <input  name="Ghichu" type="text" class="form-control" />
+            <label for="Phieugiaonhan">Phiếu giao nhận</label>
+            <input  name="Phieugiaonhan" type="text" class="form-control" />
 
             <div id="img" style="margin-top: 10px; border: 1px solid black;width: 300px; height: 150px"></div>
 

@@ -21,7 +21,7 @@ var table = $('#tablekho').DataTable({
             style:    'multi',
             selector: 'td:first-child'
         },
-        order: [[ 1, 'asc' ]],
+        order: [[ 1, 'DESC' ]],
 						  initComplete: function () {
             var api = this.api();
 

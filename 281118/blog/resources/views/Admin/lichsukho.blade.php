@@ -168,7 +168,7 @@
 		</li>
 	</div>
 	</div>
-					<li><h4>Tên</h4>
+			<li><h4>Tên</h4>
 			<p>{{$ten->Ten}}</p></li>
 			<li><h4>Thông số</h4>
 			<p>{{$ten->Thongso}}</p></li>
@@ -178,6 +178,7 @@
 			<p>{{$ten->Luuy}}</p></li>
 			<li><h4>Nhà cung cấp</h4>
 			<p>{{$ten->Nhacungcap}}</p></li>
+			
 			</ul>
 		</div>
 	</div>

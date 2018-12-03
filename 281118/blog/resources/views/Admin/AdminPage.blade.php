@@ -275,7 +275,7 @@
 					
 					$('#tablekho').on( 'draw.dt', function () {
 //KHO2    					
-setTimeout($('.showHinh').click(function (e) {
+			setTimeout($('.showHinh').click(function (e) {
            
              				   var x =$(this).text();
 				           			 $.ajax({

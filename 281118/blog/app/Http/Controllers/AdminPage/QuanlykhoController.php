@@ -40,7 +40,7 @@ class QuanlykhoController extends Controller
     }
     public function ShowKho(){
         $test= \DB::table('khotong')->select('id','MVT','MTB','Ten','Sl','Ghichu')->where('Sl','>=',1)->distinct('MVT')->get(); 
-        $data= \DB::select(\DB::raw('SELECT MVT,Ten,Ghichu, SUM(Sl) as Sl FROM khotong WHERE Sl>=1 GROUP BY MVT,Ten,Ghichu'));
+        $data= \DB::select(\DB::raw('SELECT MVT,Ten,Ghichu, SUM(Sl) as Sl FROM khotong WHERE Sl>=1 GROUP BY MVT,Ten,Ghichu Order by MVT DESC'));
     
         return view('Admin.ShowKho')->with('kho',$data);
     }
@@ -202,6 +202,7 @@ class QuanlykhoController extends Controller
         $Ghichu = $Request->Ghichu;
         $MVTtontai = \DB::table('khotong')->where('MVT',$Request->MVT)->get()->first();
       $Nhacungcap = $Request->Nhacungcap;
+    
       // if($Request->has('Ngaymua')){
       // $Ngaymua = new Carbon($Request->Ngaymua);  $Ngaymua->modify('+'.$Thoigianbdint.' month');
 
@@ -249,7 +250,8 @@ class QuanlykhoController extends Controller
             $Ghichu = $Request->Ghichu;
             $Nhacungcap = $Request->Nhacungcap;
             $Luuy = $Request->Luuy;
-
+              $Phieugiaonhan = $Request->Phieugiaonhan;
+              
             $Nhap = QuanlykhoModel::find($id);
             $Nhap->Congty = $Congty;
             if($hinhanh!=null)
@@ -281,6 +283,7 @@ class QuanlykhoController extends Controller
             $Nhap->Nhacungcap = $Nhacungcap;
             $Nhap->Ghichu = $Ghichu;
              $Nhap->Luuy = $Luuy;
+             $Nhap->Phieugiaonhan = $Phieugiaonhan;
             $Nhap->Bophan = "Kho";
             $Nhap->save();
             // chỉnh sửa đồng bộ
@@ -381,6 +384,7 @@ class QuanlykhoController extends Controller
             $Giatri = $Request->Giatri;
             $Ghichu = $Request->Ghichu;
              $Luuy = $Request->Luuy;
+             $Phieugiaonhan = $Request->Phieugiaonhan;
             if($Sl <= 0)
                 return back();
             else{
@@ -412,6 +416,7 @@ class QuanlykhoController extends Controller
                     $Nhap->Bophan = "Kho";
                     $Nhap->Ghichu = $Ghichu;
                     $Nhap->Luuy = $Luuy;
+                    $Nhap->Phieugiaonhan = $Phieugiaonhan;
                     $Nhap->save();
 
                     $Nhaphis = new HistoryNhapModel;
@@ -1137,7 +1142,7 @@ class QuanlykhoController extends Controller
         ->whereNull('MTB')
         ->where('Sl','>=',1)
         ->get()->first();
-        dd($bangtong);
+        
         }
         else{
          $bangtong = \DB::table('khotong')->where(['MVT'=>$MVT,'Ngaynhap'=>$Ngaynhap])->get()->first();
