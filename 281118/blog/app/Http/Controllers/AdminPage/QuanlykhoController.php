@@ -34,7 +34,7 @@ class QuanlykhoController extends Controller
     }
     public function ShowKho(){
         $test= \DB::table('khotong')->select('id','MVT','MTB','Ten','Sl','Ghichu')->where('Sl','>=',1)->distinct('MVT')->get(); 
-        $data= \DB::select(\DB::raw('SELECT MVT,Ten,Ghichu, SUM(Sl) as Sl FROM khotong WHERE Sl>=1 GROUP BY MVT,Ten,Ghichu Order by MVT DESC'));
+        $data= \DB::select(\DB::raw('SELECT MVT,Ten,Ghichu, SUM(Sl) as Sl FROM khotong WHERE Sl>=1 GROUP BY MVT,Ten,Ghichu'));
 
         return view('Admin.ShowKho')->with('kho',$data);
     }
@@ -192,11 +192,10 @@ class QuanlykhoController extends Controller
         return back();
     }
     public function NhapKho(Request $Request){
-        $test=null;
+        $bol=null;
         $Ghichu = $Request->Ghichu;
         $MVTtontai = \DB::table('khotong')->where('MVT',$Request->MVT)->get()->first();
         $Nhacungcap = $Request->Nhacungcap;
-    
       // if($Request->has('Ngaymua')){
       // $Ngaymua = new Carbon($Request->Ngaymua);  $Ngaymua->modify('+'.$Thoigianbdint.' month');
 
@@ -244,8 +243,7 @@ class QuanlykhoController extends Controller
             $Ghichu = $Request->Ghichu;
             $Nhacungcap = $Request->Nhacungcap;
             $Luuy = $Request->Luuy;
-              $Phieugiaonhan = $Request->Phieugiaonhan;
-              
+
             $Nhap = QuanlykhoModel::find($id);
             $Nhap->Congty = $Congty;
             if($hinhanh!=null)
@@ -266,20 +264,19 @@ class QuanlykhoController extends Controller
            $Nhap->Ngaynhap = $Ngaynhap;
            $Nhap->Trangthai = 0;
             //Thêm 
-            $Nhap->Sohopdong = $Sohopdong;
-            $Nhap->Nguoimua = $Nguoimua;
-            $Nhap->Ngaymua = $Ngaymua;
-            $Nhap->Thoigianbh = $Thoigianbh;
-            $Nhap->Thoigiankh = $Thoigiankh;
-            $Nhap->Thoigianbd = $Ngaymua;
-            $Nhap->Ngaykiemke = $Ngaykiemke;
-            $Nhap->Giatri = $Giatri;
-            $Nhap->Nhacungcap = $Nhacungcap;
-            $Nhap->Ghichu = $Ghichu;
-             $Nhap->Luuy = $Luuy;
-             $Nhap->Phieugiaonhan = $Phieugiaonhan;
-            $Nhap->Bophan = "Kho";
-            $Nhap->save();
+           $Nhap->Sohopdong = $Sohopdong;
+           $Nhap->Nguoimua = $Nguoimua;
+           $Nhap->Ngaymua = $Ngaymua;
+           $Nhap->Thoigianbh = $Thoigianbh;
+           $Nhap->Thoigiankh = $Thoigiankh;
+           $Nhap->Thoigianbd = $Ngaymua;
+           $Nhap->Ngaykiemke = $Ngaykiemke;
+           $Nhap->Giatri = $Giatri;
+           $Nhap->Nhacungcap = $Nhacungcap;
+           $Nhap->Ghichu = $Ghichu;
+           $Nhap->Luuy = $Luuy;
+           $Nhap->Bophan = "Kho";
+           $Nhap->save();
             // chỉnh sửa đồng bộ
            if($hinhanh!=null){
             \DB::table('khotong')->where('MVT',$MVT)->update([
@@ -370,48 +367,46 @@ if($bol == 1)
     $Congty = $Request->Congty;
     $dvt = $Request->dvt;
             // Thêm 
-            $Sohopdong = $Request->Sohopdong;
-            $Nguoimua = $Request->Nguoimua;
-            $Ngaymua = $Request->Ngaymua;
-            $Thoigianbh = $Request->Thoigianbh;
-            $Thoigiankh = $Request->Thoigiankh;
-            $Giatri = $Request->Giatri;
-            $Ghichu = $Request->Ghichu;
-             $Luuy = $Request->Luuy;
-             $Phieugiaonhan = $Request->Phieugiaonhan;
-            if($Sl <= 0)
-                return back();
-            else{
-                    $Nhap = new QuanlykhoModel;
-                    $Nhap->Congty = $Congty;
-                    $Nhap->Hinh = $hinhanh;
-                    $Nhap->Hinh1 = $hinhanh1;
-                    $Nhap->Hinh2 = $hinhanh2;
-                    $Nhap->Hinh3 = $hinhanh3;
-                    $Nhap ->MVT = $MVT;
-                    $Nhap->MTB = $MTB;
-                    $Nhap->Ten = $Ten;
-                    $Nhap->Thongso = $Thongso;
-                    $Nhap->Sl = $Sl;
-                    $Nhap->dvt = $dvt;
-                    $Nhap->Nguoiphutrach = Auth::user()->name;
-                    $Nhap->Ngaynhap = $Ngaynhap;
-                    $Nhap->Trangthai = 0;
+    $Sohopdong = $Request->Sohopdong;
+    $Nguoimua = $Request->Nguoimua;
+    $Ngaymua = $Request->Ngaymua;
+    $Thoigianbh = $Request->Thoigianbh;
+    $Thoigiankh = $Request->Thoigiankh;
+    $Giatri = $Request->Giatri;
+    $Ghichu = $Request->Ghichu;
+    $Luuy = $Request->Luuy;
+    if($Sl <= 0)
+        return back();
+    else{
+        $Nhap = new QuanlykhoModel;
+        $Nhap->Congty = $Congty;
+        $Nhap->Hinh = $hinhanh;
+        $Nhap->Hinh1 = $hinhanh1;
+        $Nhap->Hinh2 = $hinhanh2;
+        $Nhap->Hinh3 = $hinhanh3;
+        $Nhap ->MVT = $MVT;
+        $Nhap->MTB = $MTB;
+        $Nhap->Ten = $Ten;
+        $Nhap->Thongso = $Thongso;
+        $Nhap->Sl = $Sl;
+        $Nhap->dvt = $dvt;
+        $Nhap->Nguoiphutrach = Auth::user()->name;
+        $Nhap->Ngaynhap = $Ngaynhap;
+        $Nhap->Trangthai = 0;
                     //Thêm 
-                     $Nhap->Nhacungcap = $Nhacungcap;
-                    $Nhap->Sohopdong = $Sohopdong;
-                    $Nhap->Nguoimua = $Nguoimua;
-                    $Nhap->Ngaymua = $Ngaymua;
-                    $Nhap->Thoigianbh = $Thoigianbh;
-                    $Nhap->Thoigiankh = $Thoigiankh;
-                    $Nhap->Thoigianbd = $Ngaymua;
-                    $Nhap->Ngaykiemke = $Ngaykiemke;
-                    $Nhap->Giatri = $Giatri;
-                    $Nhap->Bophan = "Kho";
-                    $Nhap->Ghichu = $Ghichu;
-                    $Nhap->Luuy = $Luuy;
-                    $Nhap->Phieugiaonhan = $Phieugiaonhan;
-                    $Nhap->save();
+        $Nhap->Nhacungcap = $Nhacungcap;
+        $Nhap->Sohopdong = $Sohopdong;
+        $Nhap->Nguoimua = $Nguoimua;
+        $Nhap->Ngaymua = $Ngaymua;
+        $Nhap->Thoigianbh = $Thoigianbh;
+        $Nhap->Thoigiankh = $Thoigiankh;
+        $Nhap->Thoigianbd = $Ngaymua;
+        $Nhap->Ngaykiemke = $Ngaykiemke;
+        $Nhap->Giatri = $Giatri;
+        $Nhap->Bophan = "Kho";
+        $Nhap->Ghichu = $Ghichu;
+        $Nhap->Luuy = $Luuy;
+        $Nhap->save();
 
         $Nhaphis = new HistoryNhapModel;
         $Nhaphis->MVT = $MVT;
@@ -1104,7 +1099,6 @@ public function formXuatKhoV2(Request $Request){
     $SLX = $Request->SLX;
     $i = -1;
     $check = \DB::table('khotong')->select('MTB','Sl')->where([['MVT',$MVTX],['Sl','>',0]])->get();
-    dd($check);
     $MTBtt  = \DB::select(\DB::raw('SELECT TOP 1 * FROM (select  MTB from khotong
         union ALL select MTB from tsphongban) as TableMTB order by MTB DESC'));
 
@@ -1138,11 +1132,11 @@ public function FormXuatKho($Ngaynhap=null,$MVT,$MTB,$Bophannhan,$Nguoiphutrach,
         ->whereNull('MTB')
         ->where('Sl','>=',1)
         ->get()->first();
-        
-        }
-        else{
-         $bangtong = \DB::table('khotong')->where(['MVT'=>$MVT,'Ngaynhap'=>$Ngaynhap])->get()->first();
-        }
+        // dd($bangtong);
+    }
+    else{
+       $bangtong = \DB::table('khotong')->where(['MVT'=>$MVT,'Ngaynhap'=>$Ngaynhap])->get()->first();
+   }
 
 
    if($bangtong->Sl < $Sl){
