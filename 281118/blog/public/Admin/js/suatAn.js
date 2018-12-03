@@ -137,7 +137,7 @@ function checkDK(){
 		}
 	}
 	calendar+="</table>";
-	document.getElementById("daTitle").innerHTML = "Bạn Đã Đăng Kí Suất Ăn Tháng "+(fmonth-1);
+	document.getElementById("daTitle").innerHTML = "Bạn Đã Đăng Kí Suất Ăn Tháng "+(thang);
 	document.getElementById("title").innerHTML = "ĐĂNG KÍ ĂN THÁNG "+fmonth;
 	document.getElementById("calendar").innerHTML = calendar;
 	document.getElementById('daDK').style.display="block";
