@@ -192,7 +192,7 @@ class QuanlykhoController extends Controller
         return back();
     }
     public function NhapKho(Request $Request){
-        $bol=null;
+        $test=null;
         $Ghichu = $Request->Ghichu;
         $MVTtontai = \DB::table('khotong')->where('MVT',$Request->MVT)->get()->first();
         $Nhacungcap = $Request->Nhacungcap;
@@ -1097,7 +1097,9 @@ public function formXuatKhoV2(Request $Request){
     $NguoiphutrachBP = $Request->NguoiphutrachBP;
     $MVTX = $Request->MVTX;
     $SLX = $Request->SLX;
-    $i = -1 ;
+    $i = -1;
+    $check = \DB::table('khotong')->select('MTB','Sl')->where([['MVT',$MVTX],['Sl','>',0]])->get();
+    dd($check);
     $MTBtt  = \DB::select(\DB::raw('SELECT TOP 1 * FROM (select  MTB from khotong
         union ALL select MTB from tsphongban) as TableMTB order by MTB DESC'));
 
