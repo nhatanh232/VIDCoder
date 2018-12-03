@@ -404,6 +404,40 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
                 }
 
         }
+        public static function ShowDataTable(Request $Request){
+       
+            $condition = $Request->Datetime;
+
+            if($condition == null){
+                     $data = DiemDanhModel::join('STAFF','Diemdanh.Staff_ID','=','STAFF.Staff_ID')->select('Diemdanh.*','STAFF.Full_name')->get();
+                    return view('Admin.AdminControl.GioDaoTao_view.table')->with('detailDD',$data);
+            }
+            else
+                {
+                    $data = DiemDanhModel::join('STAFF','Diemdanh.Staff_ID','=','STAFF.Staff_ID')->select('Diemdanh.*','STAFF.Full_name')->where('Diemdanh.updated_at',$condition)->get();
+                     return view('Admin.AdminControl.GioDaoTao_view.table2')->with('detailDD',$data);
+                }
+
+         
+           
+        }
+        public static function editDataInDay(Request $Request){
+            $Staff_ID = $Request->Staff_ID;
+            $Event_Date = $Request->Event_Date;
+            $Event_Name = $Request->Event_Name;
+            $Categories = $Request->Categories;
+            $Hours = $Request->Hours;
+            $id = $Request->id;
+                $update = DiemDanhModel::find($id);
+                $update->Staff_ID = $Staff_ID;
+                $update->Event_Name = $Event_Name;
+                $update->Event_Date = $Event_Date;
+                $update->Categories = $Categories;
+                $update->Hours = $Hours;
+                $update->save();
+                return 'Đã chỉnh sửa thành công';
+
+        }
 }
 class StoreThamNienTotal{
     public static  function Contribute_point(){

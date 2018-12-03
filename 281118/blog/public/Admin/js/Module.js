@@ -443,20 +443,118 @@ function FormNhapLieu(url){
             success:function(data){
                 alert(data);
                 $('input[name="Staff_ID"]').val('');
+                $('input[name="Full_name"]').val('');
                 $('input[name="Event_Name"]').val('');
                 $('input[name="Event_Date"]').val('');
                 
                   $('input[name="Hours"]').val('');
             },
+            error:function(){
+                alert("Nhập đầy đủ thông tin");
+            }
             
         }) 
     });
 
 }
+function getViewDataToday(){
+    var date = new Date();
+    var day = date.getDate();
+    var month = date.getMonth()+1;
+    var year = date.getFullYear();
+
+
+  
+    $('a').click(function(){
+        event.preventDefault();
+        var condition = $(this).text();
+        
+        if(condition == 'Hôm nay')
+            var Datetime = year+'-'+month+'-'+day;
+        else
+            var Datetime = null;
+    
+        $.ajax({
+            type:"post",
+            url:'ShowDataTable',
+            headers:{
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data:{
+                Datetime:Datetime,
+            },
+            success:function(data){
+                $('#show-table').html(data);
+                  $('#formNhapCH').dataTable();
+                if(condition == 'Hôm nay')      
+                   buttonEditData();
+            }
+
+        });
+    });
+}
+
+
+function buttonEditData(){
+   
+ 
+    $('.editData').click(function(){
+        event.preventDefault();     
+        var id = this.value;
+        // get Value
+         var $row = jQuery(this).closest('tr');
+            var $columns = $row.find('td');
+             var Result = new Array();
+          $.each($columns, function(i, item) {
+          switch(i){
+            case 0:
+        Result['Staff_ID'] = $(this).find('input').val();   
+          break;
+         case 2:
+                Result['Event_Name'] = $(this).find('input').val();
+                break;
+         case 4:
+               Result['Event_Date'] = $(this).find('input').val();
+                break;
+         case 3:
+                Result['Categories'] = $(this).find('select option:selected').val();
+                break;
+         case 5:
+                Result['Hours'] = $(this).find('input').val();
+                break;
+           
+       }
+       
+    });
+    $(this).addClass('text-danger').html('Đã sửa');
+        // end getValue
+        $.ajax({
+            type:'get',
+            url:'editDataInDay',
+            headers:{
+                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+            data:{
+                Staff_ID:Result['Staff_ID'],
+                Event_Date:Result['Event_Date'],
+                Event_Name:Result['Event_Name'],
+                Categories:Result['Categories'],
+                Hours:Result['Hours'],
+                id:id
+            },
+            success:function(data){
+
+                alert(data);
+
+            }
+        })
+    })
+}
 function void_main_Modulejs(){
     $(document).ready(function(){
          FormNhapLieu();
           getDataDiemDanh();
-
+       getViewDataToday();
+      
     })
 }
