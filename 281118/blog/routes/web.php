@@ -189,6 +189,9 @@ Route::post('postDiemCongHien','AdminPage\ProfileController@postDiemCongHien')->
 Route::get('update','StoreProcedureProfile\StoreThamNien@Store_main')->name('update');
 Route::get('Store_main_total','StoreProcedureProfile\StoreThamNien@Store_main_total');
 Route::post('importamis','StoreProcedureProfile\StoreThamNien@Import_Amis_ICT')->name('importamis');
+
+Route::post('ShowDataTable','StoreProcedureProfile\StoreThamNien@ShowDataTable');
+Route::get('editDataInDay','StoreProcedureProfile\StoreThamNien@editDataInDay');
 });
 //Adminpage_Admin
 Route::group(['middleware'=>['AuthenAdmin']],function(){
