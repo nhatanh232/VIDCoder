@@ -118,17 +118,17 @@
       	  	<tfoot>
 		            <tr>
 		            	<th>Chọn</th>
-		            	<th>STT</th>
-		            	 
-		            	  <th>Mã vật tư</th>
-		            	  <th>Mã thiết bị</th>
-		            	
+		            	<th>STT</th>		            	 
+		            	<th>Mã vật tư</th>
+		            	<th>Mã thiết bị</th>
+		            	<th>Giá trị</th>
+		            	<th>Số hợp đồng</th>
+		            	<th>Phiếu giao nhận</th>
 		                <th>Bộ phận nhận</th>
 		                <th>Ngày nhận</th>
-		                
 		                <th>Người nhận</th>
 		                <th>Vị trí</th>
-		                  <th>Tình trạng</th>
+		         		<th>Tình trạng</th>
 		                <th>Người thực hiện</th>
 		                
 		          	 </tr>
