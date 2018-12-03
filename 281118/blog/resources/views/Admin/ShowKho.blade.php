@@ -289,7 +289,7 @@
 			
 		</select>
 
-	 	 <button class="btn btn-primary" style="padding-top: 15px; float: right;" data-button='ButtonXuat'>Xuất</button>
+	 	 <button class="btn btn-primary" style="margin-top: 15px; float: right;" data-button='ButtonXuat'>Xuất</button>
 	 	 
 </div>
  
