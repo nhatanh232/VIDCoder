@@ -43,16 +43,17 @@
 <br/>
 <div class="panel panel-primary">
           <div class="panel-heading">
-            <h3  class="panel-title">LỊCH SỬ ĐIỂM DANH <span> </span><span><a href="" class="panel-title">Hôm nay</a></span>
-            	/<span><a href="" class="panel-title">Tất cả</a></span>
+            <h3  class="panel-title">LỊCH SỬ ĐIỂM DANH <span>- (</span><span><a href="" class="panel-title bold">Hôm nay</a></span>
+            	/ <span><a href="" class="panel-title">Tất cả)</a></span>
             </h3>
             <!-- <div class="pull-right">
               <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
               <i class="glyphicon glyphicon-filter"></i>
                </span>
             </div> --> 
-          </div>    
-<table id="formNhapCH" class="table table-bordered ">
+          </div>
+<div id="show-table">
+<table id="formNhapCH" class="table table-bordered">
 	<thead>
 		<tr>
 			<th>Mã Nhân Viên</th>
@@ -76,6 +77,7 @@
 		@endforeach
 	</tbody>
 </table>
+</div>
 <div id="divIntro" style="width:auto;display:none; height: auto;"></div>
       <div class="modal" id="myModalFormXuat">
       	<div class="modal-content">
