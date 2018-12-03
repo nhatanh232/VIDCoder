@@ -15,7 +15,8 @@ use Auth;
 class BaoTriController extends Controller
 {
     public function getBaoDuong(){
-        $data = \DB::table('tsphongban')->select('MVT','MTB','Ten','Nguoiphutrach','Bophan','Location','thoigianbd')->orderByRaw('thoigianbd asc')->get();
+        $empty = null;
+        $data = \DB::table('tsphongban')->select('MVT','MTB','Ten','Nguoiphutrach','Bophan','Location','thoigianbd')->where('thoigianbd','!=',$empty)->orderByRaw('thoigianbd asc')->get();
         return view("Admin.BaoTriBaoDuong.BaoDuong")->with('data',$data);
     }
 

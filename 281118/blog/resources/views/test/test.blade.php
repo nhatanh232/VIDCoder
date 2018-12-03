@@ -31,12 +31,12 @@
 		<div>
 			<h1 class="info">Kỳ quay thưởng: #@if(!empty($Sodcchon)){{++$Sodcchon->Ki}} @endif| Ngày quay thưởng: @if(!empty($Sodcchon)){{date('d-m-Y',strtotime($Sodcchon->Ngay))}} @else Kì quay được cập nhật vào ngày mai @endif </h1>
 		</div>
-		<div class="container">
-			<p id="time"></p>
-		</div>
 		<div class="giaithuong">
 			<p>Giá Trị Giải Thưởng:@if(!empty($Sodcchon)) {{number_format($Sodcchon->Giaithuongdb)}}@endif đồng</p>
 		</div>
+		<div class="container">
+			<p id="time"></p>
+		</div>		
 		<div class="container" id="ShowContent">
 			<div class="rows">	
 
