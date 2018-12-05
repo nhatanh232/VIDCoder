@@ -8,7 +8,7 @@
     <h3  class="panel-title" id="title">Suất Ăn</h3>
   </div> 
   <div>
-    <h1 class="hTitle">THÔNG TIN SUẤT ĂN THÁNG 10</h1>
+    <h1 class="hTitle" id="hTitle"></h1>
     <!-- bắt đầu tạo lịch ở đây nè -->
     <div class="calendar">
     <table class="tada">
@@ -25,6 +25,14 @@
     </table>   
     </div> 
     <!-- tới đây là tạo lịch xong rồi nè -->
+    <!-- chổ này dành cho nội bộ nè -->
+    <div>
+      <div class="noibo">
+        <h1 class="hTitle">SUẤT ĂN CỦA PHÒNG</h1>
+        <div id="noibo"></div>
+      </div>
+    </div>
+    <!-- tới đây là kết thúc nè -->
   </div>
 </div>
 </div>

@@ -150,8 +150,7 @@
 			
 					<!-- end for -->
 				</div>
-			</div>			
-			<!-- hàng 2: Lịch sử -->			
+			</div>						
 		</div>
 	</div>
 

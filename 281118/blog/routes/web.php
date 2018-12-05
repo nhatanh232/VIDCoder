@@ -300,3 +300,4 @@ Route::post('updateSuatAn','suatan\SuatAnController@updateSuatAn')->name('update
 Route::get('viewAnAdmin','suatan\SuatAnController@viewAnAdmin');
 Route::get('getSuatAn','suatan\SuatAnController@getSuatAn');
 Route::get('getNVInfo','AdminPage\NhanSuController@getNVInfo');
+Route::get('getSuatAnTmp','suatan\SuatAnController@getDataSuatAnTmp');

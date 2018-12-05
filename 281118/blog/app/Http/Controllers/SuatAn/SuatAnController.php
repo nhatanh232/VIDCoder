@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SuatAn;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\SuatAn\SuatAnModel;
+use App\Profile\StaffModel;
 use Auth;
 
 class SuatAnController extends Controller
@@ -157,5 +158,12 @@ class SuatAnController extends Controller
         $nam = $Request->nam;
         $data = \DB::select(("exec suatAnData :Param1, :Param2, :Param3"),[':Param1' => $ngay, ':Param2' => $thang, 'Param3' => $nam]);
         return $data; 
+    }
+
+    public function getDataSuatAnTmp(Request $Request){
+        $thang = $Request->thang;
+        $nam = $Request->nam;
+        $data = \DB::table('SuatAn')->join('STAFF','SuatAn.MaNV','=','STAFF.Staff_ID')->select('SuatAn.*','STAFF.Full_name')->where(['ThangDK'=>$thang,'NamDK'=>$nam])->get();
+        return $data;
     }
 }
