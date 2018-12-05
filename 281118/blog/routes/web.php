@@ -192,6 +192,7 @@ Route::post('importamis','StoreProcedureProfile\StoreThamNien@Import_Amis_ICT')-
 
 Route::post('ShowDataTable','StoreProcedureProfile\StoreThamNien@ShowDataTable');
 Route::get('editDataInDay','StoreProcedureProfile\StoreThamNien@editDataInDay');
+Route::get('deleteDataInDay','StoreProcedureProfile\StoreThamNien@deleteDataInDay');
 });
 //Adminpage_Admin
 Route::group(['middleware'=>['AuthenAdmin']],function(){

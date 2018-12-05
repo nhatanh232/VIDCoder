@@ -31,7 +31,9 @@
 			</select></td>			
 			<td><input type="date"  value="{{$key->Event_Date}}"> </td>
 			<td><input type="double"  value="{{$key->Hours}}"></td>
-			<td><button class="btn btn-default editData" value="{{$key->id}}">Chỉnh sửa</button></td>
+			<td><button class="btn btn-default editData" value="{{$key->id}}">Chỉnh sửa</button>
+				<button class="btn btn-danger deleteData" value="{{$key->id}}">XÓA</button>
+			</td>
 		</tr>
 		@endforeach
 	</tbody>
