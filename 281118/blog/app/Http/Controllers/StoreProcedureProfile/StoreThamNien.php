@@ -438,6 +438,11 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
                 return 'Đã chỉnh sửa thành công';
 
         }
+        public static function deleteDataInDay(Request $Request){
+            $id = $Request->id;
+            DiemDanhModel::find($id)->delete();
+            return 'Đã xóa thành công';
+        }
 }
 class StoreThamNienTotal{
     public static  function Contribute_point(){

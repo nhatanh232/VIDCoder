@@ -487,7 +487,10 @@ function getViewDataToday(){
                 $('#show-table').html(data);
                   $('#formNhapCH').dataTable();
                 if(condition == 'Hôm nay')      
-                   buttonEditData();
+                  { 
+                    buttonEditData();
+                    deleteData();
+                    }
             }
 
         });
@@ -546,6 +549,24 @@ function buttonEditData(){
 
                 alert(data);
 
+            }
+        })
+    })
+}
+
+function deleteData(){
+    $('.deleteData').click(function(){
+        var id = this.value;
+        var row = jQuery(this).closest('tr');
+        $.ajax({
+            type:'get',
+            url:'deleteDataInDay',
+            data:{
+                id:id,
+            },
+            success:function(data){
+                alert(data);
+                row.remove();
             }
         })
     })
