@@ -527,9 +527,7 @@ $('.ShowImageTSCN').click(function (e) {
         $('#player').DataTable();
         Profile();
         NhapTen();
-      
-       getDataDiemDanh_Ten();
-
+        btnNextWeek();
 				}
 			})
 		}
