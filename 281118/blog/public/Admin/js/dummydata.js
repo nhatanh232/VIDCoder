@@ -41,4 +41,5 @@ var dummyData = {
 	'Tableau':'Tableau',
 	"Giờ đào tạo":'getDiemDanh',
 	"Suất Ăn":"viewAnAdmin",
+	"Duyệt giờ đào tạo":"Duyetdt"
 }

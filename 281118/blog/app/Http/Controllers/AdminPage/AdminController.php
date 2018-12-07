@@ -8,6 +8,9 @@ use Carbon\Carbon;
 use App\CustomerProvider\SoTrungThuongModel;
 use App\Events\CustomerProvider\Redis;
 use App\CustomerProvider\QuaySoTrungThuongModel;
+use App\Profile\BangChoDuyetModel;
+use App\Profile\DiemDanhModel;
+use Auth;
 use Excel;
 class AdminController extends Controller
 {
@@ -114,5 +117,39 @@ class AdminController extends Controller
         
         return view('Profile.tableau');
     }
+    public function DuyetGioDaoTao(){
+        $data = BangChoDuyetModel::join('STAFF','BangChoDuyet.Staff_ID','=','STAFF.Staff_ID')->select('BangChoDuyet.*','STAFF.Full_name')
+        ->where('BangChoDuyet.Status',0)
+        ->get();
+        return view('Admin.AdminControl.GioDaoTao_view.DuyetGioDaoTao')->with('data',$data);
+    }
+    public function pDuyetGioDaoTao(Request $Request){
+            $id = $Request->id;
+            $action = $Request->action;
+            $insert = BangChoDuyetModel::where('Id',$id)->get()->first();
+            if($action==1){
+                $update = BangChoDuyetModel::find($id);
+                $update->Status = 1 ;
+                $update->Nguoiduyet = Auth::user()->name;
+                $update->save();
+                // insert 
+                $nhap = new DiemDanhModel;
+                $nhap->Staff_ID = $insert->Staff_ID;
+                $nhap->Event_Name  = $insert->Event_Name;
+                $nhap->Event_Date = $insert->Event_Date;
+                $nhap->Categories = $insert->Categories;
+                $nhap->Hours = $insert->Hours;
+                $nhap->save();
 
+                return 'Đã Duyệt';
+            }
+            else{
+                $update = BangChoDuyetModel::find($id);
+                $update->Comment = $Request->Comment;
+                $update->Nguoiduyet = Auth::user()->name;
+                $update->save();
+
+                return 'Đã phản hồi';
+            }
+    }
 }
