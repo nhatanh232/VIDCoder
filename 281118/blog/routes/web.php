@@ -181,7 +181,7 @@ Route::group(['middleware'=>['AuthenNhapLieu']],function(){
 Route::get('getSuccessTen','AdminPage\ProfileController@getSuccessTen');
 	Route::get('getDataDiemDanh','AdminPage\ProfileController@getDataDiemDanh');
 	Route::get('getDiemDanh','Adminpage\ProfileController@getDiemDanh');
-	Route::post('pDiemDanh','AdminPage\ProfileController@postDiemDanh')->name('pDiemDanh');
+	Route::get('pDiemDanh','AdminPage\ProfileController@postDiemDanh')->name('pDiemDanh');
 //Cống hiến
 Route::get('diemconghien','AdminPage\ProfileController@formCongHien');
 Route::post('postDiemCongHien','AdminPage\ProfileController@postDiemCongHien')->name('postDiemCongHien');
@@ -207,10 +207,12 @@ Route::get('QuaysoAdmin','AdminPage\AdminController@QuaysoAdmin');
 Route::get("postSo",'AdminPage\AdminController@postSo')->middleware('cors');
 Route::post('ImportDSquay','AdminPage\AdminController@ImportDSquay')->name('ImportDSquay');
 Route::get("deleteSo",'AdminPage\AdminController@deleteSo');
+// ICT _Giờ đào tọa
+Route::get('Duyetdt','AdminPage\AdminController@DuyetGioDaoTao');
+Route::get('btnDuyet','AdminPage\AdminController@pDuyetGioDaoTao');
 
 
-
-
+														// end
 });
 
 

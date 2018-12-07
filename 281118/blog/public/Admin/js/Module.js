@@ -427,7 +427,7 @@ function FormNhapLieu(url){
         var Categories = $('select[name="Categories"]').val();
         var Hours = $('input[name="Hours"]').val();
         $.ajax({
-            type:'post',
+            type:'get',
             url:'pDiemDanh',
             headers: {
                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -571,11 +571,64 @@ function deleteData(){
         })
     })
 }
+function duyetDaoTao(){
+    $('.duyetdt').click(function(){
+        event.preventDefault();     
+        var id = this.value;
+        // get Value
+         var $row = jQuery(this).closest('tr');
+            var $columns = $row.find('td');
+             $.ajax({
+                type:'get',
+                url:'btnDuyet',
+                 headers:{
+                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+                data:{
+                    action:1,
+                    id:id
+                },
+                success:function(data){
+                    alert(data);
+                    $row.remove();
+                }
+             })
+    })
+
+    $('.huyduyet').click(function(){
+        event.preventDefault();   
+        var Comment = prompt('Nhập comment');
+        
+        var id = this.value;
+        // get Value
+         var $row = jQuery(this).closest('tr');
+            var $columns = $row.find('td');
+             $.ajax({
+                type:'get',
+                url:'btnDuyet',
+                 headers:{
+                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+                data:{
+                    action:0,
+                    id:id,
+                    Comment:Comment
+                },
+                success:function(data){
+                    alert(data);
+                }
+             })
+    })
+}
+
+
 function void_main_Modulejs(){
     $(document).ready(function(){
          FormNhapLieu();
           getDataDiemDanh();
        getViewDataToday();
-      
+      $('#DuyetDT').DataTable();
+      duyetDaoTao();
+
     })
 }

@@ -9,7 +9,7 @@ use App\Profile\HistoryModel;
 use App\Profile\StaffModel;
 use App\Profile\DiemCongHienModel;
 use App\Profile\Contribute_point;
-
+use App\Profile\BangChoDuyetModel;
 use Carbon\Carbon;
 use Excel;
 class StoreThamNien extends Controller
@@ -414,7 +414,7 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
             }
             else
                 {
-                    $data = DiemDanhModel::join('STAFF','Diemdanh.Staff_ID','=','STAFF.Staff_ID')->select('Diemdanh.*','STAFF.Full_name')->where('Diemdanh.updated_at',$condition)->get();
+                    $data = BangChoDuyetModel::join('STAFF','BangChoDuyet.Staff_ID','=','STAFF.Staff_ID')->select('BangChoDuyet.*','STAFF.Full_name')->get();
                      return view('Admin.AdminControl.GioDaoTao_view.table2')->with('detailDD',$data);
                 }
 
@@ -428,7 +428,7 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
             $Categories = $Request->Categories;
             $Hours = $Request->Hours;
             $id = $Request->id;
-                $update = DiemDanhModel::find($id);
+                $update = BangChoDuyetModel::find($id);
                 $update->Staff_ID = $Staff_ID;
                 $update->Event_Name = $Event_Name;
                 $update->Event_Date = $Event_Date;
@@ -440,7 +440,7 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
         }
         public static function deleteDataInDay(Request $Request){
             $id = $Request->id;
-            DiemDanhModel::find($id)->delete();
+            BangChoDuyetModel::find($id)->delete();
             return 'Đã xóa thành công';
         }
 }

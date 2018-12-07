@@ -3,7 +3,7 @@ function thongtinsuatantrongngay(){
 	var month = cDate.getMonth()+1;
 	var year = cDate.getFullYear();
 	var day = cDate.getDate();
-	document.getElementById("hTitle").innerHTML = "THÔNG TIN SUẤT ĂN THÁNG " + month;
+
 	$.ajax({
 		type:'get',
 		url:'getSuatAn',

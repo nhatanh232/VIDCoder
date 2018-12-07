@@ -111,6 +111,7 @@
 					<li class="menu__item" role="menuitem"><a class="menu__link" href="#">Suất Ăn</a></li>
 					<li class="menu__item" role="menuitem"><a class="menu__link" href="#">Tài sản phòng ban</a></li>
 					<li class="menu__item" role="menuitem"><a class="menu__link" href="#">Quay số trúng thưởng</a></li>
+					<li class="menu__item" role="menuitem"><a class="menu__link" href="#">Duyệt giờ đào tạo</a></li>
 					<li class="menu__item" role="menuitem"><a class="menu__link" href="#">Thông tin nhân viên</a></li>
 					<li class="menu__item" role="menuitem"><a class="menu__link" href="#">Điểm cống hiến</a></li>
 					<li class="menu__item" role="menuitem"><a class="menu__link" href="#">Giờ đào tạo</a></li>
