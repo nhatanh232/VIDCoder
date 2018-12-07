@@ -543,8 +543,9 @@ function getNVInfo(){
 		},
 		dataType:'json',
 		success:function(data){
-			$('input[name="name"]').val(data[0].Hoten);
-			$('input[name="bophan"]').val(data[0].Phongban);
+			$('input[name="name"]').val(data[0].Full_name);
+			$('input[name="bophan"]').val(data[0].Department);
+			$('input[name="congty"]').val(data[0].Company);
 		}
 	})
 }

@@ -23,6 +23,10 @@
 				<td><input type="text" name="bophan" readonly="true"/></td>
 			</tr>
 			<tr>
+				<td><b><p>Công Ty: </p></b></td>
+				<td><input type="text" name="congty" readonly="true"/></td>
+			</tr>
+			<tr>
 				<td><input type="hidden" name="nam"></td>
 				<td><input type="hidden" name="thang"/></td>
 			</tr>
