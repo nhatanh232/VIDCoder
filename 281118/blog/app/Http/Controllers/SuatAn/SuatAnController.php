@@ -149,7 +149,7 @@ class SuatAnController extends Controller
     }
 
     public function viewAnAdmin(){
-        return view('Admin.SuatAnAdmin.suatAnMain');
+        return view('Admin.SuatAnAdmin.mainSuatAn');
     }
 
     public function getSuatAn(Request $Request){

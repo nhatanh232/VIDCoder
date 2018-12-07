@@ -30,10 +30,10 @@ $month = date('m');
     <!-- chổ này dành cho nội bộ nè -->
     <div>
       <div class="noibo">
-        <h1 class="hTitle">SUẤT ĂN CỦA PHÒNG MÌNH NÈ</h1>
+        <h1 class="hTitle">SUẤT ĂN <input type="hidden" name="currentMonth" value="{{$month}}"> CỦA PHÒNG MÌNH NÈ ^^</h1>
         <div id="noiboCalendar"></div>
-        <br/>        
-        <Button class="btn btn-primary" id="btnSANext">Tuần Kế</Button>
+        <br/>             
+        <Button class="btn btn-primary" id="btnSANext">Tháng Kế</Button> 
       </div>
     </div>
     <!-- tới đây là kết thúc nè -->
