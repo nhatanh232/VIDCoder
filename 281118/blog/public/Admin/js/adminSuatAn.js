@@ -80,6 +80,7 @@ function addDate(date, days){
 }
 
 function getSuatAnPhong(){
+	var manv = $('input[name="Manv"]').val();
 	var cDate = new Date();
 	var month = cDate.getMonth() + 1;
 	var year = cDate.getFullYear();
@@ -104,6 +105,7 @@ function getSuatAnPhong(){
 		data:{
 			thang:month,
 			nam:year,
+			manv:manv,
 		},
 		dataType:'json',
 		success:function(data){
@@ -140,6 +142,7 @@ function getSuatAnPhong(){
 }
 
 function getNextMonthData(){
+	var manv = $('input[name="Manv"]').val();
 	var cDate = new Date();	
 	var month = cDate.getMonth() + 1;
 	var year = cDate.getFullYear();	
