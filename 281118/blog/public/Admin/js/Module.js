@@ -424,8 +424,14 @@ function FormNhapLieu(url){
         var Staff_ID = $('input[name="Staff_ID"]').val();
         var Event_Name = $('input[name="Event_Name"]').val();
         var Event_Date = $('input[name="Event_Date"]').val();
-        var Categories = $('select[name="Categories"]').val();
-        var Hours = $('input[name="Hours"]').val();
+        var TL = $('input[name="TL"]').val();
+         var KT = $('input[name="KT"]').val();  
+          var KN = $('input[name="KN"]').val();
+           var CM = $('input[name="CM"]').val();
+            var CD = $('input[name="CD"]').val();
+             var TC = $('input[name="TC"]').val();
+             var Mahoatdong = $('input[name="Mahoatdong"]').val();
+
         $.ajax({
             type:'get',
             url:'pDiemDanh',
@@ -436,8 +442,13 @@ function FormNhapLieu(url){
                 Staff_ID:Staff_ID,
                 Event_Name:Event_Name,
                 Event_Date:Event_Date,
-                Categories:Categories,
-                Hours:Hours
+                Mahoatdong:Mahoatdong,
+                TL:TL,
+                KT:KT,
+                KN:KN,
+                CM:CM,
+                CD:CD,
+                TC:TC
             },
              
             success:function(data){
@@ -446,8 +457,13 @@ function FormNhapLieu(url){
                 $('input[name="Full_name"]').val('');
                 $('input[name="Event_Name"]').val('');
                 $('input[name="Event_Date"]').val('');
-                
-                  $('input[name="Hours"]').val('');
+                 $('input[name="Mahoatdong"]').val('');
+                  $('input[name="TL"]').val(0);
+                  $('input[name="KT"]').val(0);
+                  $('input[name="KN"]').val(0);
+                  $('input[name="CM"]').val(0);
+                  $('input[name="CD"]').val(0);
+                  $('input[name="TC"]').val(0);
             },
             error:function(){
                 alert("Nhập đầy đủ thông tin");
@@ -475,7 +491,7 @@ function getViewDataToday(){
             var Datetime = null;
     
         $.ajax({
-            type:"post",
+            type:"get",
             url:'ShowDataTable',
             headers:{
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -514,17 +530,29 @@ function buttonEditData(){
         Result['Staff_ID'] = $(this).find('input').val();   
           break;
          case 2:
-                Result['Event_Name'] = $(this).find('input').val();
-                break;
-         case 4:
-               Result['Event_Date'] = $(this).find('input').val();
+                Result['Tenhoatdong'] = $(this).find('input').val();
                 break;
          case 3:
-                Result['Categories'] = $(this).find('select option:selected').val();
+               Result['Ngayhoatdong'] = $(this).find('input').val();
+                break;
+         case 4:
+                Result['TL'] = $(this).find('input').val();
                 break;
          case 5:
-                Result['Hours'] = $(this).find('input').val();
+                Result['KT'] = $(this).find('input').val();
                 break;
+         case 6:
+                Result['KN'] = $(this).find('input').val();
+                break;
+         case 7:
+                Result['CM'] = $(this).find('input').val();
+                break; 
+         case 8:
+                Result['CD'] = $(this).find('input').val();
+                break;
+         case 9:
+                Result['TC'] = $(this).find('input').val();
+                break;                     
            
        }
        
@@ -539,10 +567,14 @@ function buttonEditData(){
             },
             data:{
                 Staff_ID:Result['Staff_ID'],
-                Event_Date:Result['Event_Date'],
-                Event_Name:Result['Event_Name'],
-                Categories:Result['Categories'],
-                Hours:Result['Hours'],
+                Ngayhoatdong:Result['Ngayhoatdong'],
+                Tenhoatdong:Result['Tenhoatdong'],
+                TL:Result['TL'],
+                KT:Result['KT'],
+                KN:Result['KN'],
+                CM:Result['CM'],
+                CD:Result['CD'],
+                TC:Result['TC'],
                 id:id
             },
             success:function(data){
@@ -556,7 +588,9 @@ function buttonEditData(){
 
 function deleteData(){
     $('.deleteData').click(function(){
+
         var id = this.value;
+        alert(id);
         var row = jQuery(this).closest('tr');
         $.ajax({
             type:'get',
@@ -620,7 +654,163 @@ function duyetDaoTao(){
              })
     })
 }
+    function getMahoatdong(){
+        $('input[name="Mahoatdong"]').focusout(function(){
+            var Mahoatdong = this.value;
+            $.ajax({
+                type:'post',
+                url:'pMahoatdong',
+                dataType:'json',
+                headers:{
+                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+                data:{
+                    Mahoatdong:Mahoatdong,
+                },
+                success:function(data){
+                   var Ngaydienra = ReplaceTime(data.Ngaydienra);
+                   var Thoigianbd = ReplaceTime(data.Thoigianbd);
+                   var Thoigiankt = ReplaceTime(data.Thoigiankt);
 
+                    $('input[name="Event_Name"]').val(data.Tenhoatdong);
+                    $('input[name="TL"]').val(data.TL);
+                  $('input[name="KT"]').val(data.KT);
+                  $('input[name="KN"]').val(data.KN);
+                  $('input[name="CM"]').val(data.CM);
+                  $('input[name="CD"]').val(data.CD);
+                  $('input[name="TC"]').val(data.TC);
+
+                  $('input[name="Ngaydienra"]').val(Ngaydienra);
+                  $('input[name="Thoigianbd"]').val(Thoigianbd);
+                  $('input[name="Thoigiankt"]').val(Thoigiankt);
+                  $('input[name="Ngaydexuat"]').val(data.Ngaydexuat);
+                  $('input[name="Nguoidexuat"]').val(data.Nguoidexuat);
+                  $('input[name="Ngansachdutinh"]').val(data.Ngansachdutinh);
+                  $('input[name="Songuoithamgia"]').val(data.Songuoidukien);
+                  $('input[name="Tenhoatdong"]').val(data.Tenhoatdong);
+                }
+            })
+        });
+
+    }
+    function ReplaceTime(datetime){
+        var result = null;
+        var cut = datetime.split(" ");
+        var date = cut[0];
+        var time = cut[1].split(":");
+        result = date+"T"+time[0]+":"+time[1];
+        return result;
+    }
+    function getMahoatdong_Ten(e){
+        var Ten = e.value;
+       
+         $('input[name="Event_Name"]').autocomplete({
+        autoFocus: true,
+         source: function(request,respone){
+        $.ajax({
+        type:"get",
+        url:'pMahoatdong_Ten',
+        headers:{
+                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+        data:{
+            Event_Name:Ten,
+        },
+        dataType:'json',
+        success:function(data){
+         
+            var array = new Array();
+            
+            for (var i = 0 ; i<data.length ; i++)
+                array.push(data[i].Tenhoatdong);        
+            respone(array);
+
+        },
+        
+    });
+      },
+      select:function( event, ui ) {
+        var successTen = ui.item.value;
+       console.log(successTen);
+        $.ajax({
+            type:'get',
+            url:'SuccesMahoatdong',
+            headers:{
+                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+            data:{
+                Ten:successTen,
+            },
+
+            cache:false,
+            dataType:'json',
+            success:function(data){
+               
+                $('input[name="Mahoatdong"]').val(data.Mahoatdong);
+                 $('input[name="TL"]').val(data.TL);
+                  $('input[name="KT"]').val(data.KT);
+                  $('input[name="KN"]').val(data.KN);
+                  $('input[name="CM"]').val(data.CM);
+                  $('input[name="CD"]').val(data.CD);
+                  $('input[name="TC"]').val(data.TC);
+            }
+        });
+        // end ajax select
+      },
+    });
+    }
+
+
+function FormKhaiBao(){
+     
+        $('#FormKhaiBao').click(function(){
+               var TL = $('input[name="TL"]').val();
+        var KT = $('input[name="KT"]').val();  
+        var KN = $('input[name="KN"]').val();
+        var CM = $('input[name="CM"]').val();
+        var CD = $('input[name="CD"]').val();
+        var TC = $('input[name="TC"]').val();
+        var Mahoatdong = $('input[name="Mahoatdong"]').val();
+        var Tenhoatdong = $('input[name="Tenhoatdong"]').val();
+        var Ngaydienra = $('input[name="Ngaydienra"]').val();
+        var Ngaydexuat = $('input[name="Ngaydexuat"]').val();
+        var Nguoidexuat = $('input[name="Nguoidexuat"]').val();
+        var Thoigianbd = $('input[name="Thoigianbd"]').val();
+        var Thoigiankt = $('input[name="Thoigiankt"]').val();
+        var Ngansachdutinh = $('input[name="Ngansachdutinh"]').val();
+        var Songuoithamgia = $('input[name="Songuoithamgia"]').val();
+
+            $.ajax({
+                type:"get",
+                url:'pKhaibao',
+                headers:{
+                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                 },
+                 data:{
+                        TL:TL,
+                        KT:KT,
+                        KN:KN,
+                        CM:CM,
+                        CD:CD,
+                        TC:TC,
+                        Mahoatdong:Mahoatdong,
+                        Tenhoatdong:Tenhoatdong,
+                        Ngaydienra:Ngaydienra,
+                        Ngaydexuat:Ngaydexuat,
+                        Nguoidexuat:Nguoidexuat,
+                        Thoigianbd:Thoigianbd,
+                        Thoigiankt:Thoigiankt,
+                        Ngansachdutinh:Ngansachdutinh,
+                        Songuoithamgia:Songuoithamgia
+                 },
+                 success:function(data){
+                   alert(data);
+
+                 }
+            })
+        });
+
+}
 
 function void_main_Modulejs(){
     $(document).ready(function(){
@@ -628,7 +818,11 @@ function void_main_Modulejs(){
           getDataDiemDanh();
        getViewDataToday();
       $('#DuyetDT').DataTable();
+      $('#DSHD').DataTable();
       duyetDaoTao();
-
+      getMahoatdong();
+      FormKhaiBao();
     })
 }
+
+

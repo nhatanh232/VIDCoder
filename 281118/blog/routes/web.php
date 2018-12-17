@@ -176,7 +176,11 @@ Route::post('DieuchuyenDetail','AdminPage\QuanlykhoController@DieuchuyenDetail')
 });
 // Nhập liệu
 Route::group(['middleware'=>['AuthenNhapLieu']],function(){
-
+	Route::get('khaibaohd','StoreProcedureProfile\StoreThamNien@khaibaohd');
+	Route::get('pKhaibao','StoreProcedureProfile\StoreThamNien@pKhaibao');
+	Route::post('pMahoatdong','AdminPage\ProfileController@pMahoatdong');
+	Route::get('pMahoatdong_Ten','AdminPage\ProfileController@pMahoatdong_Ten');
+	Route::get('SuccesMahoatdong','AdminPage\ProfileController@SuccesMahoatdong');
 	Route::get('getDataDiemDanh_Ten','AdminPage\ProfileController@getDiemDanh_Ten');
 Route::get('getSuccessTen','AdminPage\ProfileController@getSuccessTen');
 	Route::get('getDataDiemDanh','AdminPage\ProfileController@getDataDiemDanh');
@@ -190,7 +194,7 @@ Route::get('update','StoreProcedureProfile\StoreThamNien@Store_main')->name('upd
 Route::get('Store_main_total','StoreProcedureProfile\StoreThamNien@Store_main_total');
 Route::post('importamis','StoreProcedureProfile\StoreThamNien@Import_Amis_ICT')->name('importamis');
 
-Route::post('ShowDataTable','StoreProcedureProfile\StoreThamNien@ShowDataTable');
+Route::get('ShowDataTable','StoreProcedureProfile\StoreThamNien@ShowDataTable');
 Route::get('editDataInDay','StoreProcedureProfile\StoreThamNien@editDataInDay');
 Route::get('deleteDataInDay','StoreProcedureProfile\StoreThamNien@deleteDataInDay');
 });

@@ -10,6 +10,9 @@ use App\Profile\StaffModel;
 use App\Profile\DiemCongHienModel;
 use App\Profile\Contribute_point;
 use App\Profile\BangChoDuyetModel;
+use App\Profile\HOATDONGNOIBOmodel;
+use App\Profile\DIEMDANHHOATDONGmodel;
+
 use Carbon\Carbon;
 use Excel;
 class StoreThamNien extends Controller
@@ -164,16 +167,24 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
                  $Status = array('Đang làm việc'=>'1','Nghỉ việc'=>'0',''=>'3');
                 $GioiTinh = array('Nam'=> 0 , 'Nữ'=> 1);
                 $CongDoan = array('Có'=>1 , "Không" => 0);
+
                 foreach($data as $key){
                     $check = StaffModel::where('Staff_ID',$key->ma_nhan_vien)->get();
-                  
+                //      $datetime = (string)$key->ngay_sinh;
+                // if($datetime != null)
+                // {   $cut = explode('-', $datetime);
+                //     $month = $cut[1];
+                //     $day = $cut[2];
+                //     $year= $cut[0];
+                //     $DOB = Carbon::create($year,$month,$day,0,0,0,'Asia/Ho_Chi_Minh');
+                // }
                     if($check->isEmpty()){
                         if($Status[$key->trang_thai_lao_dong] == 1){
                             if($key->ngay_thu_viec != ""){
                                 $nhap = new StaffModel;
                                 $nhap->Staff_ID = $key->ma_nhan_vien;
                                 $nhap->Full_name = $key->ho_va_ten;
-                                $nhap->DOB = $key->ngay_sinh;
+                                $nhap->DOB = (string)$key->ngay_sinh;
                                 $nhap->Start_work = $key->ngay_thu_viec;
                                 $nhap->Birthplace = $key->noi_sinh;
                                 $nhap->Current_Address = $key->cho_o_hien_nay;
@@ -349,7 +360,7 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
                     }else{
                         $update = StaffModel::find($key->ma_nhan_vien);
                         $update->Full_name = $key->ho_va_ten;
-                        $update->DOB = $key->dob_mmddyyyy;
+                        $update->DOB = $key->ngay_sinh;
                        
                         $update->Birthplace = $key->noi_sinh;
                         $update->Current_Address = $key->cho_o_hien_nay;
@@ -409,12 +420,18 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
             $condition = $Request->Datetime;
 
             if($condition == null){
-                     $data = DiemDanhModel::join('STAFF','Diemdanh.Staff_ID','=','STAFF.Staff_ID')->select('Diemdanh.*','STAFF.Full_name')->get();
+                     $data =DIEMDANHHOATDONGmodel::join('STAFF','DIEMDANHHOATDONG.Staff_ID','=','STAFF.Staff_ID')
+                    ->join('HOATDONGNOIBO','HOATDONGNOIBO.Mahoatdong','=','DIEMDANHHOATDONG.Mahoatdong')
+                    ->select('DIEMDANHHOATDONG.*','STAFF.Full_name','HOATDONGNOIBO.Tenhoatdong')
+                    ->get();
                     return view('Admin.AdminControl.GioDaoTao_view.table')->with('detailDD',$data);
             }
             else
                 {
-                    $data = BangChoDuyetModel::join('STAFF','BangChoDuyet.Staff_ID','=','STAFF.Staff_ID')->select('BangChoDuyet.*','STAFF.Full_name')->get();
+                    $data = DIEMDANHHOATDONGmodel::join('STAFF','DIEMDANHHOATDONG.Staff_ID','=','STAFF.Staff_ID')
+                    ->join('HOATDONGNOIBO','HOATDONGNOIBO.Mahoatdong','=','DIEMDANHHOATDONG.Mahoatdong')
+                    ->select('DIEMDANHHOATDONG.*','STAFF.Full_name','HOATDONGNOIBO.Tenhoatdong')->where('DIEMDANHHOATDONG.created_at',$condition)->orderBy('updated_at','ASC')->get();
+                    
                      return view('Admin.AdminControl.GioDaoTao_view.table2')->with('detailDD',$data);
                 }
 
@@ -423,26 +440,106 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
         }
         public static function editDataInDay(Request $Request){
             $Staff_ID = $Request->Staff_ID;
-            $Event_Date = $Request->Event_Date;
-            $Event_Name = $Request->Event_Name;
-            $Categories = $Request->Categories;
-            $Hours = $Request->Hours;
+            $Ngayhoatdong = $Request->Ngayhoatdong;
+            $Tenhoatdong = $Request->Tenhoatdong;
+            $Mahoatdong = HOATDONGNOIBOmodel::where('Tenhoatdong',$Tenhoatdong)->get()->first();
+            if(empty($Mahoatdong)){
+                return "Sai tên hoạt động";
+            }
+            $TL = $Request->TL;
+            $KT = $Request->KT;
+            $KN = $Request->KN;
+            $CM = $Request->CM;
+            $CD = $Request->CD;
+            $TC = $Request->TC;
             $id = $Request->id;
-                $update = BangChoDuyetModel::find($id);
+                $update = DIEMDANHHOATDONGmodel::find($id);
                 $update->Staff_ID = $Staff_ID;
-                $update->Event_Name = $Event_Name;
-                $update->Event_Date = $Event_Date;
-                $update->Categories = $Categories;
-                $update->Hours = $Hours;
+                $update->Mahoatdong = $Mahoatdong->Mahoatdong;
+                $update->Ngayhoatdong = $Ngayhoatdong;
+                $update->TL = $TL;
+                $update->KT = $KT;
+                $update->KN = $KN;
+                $update->CM = $CM;
+                $update->CD = $CD;
+                $update->TC = $TC;
                 $update->save();
                 return 'Đã chỉnh sửa thành công';
 
         }
         public static function deleteDataInDay(Request $Request){
             $id = $Request->id;
-            BangChoDuyetModel::find($id)->delete();
+            DIEMDANHHOATDONGmodel::find($id)->delete();
             return 'Đã xóa thành công';
         }
+        public function khaibaohd(){
+            $data = HOATDONGNOIBOmodel::get();
+            return view('Admin.AdminControl.GioDaoTao_view.khaibaohd')->with('data',$data);
+        }
+        public function pKhaibao(Request $Request){
+            // Variable
+
+
+            $TL = $Request->TL;
+            $KT = $Request->KT;
+            $KN = $Request->KN;
+            $CM = $Request->CM;
+            $CD = $Request->CD;
+            $TC = $Request->TC;
+            $Mahoatdong = $Request->Mahoatdong;
+            $Tenhoatdong = $Request->Tenhoatdong;
+            $Ngaydienra = Carbon::createFromFormat('Y-m-d\TH:i',$Request->Ngaydienra);
+            $Ngaydexuat = $Request->Ngaydexuat;
+            $Nguoidexuat = $Request->Nguoidexuat;
+            $Thoigianbd = Carbon::createFromFormat('Y-m-d\TH:i',$Request->Thoigianbd);
+            $Thoigiankt = Carbon::createFromFormat('Y-m-d\TH:i',$Request->Thoigiankt);
+            $Ngansachdutinh = $Request->Ngansachdutinh;
+            $Songuoithamgia = $Request->Songuoithamgia;
+            // end
+            if(!(HOATDONGNOIBOmodel::find($Mahoatdong)))
+                {
+                    $nhap = new HOATDONGNOIBOmodel;
+                    $nhap->TL = $TL;
+                    $nhap->KT = $KT;
+                    $nhap->KN = $KN;
+                    $nhap->CM = $CM;
+                    $nhap->CD = $CD;
+                    $nhap->TC = $TC;
+                    $nhap->Mahoatdong = $Mahoatdong;
+                    $nhap->Tenhoatdong = $Tenhoatdong;
+                    $nhap->Ngaydienra = $Ngaydienra;
+                    $nhap->Ngaydexuat = $Ngaydexuat;
+                    $nhap->Nguoidexuat = $Nguoidexuat;
+                    $nhap->Thoigianbd = $Thoigianbd;
+                    $nhap->Thoigiankt = $Thoigiankt;
+                    // $nhap->Ngansachdutinh = (int)$Ngansachdutinh;
+                    $nhap->Songuoidukien = $Songuoithamgia;
+                    $nhap->save();
+                }
+            else
+                {
+                    $update = HOATDONGNOIBOmodel::find($Mahoatdong);
+                    $update->TL = $TL;
+                    $update->KT = $KT;
+                    $update->KN = $KN;
+                    $update->CM = $CM;
+                    $update->CD = $CD;
+                    $update->TC = $TC;
+                    $update->Mahoatdong = $Mahoatdong;
+                    $update->Tenhoatdong = $Tenhoatdong;
+                    $update->Ngaydienra = $Ngaydienra;
+                    $update->Ngaydexuat = $Ngaydexuat;
+                    $update->Nguoidexuat = $Nguoidexuat;
+                    $update->Thoigianbd = $Thoigianbd;
+                    $update->Thoigiankt = $Thoigiankt;
+                    // $nhap->Ngansachdutinh = (int)$Ngansachdutinh;
+                    $update->Songuoidukien = $Songuoithamgia;
+                    $update->save();
+                }
+
+            return 'Nhập thành công';
+    }
+
 }
 class StoreThamNienTotal{
     public static  function Contribute_point(){

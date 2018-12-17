@@ -104,6 +104,7 @@
 					<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-4" aria-owns="submenu-4" href="#">Thanh lý giá trị</a></li>
 					<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-5" aria-owns="submenu-5" href="#">Thông tin nhân viên</a></li>
 					<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-6" aria-owns="submenu-6" href="#">Bộ phận bảo trì</a></li>
+					<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-7" aria-owns="submenu-7" href="#">Hoạt động nội bộ</a></li>
 				</ul>
 				<!-- Submenu 1 -->
 				<ul data-menu="submenu-1" id="submenu-1" class="menu__level" tabindex="-1" role="menu" aria-label="Vegetables">
@@ -111,11 +112,11 @@
 					<li class="menu__item" role="menuitem"><a class="menu__link" href="#">Suất Ăn</a></li>
 					<li class="menu__item" role="menuitem"><a class="menu__link" href="#">Tài sản phòng ban</a></li>
 					<li class="menu__item" role="menuitem"><a class="menu__link" href="#">Quay số trúng thưởng</a></li>
-					<li class="menu__item" role="menuitem"><a class="menu__link" href="#">Duyệt giờ đào tạo</a></li>
+				<!-- 	<li class="menu__item" role="menuitem"><a class="menu__link" href="#">Duyệt giờ đào tạo</a></li>
 					<li class="menu__item" role="menuitem"><a class="menu__link" href="#">Thông tin nhân viên</a></li>
 					<li class="menu__item" role="menuitem"><a class="menu__link" href="#">Điểm cống hiến</a></li>
 					<li class="menu__item" role="menuitem"><a class="menu__link" href="#">Giờ đào tạo</a></li>
-					<li class="menu__item" role="menuitem"><a class="menu__link" href="#">Tableau</a></li>
+					<li class="menu__item" role="menuitem"><a class="menu__link" href="#">Tableau</a></li> -->
 					<!-- <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1" aria-owns="submenu-1-1" href="#">Sale %</a></li> -->
 				</ul>
 				<!-- submenu 6 -->
@@ -188,6 +189,14 @@
 					<li class="menu__item" role="menuitem"><a class="menu__link" href="#">Mushrooms</a></li>
 					<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1" aria-owns="submenu-1-1" href="#">Sale %</a></li>
 				</ul>
+				<!-- Submenu 7 -->
+				<ul data-menu="submenu-7" id="submenu-7" class="menu__level" tabindex="-1" role="menu" aria-label="Mylk &amp; Drinks">
+					<li class="menu__item" role="menuitem"><a class="menu__link" href="#">1.Khai báo hoạt động</a></li>
+					<li class="menu__item" role="menuitem"><a class="menu__link" href="#">2.Giờ đào tạo</a></li>
+					<li class="menu__item" role="menuitem"><a class="menu__link" href="#">3.Thông tin nhân viên</a></li>
+					<li class="menu__item" role="menuitem"><a class="menu__link" href="#">4.Báo cáo</a></li>
+				</ul>
+		
 			</div>
 		</nav>
 		<div class="content" id="show">
@@ -529,6 +538,7 @@ $('.ShowImageTSCN').click(function (e) {
         Profile();
         NhapTen();
         btnNextWeek();
+        getDataDiemDanh_Ten();
 				}
 			})
 		}

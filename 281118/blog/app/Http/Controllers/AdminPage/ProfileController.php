@@ -8,6 +8,8 @@ use App\Profile\StaffModel;
 use App\Profile\HistoryModel;
 use App\Profile\DiemDanhModel;
 use App\Profile\BangChoDuyetModel;
+use App\Profile\DIEMDANHHOATDONGmodel;
+use App\Profile\HOATDONGNOIBOmodel;
 use Excel;
 use Carbon\Carbon;
 use PHPExcel_Worksheet_Drawing;
@@ -314,7 +316,10 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
         // Giờ đào tạo
 
         public function getDiemDanh(){
-            $detailDD = \DB::table('Diemdanh')->join('STAFF','Diemdanh.Staff_ID','=','STAFF.Staff_ID')->select('Diemdanh.*','STAFF.Full_name')->get();
+             $detailDD =DIEMDANHHOATDONGmodel::join('STAFF','DIEMDANHHOATDONG.Staff_ID','=','STAFF.Staff_ID')
+                    ->join('HOATDONGNOIBO','HOATDONGNOIBO.Mahoatdong','=','DIEMDANHHOATDONG.Mahoatdong')
+                    ->select('DIEMDANHHOATDONG.*','STAFF.Full_name','HOATDONGNOIBO.Tenhoatdong')
+                    ->get();
             return view('Admin.AdminControl.GioDaoTao')->with(['detailDD'=>$detailDD]);
         }
         public function getDiemDanh_Ten(Request $Request){
@@ -330,19 +335,29 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
         }
 
         public function postDiemDanh(Request $Request){
-           
+           // valiable
             $Staff_ID = $Request->Staff_ID;
             $Event_Name = $Request->Event_Name;
-            $Categories = $Request->Categories;
+            $Mahoatdong = $Request->Mahoatdong;
             $Event_Date = $Request->Event_Date;
-            $Hours = $Request->Hours;
-            $nhap = new BangChoDuyetModel();
+            $TL = $Request->TL;
+            $KT = $Request->KT;
+            $KN = $Request->KN;
+            $CM = $Request->CM;
+            $CD = $Request->CD;
+            $TC = $Request->TC;
+            // Function 
+            $nhap = new DIEMDANHHOATDONGmodel;
             $nhap->Staff_ID = $Staff_ID;
-            $nhap->Event_Name = $Event_Name;
-            $nhap->Categories = $Categories;
-            $nhap->Event_Date = $Event_Date;
-            $nhap->Hours = $Hours;
-            $nhap->Status = 0;
+            $nhap->Mahoatdong = $Mahoatdong;
+            $nhap->Ngayhoatdong = $Event_Date;
+            $nhap->TL = $TL;
+            $nhap->KT = $KT;
+            $nhap->KN = $KN;
+            $nhap->CM = $CM;
+            $nhap->CD = $CD;
+            $nhap->TC = $TC;
+            
             $nhap->save();
             return 'Nhập thành công';
            
@@ -378,5 +393,23 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
                 }
             });
         }
+        public function pMahoatdong(Request $Request){
+            $Mahoatdong = $Request->Mahoatdong;
+            $data = HOATDONGNOIBOmodel::where('Mahoatdong',$Mahoatdong)->get()->first();
 
+            return $data;
+
+        }
+        public function pMahoatdong_Ten(Request $Request){
+             $Ten = $Request->Event_Name;
+             $compare = '%'.$Ten.'%';
+            $data = HOATDONGNOIBOmodel::where('Tenhoatdong','like',$compare)->SELECT('Tenhoatdong')->get();
+
+            return $data;
+        }
+        public function SuccesMahoatdong(Request $Request){
+            $Ten = $Request->Ten;
+            $data = HOATDONGNOIBOmodel::where('Tenhoatdong',$Ten)->get()->first();
+            return $data;
+        }
 }

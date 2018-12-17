@@ -10,6 +10,7 @@ use App\Events\CustomerProvider\Redis;
 use App\CustomerProvider\QuaySoTrungThuongModel;
 use App\Profile\BangChoDuyetModel;
 use App\Profile\DiemDanhModel;
+use App\Profile\StaffModel;
 use Auth;
 use Excel;
 class AdminController extends Controller
@@ -112,7 +113,26 @@ class AdminController extends Controller
         
 
     }
-
+    public function importNgaysinh(Request $Request){
+        $file = $Request->file;
+        ExceL::load($file,function($reader){
+            $data = $reader->get(array('id','dob'));
+    $checkStaff = \DB::table('STAFF')->get();
+            foreach($data as $key){
+                $datetime = $key->dob;
+                if($datetime != null)
+                {   $cut = explode('-', $datetime);
+                    $month = $cut[0];
+                    $day = $cut[1];
+                    $year= $cut[2];
+                    $DOB = Carbon::create($year,$month,$day,0,0,0,'Asia/Ho_Chi_Minh');
+                    $update = StaffModel::find($key->id);
+                    $update->DOB = $DOB;
+                    $update->save();
+                }
+            }
+        });
+    }
       public function Tableau(){
         
         return view('Profile.tableau');
