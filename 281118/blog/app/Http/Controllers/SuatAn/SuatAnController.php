@@ -149,7 +149,8 @@ class SuatAnController extends Controller
     }
 
     public function viewAnAdmin(){
-        return view('Admin.SuatAnAdmin.suatAnMain');
+        $user = Auth::user()->Manv;
+        return view('Admin.SuatAnAdmin.mainSuatAn')->with('user',$user);
     }
 
     public function getSuatAn(Request $Request){
@@ -163,7 +164,9 @@ class SuatAnController extends Controller
     public function getDataSuatAnTmp(Request $Request){
         $thang = $Request->thang;
         $nam = $Request->nam;
-        $data = \DB::table('SuatAn')->join('STAFF','SuatAn.MaNV','=','STAFF.Staff_ID')->select('SuatAn.*','STAFF.Full_name')->where(['ThangDK'=>$thang,'NamDK'=>$nam])->get();
+        $manv = $Request->manv;
+        $bophan = \DB::table('STAFF')->select('Department')->where('Staff_ID',$manv)->get()->first();
+        $data = \DB::table('SuatAn')->join('STAFF','SuatAn.MaNV','=','STAFF.Staff_ID')->select('SuatAn.*','STAFF.Full_name')->where(['SuatAn.ThangDK'=>$thang,'SuatAn.NamDK'=>$nam,'STAFF.Department'=>$bophan->Department])->get();
         return $data;
     }
 }

@@ -23,7 +23,6 @@
 
 </head>
 <body>
-	<hr/>
 	<div class="container">
 		<div>
 			<h1 class="title">CƠ HỘI BẤT NGỜ</h1>			

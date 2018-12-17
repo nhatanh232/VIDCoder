@@ -79,247 +79,141 @@ function addDate(date, days){
 	return result;
 }
 
-function getSuatAnPhong(){	
+function getSuatAnPhong(){
+	var manv = $('input[name="Manv"]').val();
 	var cDate = new Date();
-	var month = cDate.getMonth()+1;
+	var month = cDate.getMonth() + 1;
 	var year = cDate.getFullYear();
-	console.log(month +" "+year);
+	var dayOfMonth = daysInMonth(month,year);
+
 	var first = cDate.getDate() - cDate.getDay() + 1;
-	var last = first + 4;
 	var firstDay = new Date(cDate.setDate(first));
-	var lastDay = new Date(cDate.setDate(last));
-	var table = "<table class='tNoiBo'><tr><td>Tên</td>";
-	var lastDayOfMonth = (new Date(year, month, 0)).getDate();
-	var check = lastDayOfMonth - firstDay.getDate();
-	var cDay = new Date();
-	var checkDay = addDate(cDay,-7);
-	var cfirst = checkDay.getDate() - checkDay.getDay() + 1;
-	var cfirstDay = new Date(checkDay.setDate(cfirst));
-	if(check < 5){
-		for(var i = 0; i < (5 + check + 7); i++){
-			var checkDate = addDate(cfirstDay,i);
-			if(checkDate.getDay() === 0 || checkDate.getDay() === 6){
-				continue;
-			} else if((cfirst+i)===31){
-				table += "<td>Ngày "+(cfirst+i)+"</td>";
-				break;
-			} else{
-				table += "<td>Ngày "+(cfirst+i)+"</td>";
-			}
+	var lastDay = addDate(cDate,5);
+
+	var table = "<table class='tNoiBo'><tr><td>Tên &#8726; Ngày</td>";
+	for(var i = 1; i <= dayOfMonth; i++){
+		var checkDate = new Date(month+" "+i+" "+ year);
+		var checkDay = checkDate.getDay();
+		if(checkDay !== 0 && checkDay !== 6){
+			table += "<td>"+i+"</td>";
 		}
-	} else {
-		for(var i = 0; i < 5; i++){
-			table += "<td>Ngày "+(firstDay.getDate()+i)+"</td>";
-		}
-	}	
-	table += "</tr>"
+	}
+	table += "<tr/>";
 	$.ajax({
 		type:'get',
 		url:'getSuatAnTmp',
 		data:{
-			thang: month,
-			nam: year,
+			thang:month,
+			nam:year,
+			manv:manv,
 		},
 		dataType:'json',
 		success:function(data){
-			for(var j = 0; j < data.length; j++){				
-				table+= "<tr>";
-				table+="<td>"+data[j].Full_name+"</td>"				
-				if(check < 5){
-					for(var f = 0; f < (5 + check + 7); f++){
-						var checkDate1 = addDate(cfirstDay,f);
-						var mon = "data[j].Ngay"+(cfirst+f);
-						if(checkDate1.getDay() === 0 || checkDate1.getDay() === 6){
-							continue;
-						} else if((cfirst+f)===31){
-							table += "<td>"+eval(mon)+"</td>";
-							break;
-						} else{
-							table += "<td>"+eval(mon)+"</td>";
+			for(var j = 0; j < data.length; j++){
+				table += "<td>"+data[j].Full_name+"</td>";
+				for(var k = 1; k <= dayOfMonth; k++){
+					var checkDate1 = new Date(month+" "+k+" "+ year);
+					var checkDay1 = checkDate1.getDay();
+					if(checkDay1 !== 0 && checkDay1 !== 6){
+						var mon = "data[j].Ngay"+k;
+						var checkCurrent = new Date(month+" "+k+" "+year);
+						if(checkCurrent <= lastDay && checkCurrent >= addDate(firstDay,-1)){							
+							if(eval(mon)===null){
+								table += "<td class='highlight'>O</td>";
+							}else {
+								table += "<td class='highlight'>"+eval(mon)+"</td>";
+							}	
+						}else{
+							if(eval(mon)===null){
+								table += "<td>O</td>";
+							}else {
+								table += "<td>"+eval(mon)+"</td>";
+							}	
 						}
-					}
-				} else {
-					for(var k = 0; k < 5; k++){
-						var ngay = "data[j].Ngay"+(firstDay.getDate()+k);
-						if(eval(ngay)!==null){
-							table += "<td>"+eval(ngay)+"</td>";
-						} else{
-							table += "<td>O</td>";
-						}
+
 					}
 				}
-				table+="</tr>";
+				table += "</tr>";
 			}
-			table+="</table>";
+			table += "</table>";
 			document.getElementById("noiboCalendar").innerHTML = table;
-		}
+		}		
 	})
 }
 
-function getSuatAnPhongNext(){	
-	var cDate = new Date();
-	var fDate = addDate(cDate,7);		
-	var first = fDate.getDate() - fDate.getDay() + 1;
-	var last = first + 4;
-	var firstDay = new Date(fDate.setDate(first));
-	var lastDay = new Date(fDate.setDate(last));
-	console.log(firstDay);
-	var month = firstDay.getMonth()+1;
-	var year = firstDay.getFullYear();
-	var table = "<table class='tNoiBo'><tr><td>Tên</td>";
-	var lastDayOfMonth = (new Date(year, month, 0)).getDate();
-	var check = lastDayOfMonth - firstDay.getDate();
-	var cDay = new Date();
-	var checkDay = addDate(cDay,-7);
-	var cfirst = checkDay.getDate() - checkDay.getDay() + 1;
-	var cfirstDay = new Date(checkDay.setDate(cfirst));
-	if(check < 5){
-		for(var i = 0; i < (5 + check + 7); i++){
-			var checkDate = addDate(cfirstDay,i);
-			if(checkDate.getDay() === 0 || checkDate.getDay() === 6){
-				continue;
-			} else if((cfirst+i)===31){
-				table += "<td>Ngày "+(cfirst+i)+"</td>";
-				break;
-			} else{
-				table += "<td>Ngày "+(cfirst+i)+"</td>";
-			}
+function getNextMonthData(){
+	var manv = $('input[name="Manv"]').val();
+	var cDate = new Date();	
+	var month = cDate.getMonth() + 1;
+	var year = cDate.getFullYear();	
+	var nDate = cDate;
+	nDate.setMonth(nDate.getMonth()+1);
+	var fmonth= nDate.getMonth() + 1;
+	var fyear = nDate.getFullYear();
+	var dayOfMonth = daysInMonth(fmonth,fyear);
+
+	var currentDay = new Date();
+	var first = currentDay.getDate() - currentDay.getDay() + 1;
+	var firstDay = new Date(currentDay.setDate(first));
+	var lastDay = addDate(currentDay,5);
+
+	var table = "<table class='tNoiBo'><tr><td>Tên &#8726; Ngày</td>";
+	for(var i = 1; i <= dayOfMonth; i++){
+		var checkDate = new Date(fmonth+" "+i+" "+ fyear);
+		var checkDay = checkDate.getDay();
+		if(checkDay !== 0 && checkDay !== 6){
+			table += "<td>"+i+"</td>";
 		}
-	} else {
-		for(var i = 0; i < 5; i++){
-			table += "<td>Ngày "+(firstDay.getDate()+i)+"</td>";
-		}
-	}	
-	table += "</tr>"
+	}
+	table += "<tr/>";
 	$.ajax({
 		type:'get',
 		url:'getSuatAnTmp',
 		data:{
-			thang: month,
-			nam: year,
+			thang:fmonth,
+			nam:fyear,
 		},
 		dataType:'json',
 		success:function(data){
-			for(var j = 0; j < data.length; j++){				
-				table+= "<tr>";
-				table+="<td>"+data[j].Full_name+"</td>"				
-				if(check < 5){
-					for(var f = 0; f < (5 + check + 7); f++){
-						var checkDate1 = addDate(cfirstDay,f);
-						var mon = "data[j].Ngay"+(cfirst+f);
-						if(checkDate1.getDay() === 0 || checkDate1.getDay() === 6){
-							continue;
-						} else if((cfirst+f)===31){
-							table += "<td>"+eval(mon)+"</td>";
-							break;
-						} else{
-							table += "<td>"+eval(mon)+"</td>";
+			if(data.length===0){
+				alert("Chưa có ai đăng kí ăn tháng "+fmonth+" hết đó!!!");
+			}else{
+				for(var j = 0; j < data.length; j++){
+				table += "<td>"+data[j].Full_name+"</td>";
+				for(var k = 1; k <= dayOfMonth; k++){
+					var checkDate1 = new Date(fmonth+" "+k+" "+ fyear);
+					var checkDay1 = checkDate1.getDay();
+					if(checkDay1 !== 0 && checkDay1 !== 6){
+						var mon = "data[j].Ngay"+k;
+						var checkCurrent = new Date(fmonth+" "+k+" "+fyear);
+						if(checkCurrent <= lastDay && checkCurrent >= addDate(firstDay,-1)){							
+							if(eval(mon)===null){
+								table += "<td class='highlight'>O</td>";
+							}else {
+								table += "<td class='highlight'>"+eval(mon)+"</td>";
+							}	
+						}else{
+							if(eval(mon)===null){
+								table += "<td>O</td>";
+							}else {
+								table += "<td>"+eval(mon)+"</td>";
+							}	
 						}
-					}
-				} else {
-					for(var k = 0; k < 5; k++){
-						var ngay = "data[j].Ngay"+(firstDay.getDate()+k);
-						if(eval(ngay)!==null){
-							table += "<td>"+eval(ngay)+"</td>";
-						} else{
-							table += "<td>O</td>";
-						}
+
 					}
 				}
-				table+="</tr>";
+				table += "</tr>";
 			}
-			table+="</table>";
+			table += "</table>";
 			document.getElementById("noiboCalendar").innerHTML = table;
-		}
+			}
+			
+		}		
 	})
 }
 
-function btnNextWeek(){
-	$('#btnSANext').click(function(e){
-		getSuatAnPhongNext();
+function btnNextMonth(){
+	$('button[id="btnSANext"]').click(function(e){
+		getNextMonthData();
 	})
 }
-
-// function getSuatAnPhongPre(){	
-// 	var cDate = new Date();
-// 	var fDate = addDate(cDate,-7);
-// 	console.log(fDate);
-// 	var month = fDate.getMonth()+1;
-// 	var year = fDate.getFullYear();
-// 	var first = fDate.getDate() - fDate.getDay() + 1;
-// 	var last = first + 4;
-// 	var firstDay = new Date(fDate.setDate(first));
-// 	var lastDay = new Date(fDate.setDate(last));
-// 	var table = "<table class='tNoiBo'><tr><td>Tên</td>";
-// 	var lastDayOfMonth = (new Date(year, month, 0)).getDate();
-// 	var check = lastDayOfMonth - firstDay.getDate();
-// 	var cDay = new Date();
-// 	var checkDay = addDate(cDay,-7);
-// 	var cfirst = checkDay.getDate() - checkDay.getDay() + 1;
-// 	var cfirstDay = new Date(checkDay.setDate(cfirst));
-// 	if(check < 5){
-// 		for(var i = 0; i < (5 + check + 7); i++){
-// 			var checkDate = addDate(cfirstDay,i);
-// 			if(checkDate.getDay() === 0 || checkDate.getDay() === 6){
-// 				continue;
-// 			} else if((cfirst+i)===31){
-// 				table += "<td>Ngày "+(cfirst+i)+"</td>";
-// 				break;
-// 			} else{
-// 				table += "<td>Ngày "+(cfirst+i)+"</td>";
-// 			}
-// 		}
-// 	} else {
-// 		for(var i = 0; i < 5; i++){
-// 			table += "<td>Ngày "+(firstDay.getDate()+i)+"</td>";
-// 		}
-// 	}	
-// 	table += "</tr>"
-// 	$.ajax({
-// 		type:'get',
-// 		url:'getSuatAnTmp',
-// 		data:{
-// 			thang: month,
-// 			nam: year,
-// 		},
-// 		dataType:'json',
-// 		success:function(data){
-// 			for(var j = 0; j < data.length; j++){				
-// 				table+= "<tr>";
-// 				table+="<td>"+data[j].Full_name+"</td>"				
-// 				if(check < 5){
-// 					for(var f = 0; f < (5 + check + 7); f++){
-// 						var checkDate1 = addDate(cfirstDay,f);
-// 						var mon = "data[j].Ngay"+(cfirst+f);
-// 						if(checkDate1.getDay() === 0 || checkDate1.getDay() === 6){
-// 							continue;
-// 						} else if((cfirst+f)===31){
-// 							table += "<td>"+eval(mon)+"</td>";
-// 							break;
-// 						} else{
-// 							table += "<td>"+eval(mon)+"</td>";
-// 						}
-// 					}
-// 				} else {
-// 					for(var k = 0; k < 5; k++){
-// 						var ngay = "data[j].Ngay"+(firstDay.getDate()+k);
-// 						if(eval(ngay)!==null){
-// 							table += "<td>"+eval(ngay)+"</td>";
-// 						} else{
-// 							table += "<td>O</td>";
-// 						}
-// 					}
-// 				}
-// 				table+="</tr>";
-// 			}
-// 			table+="</table>";
-// 			document.getElementById("noiboCalendar").innerHTML = table;
-// 		}
-// 	})
-// }
-
-// function btnPreWeek(){
-// 	$('#btnSAPre').click(function(e){
-// 		getSuatAnPhongPre();
-// 	})
-// }

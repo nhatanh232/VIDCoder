@@ -4,6 +4,7 @@ namespace App\Http\Controllers\AdminPage;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Profile\StaffModel;
 
 class NhanSuController extends Controller
 {
@@ -24,7 +25,7 @@ class NhanSuController extends Controller
     }
      public function getNVInfo(Request $Request){
         $Manv = $Request->Manv;
-        $data = \DB::table('dsnv')->where('Manv',$Manv)->get();
+        $data = \DB::table('STAFF')->where('Staff_ID',$Manv)->get();
         return $data;
     }
 }

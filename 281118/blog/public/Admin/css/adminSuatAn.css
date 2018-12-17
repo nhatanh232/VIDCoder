@@ -20,8 +20,7 @@
 
 
 .tNoiBo{
-	width: 80%;
-	margin-left: 10%
+	width: 100%;
 }
 
 .tNoiBo tr td{
@@ -33,4 +32,14 @@
 .noibo button{	
 	float: right;
 	margin: 1px;
+}
+
+.highlight{
+	background-color: #337ab7;
+	color: white;
+}
+
+.thang{
+	width: 50px;
+	border: 0;
 }
