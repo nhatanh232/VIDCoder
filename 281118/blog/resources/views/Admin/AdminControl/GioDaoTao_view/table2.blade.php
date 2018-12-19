@@ -1,45 +1,71 @@
 
 
-<table id="formNhapCH" class="table table-bordered">
-	<?php $Categories = array('TL'=>'Tâm Lý','KN'=>'Kỹ Năng','KT'=>'Kiến Thức','CM'=>'Chuyên Môn','CĐ'=>'Cộng Đồng','TC'=>'Thể Chất'); ?>
+<table id="formNhapCH" class="table table-bordered" style="width: auto">
 <thead>
 
 		<tr>
-			<th>Mã Nhân Viên</th>
-			<th>Họ Tên</th>
-			<th>Tên Sự Kiện</th>
-			<th>Phân Loại</th>
-			<th>Ngày Tham Gia</th>
-			<th>Số Giờ</th>
-			<th>Comment Người duyệt</th>
-			<th>Chỉnh sửa</th>
+			<th style="width: 15%">Mã Nhân Viên</th>
+			<th style="width: 23%">Họ Tên</th>
+			<th style="width: 14%">Tên Sự Kiện</th>
+			<th style="width: 0.01%">Ngày Tham Gia</th>
+			<th style="width: 7%">TL</th>
+			<th style="width: 7%">KT</th>
+			<th style="width: 7%">KN</th>
+			<th style="width: 7%">CM</th>
+			<th style="width: 7%">CĐ</th>
+			<th style="width: 7%">TC</th>
+			
+			<th >Chỉnh sửa</th>
 		</tr>
 	</thead>
-	<tbody>
+	<tbody>	
 		@foreach($detailDD as $key)
 		<tr>
-			<td ><input type="text"  value="{{$key->Staff_ID}}" ></td>
-			<td  >{{$key->Full_name}}</td>
-			<td ><input type="text"  value="{{$key->Event_Name}}" ></td>
-			<td ><select>
-				<option value="{{$key->Categories}}">{{$Categories[$key->Categories]}}</option>
-				<option value="TL">Tâm Lý</option>
-				<option value="KN">Kỹ Năng</option>
-				<option value="KT">Kiến Thức</option>
-				<option value="CM">Chuyên Môn</option>
-				<option value="CĐ">Cộng Đồng</option>
-				<option value="TC">Thể Chất</option>
-			</select></td>			
-			<td><input type="date"  value="{{$key->Event_Date}}" > </td>
-			<td><input type="double"  value="{{$key->Hours}}" ></td>
-			<td class="text-danger" >{{$key->Comment}}</td>
-			@if($key->Status == 0 )
-			<td><button class="btn btn-default editData" value="{{$key->id}}">Chỉnh sửa</button>
+			<td  ><input type="text"  value="{{$key->Staff_ID}}"  class="form-control"></td>
+			<td>{{$key->Full_name}}</td>
+			<td ><input type="text"  value="{{$key->Tenhoatdong}}"   class="form-control"></td>
+				
+			<td ><input type="date"  value="{{$key->Ngayhoatdong}}"  class="form-control" > </td>
+			@if($key->TL > 0 )
+			<td ><input type="double" name="TL" value="{{$key->TL}}"  class="form-control text-success"></td>	
+			@else
+			<td ><input type="double" name="TL" value="{{$key->TL}}"  class="form-control"></td>	
+			@endif
+
+			@if($key->KT > 0 )
+			<td ><input type="double" name="KT" value="{{$key->KT}}"  class="form-control text-success"></td>	
+			@else
+			<td ><input type="double" name="KT" value="{{$key->KT}}"  class="form-control"></td>	
+			@endif
+
+			@if($key->KN > 0 )
+			<td ><input type="double" name="KN" value="{{$key->KN}}" class="form-control text-success"></td>	
+			@else
+			<td ><input type="double" name="KN" value="{{$key->KN}}" class="form-control"></td>	
+			@endif
+
+			@if($key->CM > 0 )
+			<td ><input type="double" name="CM" value="{{$key->CM}}" class="form-control text-success"></td>	
+			@else
+			<td ><input type="double" name="CM" value="{{$key->CM}}" class="form-control"></td>	
+			@endif
+
+			@if($key->CD > 0 )
+			<td ><input type="double" name="CD" value="{{$key->CD}}" class="form-control text-success"></td>	
+			@else
+			<td ><input type="double" name="CD" value="{{$key->CD}}" class="form-control"></td>	
+			@endif
+
+			@if($key->TC > 0 )
+			<td ><input type="double" name="TC" value="{{$key->TC}}" class="form-control text-success"></td>	
+			@else
+			<td ><input type="double" name="TC" value="{{$key->TC}}" class="form-control"></td>	
+			@endif
+			
+			<td ><button class="btn btn-default editData" value="{{$key->id}}" >Chỉnh sửa</button>
 				<button class="btn btn-danger deleteData" value="{{$key->id}}">XÓA</button>
 			</td>
-			@else
-				<td class="text-success">Đã duyệt &radic;</td>
-			@endif
+			
 		</tr>
 		@endforeach
 	</tbody>

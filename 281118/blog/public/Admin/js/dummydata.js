@@ -37,9 +37,10 @@ var dummyData = {
 	"Bảo trì":"baotri",
 	"Lịch sử":"lichsuBD",
 	"Điểm cống hiến":"diemconghien",
-	'Thông tin nhân viên':'getInfoAdmin',
+	'3.Thông tin nhân viên':'getInfoAdmin',
 	'Tableau':'Tableau',
-	"Giờ đào tạo":'getDiemDanh',
+	"2.Giờ đào tạo":'getDiemDanh',
 	"Suất Ăn":"viewAnAdmin",
-	"Duyệt giờ đào tạo":"Duyetdt"
+	"Duyệt giờ đào tạo":"Duyetdt",
+	"1.Khai báo hoạt động":"khaibaohd"
 }
