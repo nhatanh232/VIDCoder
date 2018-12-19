@@ -167,10 +167,30 @@ function Countdown(Time){
     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+   	var day = days.toString();
+   	var hour = hours.toString();
+   	var minute = minutes.toString();
+   	var second = seconds.toString();
+   	if(day.length == 1){
+   		day = "0"+day;
+   	}
+   	if(hour.length == 1){
+   		hour = "0"+hour;
+   	}
+   	if(minute.length == 1){
+   		minute = "0"+minute;
+   	}
+   	if(second.length == 1){
+   		second = "0"+second;
+   	}
  
     // HIển thị chuỗi thời gian trong thẻ p
-    document.getElementById("time").innerHTML ="Thời gian còn: "+days + " Ngày " + hours + " Giờ "
-    + minutes + " Phút " + seconds + " Giây ";
+    document.getElementById("time").innerHTML ="<div class='bigdiv'><div><span class='text-time'>"+day +
+     "</span><div class='div-description'>Ngày</div></div></div><div class='bigdiv'><div><span class='text-time'>"
+     + hour + "</span><div class='div-description'>Giờ</div></div></div><div class='bigdiv'><div><span class='text-time'>"
+    + minute + "</span><div class'div-description'>Phút</div></div></div><div class='bigdiv'><div><span class='text-time'>"
+     + second + "</span><div class='div-description'>Giây</div></div></div>";
  
     // Nếu thời gian kết thúc, hiển thị chuỗi thông báo
     if (distance < 0) {

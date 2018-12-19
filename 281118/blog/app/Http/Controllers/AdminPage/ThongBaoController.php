@@ -48,7 +48,7 @@ and sotrungthuong.Ngay  = quaysotrungthuong.Ngayxo'));
 if(!empty($countGiaiDB))
   {\DB::Table('sotrungthuong')->where('Ngay',$countGiaiDB->Ngayxo)->update(['Trungdb'=>$countGiaiDB->Sogiaidb]);
 }
-        return view('test.test')->with(['Sodcchon'=>$Sodcchon,
+        return view('test.quayso')->with(['Sodcchon'=>$Sodcchon,
                                             'Giaidacbiet'=>$Giaidacbiet,
                                             
                                             'Giaikhuyenkhich'=>$Giaikhuyenkhich,

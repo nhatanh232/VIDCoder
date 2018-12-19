@@ -1,4 +1,4 @@
-@extends('kethua2')
+@extends('kethua3')
 @section('body')
 <!DOCTYPE html>
 <?php $i=1;?>
@@ -10,20 +10,25 @@
 <?php $o = 1;?>
 <html>
 <head>
-	<title>test</title>
-	
-	
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
 	<script type="text/javascript" src="{{asset('Admin/js/Quayso.js')}}"></script>
 	<link rel="stylesheet" type="text/css" href="{{asset('Admin/css/quayso.css')}}">
-
-
-
 </head>
-<body>
+<body style="background-image: url('{{asset('images/snow2.gif')}}'); background-color: #e0e0e0;">
+	<img src="{{URL::asset('images/topweb.png')}}" class="topweb">
+	<img src="{{URL::asset('images/santa.png')}}" class="leftbot">
+	<img src="{{URL::asset('images/christmas-tree.png')}}" class="rightbot">
 	<div class="container">
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
 		<div>
 			<h1 class="title">CƠ HỘI BẤT NGỜ</h1>			
 		</div>
@@ -38,17 +43,17 @@
 		</div>	
 		<div class="container" style="margin-left: 35%; margin-bottom: 10px;">
 			@if(!empty($Sodcchon))					
-					<div class="luckyNumber">
-						<div class="number"  ><STRONG id="Solan1">{{$Sodcchon->Solan1}}</STRONG></div>
-					</div>
-					<div class="luckyNumber">
-						<div class="number" ><STRONG id="Solan2">{{$Sodcchon->Solan2}}</STRONG></div>
-					</div>
-					<div class="luckyNumber">
-						<div class="number"><STRONG id="Solan3">{{$Sodcchon->Solan3}}</STRONG></div>
-					</div>
-					
-					@endif
+			<div class="luckyNumber">
+				<div class="number"  ><STRONG id="Solan1">{{$Sodcchon->Solan1}}</STRONG></div>
+			</div>
+			<div class="luckyNumber">
+				<div class="number" ><STRONG id="Solan2">{{$Sodcchon->Solan2}}</STRONG></div>
+			</div>
+			<div class="luckyNumber">
+				<div class="number"><STRONG id="Solan3">{{$Sodcchon->Solan3}}</STRONG></div>
+			</div>
+			
+			@endif
 		</div>	
 		<div class="container" id="ShowContent">
 			<div class="rows">				
@@ -79,8 +84,8 @@
 				<!-- Lần 2 -->
 				<div class="col-md-3">
 					<div class="subTitle">LẦN QUAY 2</div>
-		
-				
+					
+					
 					<!-- start for -->			
 					@foreach($Lichsu2 as $Lichsu2)	
 					<?php $b++ ?>
@@ -103,25 +108,25 @@
 				</div>
 				<div class="col-md-3">
 					<div class="subTitle" >ĐẶC BIỆT</div>
-				<br/>
-				<div id="Nguoidb">	
-				@foreach($Giaidacbiet as $Nguoidb)	
-					<?php $x++ ?>
-					@if($x%2 ==0)
-					<div class="t1">{{$Nguoidb->Hoten}}</div>
-					<div class="t1-num">{{$Nguoidb->Lan1}}</div>
-					<div class="t1-num">{{$Nguoidb->Lan2}}</div>
-					<div class="t1-num">{{$Nguoidb->Lan3}}</div>
-					
-					@else
-					<div class="t2">{{$Nguoidb->Hoten}}</div>
-					<div class="t2-num">{{$Nguoidb->Lan1}}</div>
-					<div class="t2-num">{{$Nguoidb->Lan2}}</div>
-					<div class="t2-num">{{$Nguoidb->Lan3}}</div>
+					<br/>
+					<div id="Nguoidb">	
+						@foreach($Giaidacbiet as $Nguoidb)	
+						<?php $x++ ?>
+						@if($x%2 ==0)
+						<div class="t1">{{$Nguoidb->Hoten}}</div>
+						<div class="t1-num">{{$Nguoidb->Lan1}}</div>
+						<div class="t1-num">{{$Nguoidb->Lan2}}</div>
+						<div class="t1-num">{{$Nguoidb->Lan3}}</div>
+						
+						@else
+						<div class="t2">{{$Nguoidb->Hoten}}</div>
+						<div class="t2-num">{{$Nguoidb->Lan1}}</div>
+						<div class="t2-num">{{$Nguoidb->Lan2}}</div>
+						<div class="t2-num">{{$Nguoidb->Lan3}}</div>
 
-					@endif
+						@endif
 
-					@endforeach
+						@endforeach
 					</div>
 				</div>
 				<div class="col-md-3">
@@ -146,7 +151,7 @@
 
 					@endforeach
 					<!-- t2 -->
-			
+					
 					<!-- end for -->
 				</div>
 			</div>						
@@ -166,19 +171,19 @@
 			
 		});
 
-	
-	function Refesh(){
-		$.ajax({
-			type:'get',
-			url:'Refesh',
-			success:function(data){
+		
+		function Refesh(){
+			$.ajax({
+				type:'get',
+				url:'Refesh',
+				success:function(data){
 
-				$('#ShowContent').html(data);
-			}
+					$('#ShowContent').html(data);
+				}
 
 
-		})
-	}
+			})
+		}
 	</script>
 
 	<!-- Countdown -->
@@ -187,7 +192,7 @@
   	// Thiết lập thời gian đích mà ta sẽ đếm
   	Countdown('{{$Sodcchon->Ngay}}');
   </script>
-@endif
+  @endif
 </body>
 </html>
 @endsection
