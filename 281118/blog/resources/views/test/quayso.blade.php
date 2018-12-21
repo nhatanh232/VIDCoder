@@ -158,8 +158,12 @@
 			</div>						
 		</div>
 	</div>
-<div class="btn btn-primary" onclick="preResult()">test</div>
-<div class="btn btn-primary" onclick="nextResult()">test</div>
+	<a class="left carousel-control" onclick="preResult()">
+		<span class="glyphicon glyphicon-chevron-left" onclick="preResult()"></span>
+	</a>
+<a class="right carousel-control" onclick="nextResult()">
+		<span class="glyphicon glyphicon-chevron-right" onclick="nextResult()"></span>
+	</a>
 	<div id="counter-days-only" class=""></div>
 
 	<script type="text/javascript">

@@ -190,3 +190,28 @@ strong{
 .div-description{
 
 }
+
+.btn-preResult{
+	position: absolute;
+	left: 0px;
+	top: 50%;
+	margin: 10px;
+}
+
+.btn-nextResult{
+	position: absolute;
+	right: 0px;
+	top: 50%;
+	margin: 10px;
+}
+
+.music{
+	position: fixed;
+	bottom: 0px;
+	left: 40%;
+	opacity: 0.2;
+}
+
+.music:hover{
+	opacity: 1;
+}

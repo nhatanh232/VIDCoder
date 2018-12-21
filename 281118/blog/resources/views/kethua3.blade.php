@@ -54,7 +54,9 @@
             </div>
         </div>
         @yield('body')
-       
+       <audio controls autoplay="autoplay" loop="loop" class="music">
+           <source src="{{URL::asset('music/Event.mp3')}}" type="audio/mpeg">
+       </audio>
         <div class="templatemo-footer" >
             <div class="container">
                 <div class="row">

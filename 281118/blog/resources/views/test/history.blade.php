@@ -14,7 +14,7 @@
 		<br/>
 		<br/>
 		<div>
-			<h1 class="title">CƠ HỘI BẤT </h1>			
+			<h1 class="title">CƠ HỘI BẤT NGỜ</h1>			
 		</div>
 		<div>
 			
