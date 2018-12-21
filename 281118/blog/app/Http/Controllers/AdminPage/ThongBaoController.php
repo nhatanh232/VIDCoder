@@ -138,4 +138,33 @@ if(!empty($countGiaiDB))
             }
         }
     }
+    public function preQS(Request $Request){
+      $Ky = $Request->Ki;
+     
+       date_default_timezone_set("Asia/Ho_Chi_Minh");
+          $Ngaybatdau = Carbon::create(2018,10,13,11,0,0);
+       
+        $Tinhngay = --$Ky * 7 ;
+
+        $Ngayxo = $Ngaybatdau->modify('+'.$Tinhngay.' day');
+          $Sodcchon = \DB::table('sotrungthuong')->where('Ngay',$Ngayxo)->get()->first();
+         
+          $Giaidacbiet =\DB::select(\DB::raw('SELECT * FROM quaysotrungthuong,sotrungthuong WHERE (quaysotrungthuong.Lan1 = sotrungthuong.Solan1 or quaysotrungthuong.Lan2 = sotrungthuong.Solan1 or quaysotrungthuong.Lan3 = sotrungthuong.Solan1) AND (quaysotrungthuong.Lan1 = sotrungthuong.Solan2 or quaysotrungthuong.Lan2 = sotrungthuong.Solan2 or quaysotrungthuong.Lan3 = sotrungthuong.Solan2) AND (quaysotrungthuong.Lan1 = sotrungthuong.Solan3 or quaysotrungthuong.Lan2 = sotrungthuong.Solan3 or quaysotrungthuong.Lan3 = sotrungthuong.Solan3) AND quaysotrungthuong.Ngayxo =\''.$Ngayxo.'\' AND quaysotrungthuong.Ngayxo = sotrungthuong.Ngay'));
+            $Giaikhuyenkhich = \DB::select(\DB::raw('select Hoten,Lan1,Lan2,Lan3 from quaysotrungthuong,sotrungthuong where 
+          quaysotrungthuong.Lan3  = sotrungthuong.Solan3 and quaysotrungthuong.Ngayxo = \''.$Ngayxo.'\'
+          and sotrungthuong.Ngay  = quaysotrungthuong.Ngayxo'));
+              
+           $Lichsu1 =\DB::select(\DB::raw('SELECT * FROM quaysotrungthuong,sotrungthuong WHERE (quaysotrungthuong.Lan1 = sotrungthuong.Solan1 or quaysotrungthuong.Lan2 = sotrungthuong.Solan1 or quaysotrungthuong.Lan3 = sotrungthuong.Solan1) and quaysotrungthuong.Ngayxo =\''.$Ngayxo.'\' AND quaysotrungthuong.Ngayxo = sotrungthuong.Ngay'));
+          $Lichsu2 =\DB::select(\DB::raw('SELECT * FROM quaysotrungthuong,sotrungthuong WHERE (quaysotrungthuong.Lan1 = sotrungthuong.Solan1 or quaysotrungthuong.Lan2 = sotrungthuong.Solan1 or quaysotrungthuong.Lan3 = sotrungthuong.Solan1) AND (quaysotrungthuong.Lan1 = sotrungthuong.Solan2 or quaysotrungthuong.Lan2 = sotrungthuong.Solan2 or quaysotrungthuong.Lan3 = sotrungthuong.Solan2) AND quaysotrungthuong.Ngayxo =\''.$Ngayxo.'\' AND quaysotrungthuong.Ngayxo = sotrungthuong.Ngay'));
+          
+
+      return view('test.history')->with(['Sodcchon'=>$Sodcchon,
+                                            'Giaidacbiet'=>$Giaidacbiet,
+                                            
+                                            'Giaikhuyenkhich'=>$Giaikhuyenkhich,
+                                           
+                                            'Lichsu1'=>$Lichsu1,
+                                            'Lichsu2'=>$Lichsu2,
+                                            ]);
+    }
 }

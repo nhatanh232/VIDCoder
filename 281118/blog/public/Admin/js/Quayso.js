@@ -199,3 +199,42 @@ function Countdown(Time){
     }
   }, 1000);
 }
+function preResult(){
+	var Ki = $('.info').text();
+	var result = --Ki.split(" ")[3].split('#')[1];
+	console.log(result);
+	
+	$.ajax({
+		type:'get',
+		url:'preKi',
+		 headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    		},
+		data:{
+			Ki:result,
+		},
+		success:function(data){
+			$('#His').html(data);
+		}
+	})
+}
+function nextResult(){
+	var Ki = $('.info').text();
+	var result = ++Ki.split(" ")[3].split('#')[1];
+	console.log(result);
+	
+	$.ajax({
+		type:'get',
+		url:'preKi',
+		 headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    		},
+		data:{
+			Ki:result,
+		},
+		success:function(data){
+			$('#His').html(data);
+		}
+	})
+}
+

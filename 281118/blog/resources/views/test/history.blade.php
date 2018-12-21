@@ -1,6 +1,3 @@
-@extends('kethua3')
-@section('body')
-<!DOCTYPE html>
 <?php $i=1;?>
 <?php $k=1;?>
 <?php $z=1;?>
@@ -8,20 +5,7 @@
 <?php $a=1;?>
 <?php $b=1;?>
 <?php $o = 1;?>
-<html>
-<head>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
-	<script type="text/javascript" src="{{asset('Admin/js/Quayso.js')}}"></script>
-	<link rel="stylesheet" type="text/css" href="{{asset('Admin/css/quayso.css')}}">
-</head>
-<body style="background-image: url('{{asset('images/snow2.gif')}}'); background-color: #e0e0e0;">
-	<img src="{{URL::asset('images/topweb.png')}}" class="topweb">
-	<img src="{{URL::asset('images/santa.png')}}" class="leftbot">
-	<img src="{{URL::asset('images/christmas-tree.png')}}" class="rightbot">
-	<div class="container" id="His">
-		<br/>
+<br/>
 		<br/>
 		<br/>
 		<br/>
@@ -30,18 +14,16 @@
 		<br/>
 		<br/>
 		<div>
-			<h1 class="title">CƠ HỘI BẤT NGỜ</h1>			
+			<h1 class="title">CƠ HỘI BẤT </h1>			
 		</div>
 		<div>
-
+			
 			<h1 class="info">Kỳ quay thưởng: #@if(!empty($Sodcchon)){{++$Sodcchon->Ki}} @endif| Ngày quay thưởng: @if(!empty($Sodcchon)){{date('d-m-Y',strtotime($Sodcchon->Ngay))}} @else Kì quay được cập nhật vào ngày mai @endif </h1>
 		</div>
 		<div class="giaithuong">
 			<p>Giá Trị Giải Thưởng:@if(!empty($Sodcchon)) {{number_format($Sodcchon->Giaithuongdb)}}@endif đồng</p>
 		</div>
-		<div class="container">
-			<p id="time"></p>
-		</div>	
+
 		<div class="container" style="margin-left: 35%; margin-bottom: 10px;">
 			@if(!empty($Sodcchon))					
 			<div class="luckyNumber">
@@ -158,43 +140,3 @@
 			</div>						
 		</div>
 	</div>
-<div class="btn btn-primary" onclick="preResult()">test</div>
-<div class="btn btn-primary" onclick="nextResult()">test</div>
-	<div id="counter-days-only" class=""></div>
-
-	<script type="text/javascript">
-		$(document).ready(function(){
-			// Dacbiet();
-			Tomau();
-		})
-		var socket = io('http://115.165.166.191:6001');
-		socket.on('chat:mess',function(){
-			window.location.reload();
-			
-		});
-
-		
-		function Refesh(){
-			$.ajax({
-				type:'get',
-				url:'Refesh',
-				success:function(data){
-
-					$('#ShowContent').html(data);
-				}
-
-
-			})
-		}
-	</script>
-
-	<!-- Countdown -->
-	@if(!empty($Sodcchon))
-	<script>
-  	// Thiết lập thời gian đích mà ta sẽ đếm
-  	Countdown('{{$Sodcchon->Ngay}}');
-  </script>
-  @endif
-</body>
-</html>
-@endsection
