@@ -158,12 +158,13 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
                 })->export('xlsx');
             }else{
             Excel::selectSheets(array('Hồ sơ nhân viên'))->load($file,function($reader){
-                 
+                 $reader->formatDates(true,'d-m-Y');
                  $CountStaff = 0;
-                $data = $reader->get(array('ma_nhan_vien','ho_va_ten','gioi_tinh','ngay_sinh','noi_sinh','ton_giao','quoc_tich','trinh_do_dao_tao','cho_o_hien_nay','ngay_thu_viec','ngay_chinh_thuc','ngay_nghi_viec','trang_thai_lao_dong','ma_vi_tri_cong_viec','nhom_mau','muc_tieu_ca_nhan','so_thich','nguyen_quan','tinhthanh_pho_cua_nguyen_quan','tinh_trang_hon_nhan','trinh_do_dao_tao','tinh_trang_suc_khoe','diem_manh','diem_yeu','so_cong_chuan','don_vi_cham_cong','tham_gia_cong_doan','chieu_cao','can_nang',
+                $data = $reader->get(array('ma_nhan_vien','ho_va_ten','gioi_tinh','ngay_sinh','noi_sinh','ton_giao','quoc_tich','trinh_do_dao_tao','cho_o_hien_nay','ngay_thu_viec','ngay_chinh_thuc','ngay_nghi_viec','trang_thai_lao_dong','ma_vi_tri_cong_viec','nhom_mau','muc_tieu_ca_nhan','so_thich','nguyen_quan','tinhthanh_pho_cua_nguyen_quan','tinh_trang_hon_nhan','trinh_do_dao_tao','tinh_trang_suc_khoe','diem_manh','diem_yeu','so_cong_chuan','don_vi_cham_cong','tham_gia_cong_doan','chieu_cao','can_nang','ten_don_vi_cong_tac',
                     'ho_va_ten_nguoi_lien_he_khan_cap','quan_he_nguoi_lien_he_khan_cap','dt_di_dong_nguoi_lien_he_khan_cap'
                     ,'noi_dao_tao','chuyen_nganh','email_co_quan','dt_di_dong'
                 ));
+               
                  $Status = array('Đang làm việc'=>'1','Nghỉ việc'=>'0',''=>'3');
                 $GioiTinh = array('Nam'=> 0 , 'Nữ'=> 1);
                 $CongDoan = array('Có'=>1 , "Không" => 0);
@@ -184,11 +185,11 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
                                 $nhap = new StaffModel;
                                 $nhap->Staff_ID = $key->ma_nhan_vien;
                                 $nhap->Full_name = $key->ho_va_ten;
-                                $nhap->DOB = (string)$key->ngay_sinh;
-                                $nhap->Start_work = $key->ngay_thu_viec;
+                                $nhap->DOB = Carbon::createFromFormat('d-m-Y',$key->ngay_sinh);
+                                $nhap->Start_work =Carbon::createFromFormat('d-m-Y',$key->ngay_thu_viec);
                                 $nhap->Birthplace = $key->noi_sinh;
                                 $nhap->Current_Address = $key->cho_o_hien_nay;
-                               
+                                $nhap->Department = $key->ten_don_vi_cong_tac;
                                 $nhap->HoTen_KC = $key->ho_va_ten_nguoi_lien_he_khan_cap;
                                 $nhap->QuanHe_KC = $key->quan_he_nguoi_lien_he_khan_cap;
                                 $nhap->DT_KC = $key->dt_di_dong_nguoi_lien_he_khan_cap;
@@ -222,19 +223,19 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
                             }
 
                             elseif ($key->ngay_chinh_thuc != "") {
-                                $Start_work = $key->ngay_chinh_thuc->modify('-2 month');
+                                $Start_work = Carbon::createFromFormat('d-m-Y',$key->ngay_chinh_thuc);
                                     $nhap = new StaffModel;
                                     $nhap->Staff_ID = $key->ma_nhan_vien;
                                     $nhap->Full_name = $key->ho_va_ten;
-                                    $nhap->DOB = $key->dob_mmddyyyy;
-                                    $nhap->Start_work = $Start_work;
+                                    $nhap->DOB = Carbon::createFromFormat('d-m-Y',$key->ngay_sinh);
+                                    $nhap->Start_work = $Start_work->modify('-2 month');
                                     $nhap->Birthplace = $key->noi_sinh;
                                     $nhap->Current_Address = $key->cho_o_hien_nay;
                                     
                                 $nhap->HoTen_KC = $key->ho_va_ten_nguoi_lien_he_khan_cap;
                                 $nhap->QuanHe_KC = $key->quan_he_nguoi_lien_he_khan_cap;
                                 $nhap->DT_KC = $key->dt_di_dong_nguoi_lien_he_khan_cap;
-                             
+                                $nhap->Department = $key->ten_don_vi_cong_tac;
                                 $nhap->MaViTriCongViec = $key->ma_vi_tri_cong_viec;
                                
                                 $nhap->SoThich = $key->so_thich;
@@ -272,16 +273,16 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
                                 $nhap = new StaffModel;
                                 $nhap->Staff_ID = $key->ma_nhan_vien;
                                 $nhap->Full_name = $key->ho_va_ten;
-                                $nhap->DOB = $key->dob_mmddyyyy;
-                                $nhap->Start_work = $key->ngay_thu_viec;
-                                $nhap->End_work = $key->ngay_nghi_viec;
+                                $nhap->DOB = Carbon::createFromFormat('d-m-Y',$key->ngay_sinh);
+                                $nhap->Start_work =Carbon::createFromFormat('d-m-Y',$key->ngay_thu_viec);
+                                $nhap->End_work = Carbon::createFromFormat('d-m-Y',$key->ngay_nghi_viec);
                                 $nhap->Birthplace = $key->noi_sinh;
                                 $nhap->Current_Address = $key->cho_o_hien_nay;
                               
                                 $nhap->HoTen_KC = $key->ho_va_ten_nguoi_lien_he_khan_cap;
                                 $nhap->QuanHe_KC = $key->quan_he_nguoi_lien_he_khan_cap;
                                 $nhap->DT_KC = $key->dt_di_dong_nguoi_lien_he_khan_cap;
-                             
+                                $nhap->Department = $key->ten_don_vi_cong_tac;
                                 $nhap->MaViTriCongViec = $key->ma_vi_tri_cong_viec;
                                
                                 $nhap->SoThich = $key->so_thich;
@@ -311,12 +312,12 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
                             }
 
                             elseif ($key->ngay_chinh_thuc != "") {
-                                $Start_work = $key->ngay_chinh_thuc->modify('-2 month');
+                                $Start_work = Carbon::createFromFormat('d-m-Y',$key->ngay_chinh_thuc);
                                     $nhap = new StaffModel;
                                     $nhap->Staff_ID = $key->ma_nhan_vien;
                                     $nhap->Full_name = $key->ho_va_ten;
-                                    $nhap->DOB = $key->dob_mmddyyyy;
-                                    $nhap->Start_work = $Start_work;
+                                    $nhap->DOB = Carbon::createFromFormat('d-m-Y',$key->ngay_sinh);
+                                    $nhap->Start_work = $Start_work->modify('-2 month');
                                     $nhap->End_work = $key->ngay_nghi_viec;
                                     $nhap->Birthplace = $key->noi_sinh;
                                     $nhap->Current_Address = $key->cho_o_hien_nay;
@@ -324,7 +325,7 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
                                 $nhap->HoTen_KC = $key->ho_va_ten_nguoi_lien_he_khan_cap;
                                 $nhap->QuanHe_KC = $key->quan_he_nguoi_lien_he_khan_cap;
                                 $nhap->DT_KC = $key->dt_di_dong_nguoi_lien_he_khan_cap;
-                             
+                                $nhap->Department = $key->ten_don_vi_cong_tac;
                                 $nhap->MaViTriCongViec = $key->ma_vi_tri_cong_viec;
                                
                                 $nhap->SoThich = $key->so_thich;
@@ -358,23 +359,29 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
                             }
                         }  
                     }else{
+                         if($key->ngay_chinh_thuc != "")
+                                 $Start_work = Carbon::createFromFormat('d-m-Y',$key->ngay_chinh_thuc)->modify('-2 month');
+                            if($key->ngay_thu_viec != "")
+                                    $Start_work = Carbon::createFromFormat('d-m-Y',$key->ngay_thu_viec);
                         $update = StaffModel::find($key->ma_nhan_vien);
                         $update->Full_name = $key->ho_va_ten;
-                        $update->DOB = $key->ngay_sinh;
-                       
+                        if(!empty($key->ngay_sinh))
+                        $update->DOB = Carbon::createFromFormat('d-m-Y',$key->ngay_sinh);
+                            
                         $update->Birthplace = $key->noi_sinh;
                         $update->Current_Address = $key->cho_o_hien_nay;
-                       
+                            $update->Start_work = $Start_work;
                                 $update->HoTen_KC = $key->ho_va_ten_nguoi_lien_he_khan_cap;
                                 $update->QuanHe_KC = $key->quan_he_nguoi_lien_he_khan_cap;
                                 $update->DT_KC = $key->dt_di_dong_nguoi_lien_he_khan_cap;
-                                $update->End_work = $key->ngay_nghi_viec;
+                                if(!empty($key->ngay_nghi_viec))
+                                $update->End_work = Carbon::createFromFormat('d-m-Y',$key->ngay_nghi_viec);
                                 $update->MaViTriCongViec = $key->ma_vi_tri_cong_viec;
                                
                                 $update->SoThich = $key->so_thich;
                                 $update->MucTieuCaNhan = $key->muc_tieu_ca_nhan;
                                 $update->TinhTrangSucKhoe = $key->tinh_trang_suc_khoe;
-                                
+                                $update->Department = $key->ten_don_vi_cong_tac;
                                 $update->GioiTinh = $GioiTinh[$key->gioi_tinh];
                                 $update->DiemManh = $key->diem_manh;
                                 $update->DiemYeu  = $key->diem_yeu;
