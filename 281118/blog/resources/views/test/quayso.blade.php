@@ -16,19 +16,12 @@
 	<script type="text/javascript" src="{{asset('Admin/js/Quayso.js')}}"></script>
 	<link rel="stylesheet" type="text/css" href="{{asset('Admin/css/quayso.css')}}">
 </head>
-<body style="background-image: url('{{asset('images/snow2.gif')}}'); background-color: #e0e0e0;">
-	<img src="{{URL::asset('images/topweb.png')}}" class="topweb">
-	<img src="{{URL::asset('images/santa.png')}}" class="leftbot">
-	<img src="{{URL::asset('images/christmas-tree.png')}}" class="rightbot">
+<body>
+	<img src="{{URL::asset('images/hanabi.gif')}}" class="firework1">
+	<img src="{{URL::asset('images/hanabi2.gif')}}" class="firework2">
+	<img src="{{URL::asset('images/hanabi2.gif')}}" class="firework3">
+	<img src="{{URL::asset('images/hanabi3.gif')}}" class="firework4">
 	<div class="container" id="His">
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
 		<div>
 			<h1 class="title">CƠ HỘI BẤT NGỜ</h1>			
 		</div>
@@ -37,12 +30,12 @@
 			<h1 class="info">Kỳ quay thưởng: #@if(!empty($Sodcchon)){{++$Sodcchon->Ki}} @endif| Ngày quay thưởng: @if(!empty($Sodcchon)){{date('d-m-Y',strtotime($Sodcchon->Ngay))}} @else Kì quay được cập nhật vào ngày mai @endif </h1>
 		</div>
 		<div class="giaithuong">
-			<p>Giá Trị Giải Thưởng:@if(!empty($Sodcchon)) {{number_format($Sodcchon->Giaithuongdb)}}@endif đồng</p>
+			<p class="giaithuong1">Giá Trị Giải Thưởng:</p><p class="value">@if(!empty($Sodcchon)) {{number_format($Sodcchon->Giaithuongdb)}}@endif đồng</p>
 		</div>
 		<div class="container">
 			<p id="time"></p>
 		</div>	
-		<div class="container" style="margin-left: 35%; margin-bottom: 10px;">
+		<div class="container" style="margin-left: 25%; margin-bottom: 10px; display: none;" id="circle">
 			@if(!empty($Sodcchon))					
 			<div class="luckyNumber">
 				<div class="number"  ><STRONG id="Solan1">{{$Sodcchon->Solan1}}</STRONG></div>
@@ -56,7 +49,7 @@
 			
 			@endif
 		</div>	
-		<div class="container" id="ShowContent">
+		<div class="container" id="ShowContent" style="display: none;">
 			<div class="rows">				
 				<!-- Lần 1 -->
 				<div class="col-md-3">

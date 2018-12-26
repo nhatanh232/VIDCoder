@@ -250,7 +250,7 @@ Route::get('detailTLGT','AdminPage\ThanhLyController@detailTLGT');
 Route::get('ChinhsuaHis','AdminPage\QuanlykhoController@ChinhsuaHis')->name('ChinhsuaHis');
 
 
-	Route::get('getRe','AdminPage\ThongBaoController@getRe')->middleware('auth');
+	Route::get('getRe','AdminPage\ThongBaoController@getRe');
 	// Route::post('postRe','AdminPage\ThongBaoController@postRe');
 	Route::get('Refesh','AdminPage\ThongBaoController@Refesh');
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Viễn Đông</title>
+        <title>Cơ Hội Bất Ngờ</title>
           <meta name="csrf-token" content="{{ csrf_token() }}" />
         <meta name="keywords" content="" />
 		<meta name="description" content="" />
@@ -38,26 +38,10 @@
 
   
     </head>    
-    <body">
-        <div class="templatemo-top-bar" id="templatemo-top" style="background-color: #e3e4e5;>
-            <div class="container">
-                <div class="subheader">
-                    <div id="phone" class="pull-left">
-                            <img src="{{URL::asset('layouts/images/phone.png')}}" alt="phone"/>
-                            (028)-3842-8633
-                    </div>
-                    <div id="email" class="pull-right">
-                            <img src="{{URL::asset('layouts/images/email.png')}}" alt="email"/>
-                           vidon@vidon.com.vn
-                    </div>
-                </div>
-            </div>
-        </div>
+    <body style="background-image: url('{{URL::asset('images/ny2019-2.jpg')}}');">
+        
         @yield('body')
-       <audio controls autoplay="autoplay" loop="loop" class="music">
-           <source src="{{URL::asset('music/Event.mp3')}}" type="audio/mpeg">
-       </audio>
-        <div class="templatemo-footer" >
+       <!--  <div class="templatemo-footer" >
             <div class="container">
                 <div class="row">
                     <div class="text-center">
@@ -101,7 +85,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <script src="{{URL::asset('layouts/js/jquery.min.js')}}" type="text/javascript"></script>
         <script src="{{URL::asset('layouts/js/bootstrap.min.js')}}"  type="text/javascript"></script>
