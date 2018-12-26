@@ -18,7 +18,7 @@
               <div class="card text-white Tamly o-hidden h-100">
                 <div class="card-body">
                   <div class="card-body-icon">
-                    <i class="fas fa-fw fa-comments"></i>
+                    <i class="fas fa-fw fa-smile"></i>
                   </div>
                   <div class="mr-5">Tâm Lý: <label>{{$Tamly != null ? $Tamly->Diem : 0}} giờ</label></div>
                 </div>
@@ -34,7 +34,7 @@
               <div class="card text-white Chuyenmon o-hidden h-100">
                 <div class="card-body">
                   <div class="card-body-icon">
-                    <i class="fas fa-fw fa-list"></i>
+                    <i class="fas fa-fw fa-book"></i>
                   </div>
                   <div class="mr-5">Chuyên Môn: <label>{{$Chuyenmon != null ? $Chuyenmon->Diem : 0}} giờ</label></div>
                 </div>
@@ -50,7 +50,7 @@
               <div class="card text-white Kynang o-hidden h-100">
                 <div class="card-body">
                   <div class="card-body-icon">
-                    <i class="fas fa-fw fa-shopping-cart"></i>
+                    <i class="fas fa-fw fa-camera"></i>
                   </div>
                   <div class="mr-5">Kỹ Năng: <label>{{$Kynang != null ? $Kynang->Diem : 0}} giờ</label></div>
                 </div>
@@ -66,7 +66,7 @@
               <div class="card text-white Kienthuc o-hidden h-100">
                 <div class="card-body">
                   <div class="card-body-icon">
-                    <i class="fas fa-fw fa-life-ring"></i>
+                    <i class="fas fa-fw fa-lightbulb"></i>
                   </div>
                   <div class="mr-5">Kiến Thức: <label>{{$Kienthuc != null ? $Kienthuc->Diem : 0}} giờ</label></div>
                 </div>
@@ -82,7 +82,7 @@
               <div class="card text-white Congdong o-hidden h-100">
                 <div class="card-body">
                   <div class="card-body-icon">
-                    <i class="fas fa-fw fa-comments"></i>
+                    <i class="fas fa-fw fa-users"></i>
                   </div>
                   <div class="mr-5">Cộng Đồng: <label>{{$Congdong !== null ? $Congdong->Diem : 0}} giờ</label></div>
                 </div>
@@ -98,7 +98,7 @@
               <div class="card text-white Thechat o-hidden h-100">
                 <div class="card-body">
                   <div class="card-body-icon">
-                    <i class="fas fa-fw fa-life-ring"></i>
+                    <i class="fas fa-fw fa-bicycle"></i>
                   </div>
                   <div class="mr-5">Thể Chất: <label>{{$Thechat != null ? $Thechat->Diem : 0}} giờ</label></div>
 

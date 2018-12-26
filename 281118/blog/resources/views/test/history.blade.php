@@ -5,14 +5,14 @@
 <?php $a=1;?>
 <?php $b=1;?>
 <?php $o = 1;?>
-<br/>
+<!-- <br/>
 		<br/>
 		<br/>
 		<br/>
 		<br/>
 		<br/>
 		<br/>
-		<br/>
+		<br/> -->
 		<div>
 			<h1 class="title">CƠ HỘI BẤT NGỜ</h1>			
 		</div>
@@ -21,10 +21,10 @@
 			<h1 class="info">Kỳ quay thưởng: #@if(!empty($Sodcchon)){{++$Sodcchon->Ki}} @endif| Ngày quay thưởng: @if(!empty($Sodcchon)){{date('d-m-Y',strtotime($Sodcchon->Ngay))}} @else Kì quay được cập nhật vào ngày mai @endif </h1>
 		</div>
 		<div class="giaithuong">
-			<p>Giá Trị Giải Thưởng:@if(!empty($Sodcchon)) {{number_format($Sodcchon->Giaithuongdb)}}@endif đồng</p>
+			<p class="giaithuong1">Giá Trị Giải Thưởng:</p><p class="value">@if(!empty($Sodcchon)) {{number_format($Sodcchon->Giaithuongdb)}}@endif đồng</p>
 		</div>
 
-		<div class="container" style="margin-left: 35%; margin-bottom: 10px;">
+		<div class="container" style="margin-left: 25%; margin-bottom: 10px;">
 			@if(!empty($Sodcchon))					
 			<div class="luckyNumber">
 				<div class="number"  ><STRONG id="Solan1">{{$Sodcchon->Solan1}}</STRONG></div>

@@ -195,7 +195,10 @@ function Countdown(Time){
     // Nếu thời gian kết thúc, hiển thị chuỗi thông báo
     if (distance < 0) {
     	clearInterval(x);
-    	document.getElementById("time").innerHTML = "Thời gian đếm ngược đã kết thúc";
+    	// document.getElementById("time").innerHTML = "Thời gian đếm ngược đã kết thúc";
+    	document.getElementById("time").style.display = "none";
+    	document.getElementById("circle").style.display = "block";
+    	document.getElementById("ShowContent").style.display = "block";
     }
 }, 1000);
   }
