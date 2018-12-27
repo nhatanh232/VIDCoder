@@ -7,9 +7,9 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="#">Dashboard</a>
+              <a href="#">Trang chủ</a>
             </li>
-            <li class="breadcrumb-item active">Overview</li>
+            <li class="breadcrumb-item active">Thông tin điểm cống hiến</li>
           </ol>
 
           <!-- Icon Cards-->
@@ -120,13 +120,19 @@
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-chart-area"></i>
-              Area Chart Example</div>
+              Biểu đồ điểm cống hiến</div>
             <div class="card-body">
               <canvas id="myAreaChart" width="100%" height="30"></canvas>
             </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+            <div class="card-footer small text-muted">Updated {{$updatetimeCH->updated_at}}</div>
           </div>
+          <div class="card mb-3">
+            <div class="container-fluid">
+<div class='tableauPlaceholder' id='viz1545808933802' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ND&#47;ND7FXBJ6N&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;ND7FXBJ6N' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ND&#47;ND7FXBJ6N&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                
+<script type='text/javascript'>                    var divElement = document.getElementById('viz1545808933802');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
 
+          </div>
+          <hr>
           <!-- DataTables Example -->
           <div class="card mb-3">
             <div class="card-header">
@@ -138,36 +144,36 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>STT</th>
-                      <th>SỰ KIỆN</th>
-                      <th>NGÀY DIỄN RA</th>
-                      <th>SỐ GIỜ</th>
-                   
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>STT</th>
-                      <th>SỰ KIỆN</th>
-                      <th>NGÀY DIỄN RA</th>
-                      <th>SỐ GIỜ</th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
-                   @foreach($Conghien as $key)
-                    <tr>
-                      <td>{{$i++}}</td>
-                      <td>{{$key->Event_Name}}</td> 
-                      <td>{{date('d-m-Y',strtotime($key->Event_Date))}}</td>
-                       <td>{{$key->Hours}}</td>
-                      
-                    </tr>
-                    @endforeach
+     
+      <th >Tên Sự Kiện</th>
+      <th >Ngày Tham Gia</th>
+      <th >TL</th>
+      <th >KT</th>
+      <th >KN</th>
+      <th >CM</th>
+      <th >CĐ</th>
+      <th >TC</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach($Conghien as $key)
+    <tr>
+      <td>{{$key->Tenhoatdong}}</td>
+      <td>{{date('d-m-Y',strtotime($key->Ngayhoatdong))}}</td>      
+      <td>{{$key->TL}}</td>
+      <td>{{$key->KT}}</td>
+      <td>{{$key->KN}}</td>
+      <td>{{$key->CM}}</td>
+      <td>{{$key->CD}}</td>
+      <td>{{$key->TC}}</td>
+
+    </tr>
+    @endforeach
                   </tbody>
                 </table>
               </div>
             </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+            <div class="card-footer small text-muted">Updated {{$updatetimeDT->updated_at}}</div>
           </div>
 
         </div>

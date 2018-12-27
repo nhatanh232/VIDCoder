@@ -22,8 +22,8 @@ $(document).ready(function(){
            var day     = date.getDate()  < 10 ? '0' + date.getDate()  : date.getDate();
            month =  ++month < 10 ? '0' + month : month ;
           
-           var newDate = day + '-' + month + '-' + yr;
-           Closing.push(data[i].Closing_Balance);
+           var newDate = month + '-' + yr;
+           Closing.push(data[i].Diemconghien);
            Decision_Date.push(newDate);
         }
 

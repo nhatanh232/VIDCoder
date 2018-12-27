@@ -6,16 +6,16 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="#">Dashboard</a>
+              <a href="#">Trang chủ</a>
             </li>
-            <li class="breadcrumb-item active">Charts</li>
+            <li class="breadcrumb-item active">Biểu đồ thống kê</li>
           </ol>
 
           <!-- Area Chart Example-->
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-chart-area"></i>
-              Chart Cống Hiến</div>
+              Biểu đồ cống hiến</div>
             <div class="card-body">
               <canvas id="myAreaChart" width="100%" height="30"></canvas>
             </div>
@@ -27,7 +27,7 @@
               <div class="card mb-3">
                 <div class="card-header">
                   <i class="fas fa-chart-bar"></i>
-                  Bar Chart Example</div>
+                  Biểu đồ cột điểm cống hiến</div>
                 <div class="card-body">
                   <canvas id="myBarChart" width="100%" height="50"></canvas>
                 </div>
@@ -38,7 +38,7 @@
               <div class="card mb-3">
                 <div class="card-header">
                   <i class="fas fa-chart-pie"></i>
-                  Pie Chart Example</div>
+                 Biểu đồ số giờ đào tạo</div>
                 <div class="card-body">
                   <canvas id="myPieChart" width="100%" height="100"></canvas>
                 </div>
@@ -47,9 +47,7 @@
             </div>
           </div>
 
-          <p class="small text-center text-muted my-5">
-            <em>More chart examples coming soon...</em>
-          </p>
+          
 
         </div>
         <!-- /.container-fluid -->
