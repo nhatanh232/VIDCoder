@@ -310,3 +310,6 @@ Route::get('getSuatAnTmp','suatan\SuatAnController@getDataSuatAnTmp');
 
 
 Route::get('preKi','AdminPage\ThongBaoController@preQS');
+
+Route::get("t",'SQL\ProfileManager@Update_EditInDay');
+Route::get('u','SQL\ProfileManager@store_ThongKeCongHien_ThamNien');
