@@ -39,9 +39,9 @@
 
   </head>    
   <body style="background-image: url('{{URL::asset('images/ny2019-2.jpg')}}');">
-    <audio class="music" controls autoplay loop>
+    <!-- <audio class="music" controls autoplay loop>
       <source src="{{URL::asset('music/hpny.mp3')}}" type="audio/mpeg">
-      </audio>
+      </audio> -->
 
       @yield('body')
        <!--  <div class="templatemo-footer" >
