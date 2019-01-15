@@ -203,6 +203,7 @@ Route::group(['middleware'=>['AuthenAdmin']],function(){
 
 Route::get('phanquyen','AdminPage\AdminController@getInformationNV');
 Route::get('AuthenQLkho','AdminPage\AdminController@AuthenQLkho');
+Route::get('AuthenTSPB','AdminPage\AdminController@AuthenTSPB');
 Route::get('AuthenThanhlygt','AdminPage\AdminController@AuthenThanhlygt');
 Route::get('AuthenThongbao','AdminPage\AdminController@AuthenThongbao');
 Route::get('AuthenNhapLieu','AdminPage\AdminController@AuthenNhapLieu');
