@@ -16,7 +16,7 @@ use Excel;
 class AdminController extends Controller
 {
     public function getInformationNV(){
-    	$data = \DB::table('dsnv')->join('users','dsnv.Manv','=','users.Manv')->select('dsnv.Manv','dsnv.Hoten','dsnv.Phongban','dsnv.Congty','users.Authen','users.Quanlykho','users.Thanhlygt','users.Thongbao','users.Nhaplieu')->get();
+    	$data = \DB::table('dsnv')->join('users','dsnv.Manv','=','users.Manv')->select('dsnv.Manv','dsnv.Hoten','dsnv.Phongban','dsnv.Congty','users.Authen','users.Quanlykho','users.Thanhlygt','users.Thongbao','users.Nhaplieu','users.TSPB')->get();
     	return view("Admin.AdminControl.Phanquyen")->with('data',$data);
     }
     public function AuthenQLKho(Request $Request){
@@ -41,6 +41,12 @@ class AdminController extends Controller
         $Manv = $Request->Manv;
         $chon = $Request->chon;
         \DB::table('users')->where('Manv',$Manv)->update(['Nhaplieu'=>$chon]);
+        return 'Success';
+    }
+    public function AuthenTSPB(Request $Request){
+        $Manv = $Request->Manv;
+        $chon = $Request->chon;
+        \DB::table('users')->where('Manv',$Manv)->update(['TSPB'=>$chon]);
         return 'Success';
     }
     public function AuthenAdmin(Request $Request){
