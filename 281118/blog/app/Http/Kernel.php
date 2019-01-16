@@ -64,6 +64,7 @@ class Kernel extends HttpKernel
         'AuthenThanhlygt'=> \App\Http\Middleware\AutheThanhlygt::class,
         'AuthenThongbao'=> \App\Http\Middleware\AutheThongbao::class,
         'AuthenNhapLieu'=> \App\Http\Middleware\AuthenNhapLieu::class,
+        'AuthenTSPB'=> \App\Http\Middleware\AuthenTSPB::class,
           'cors' => \App\Http\Middleware\Cors::class,
     ];
 }

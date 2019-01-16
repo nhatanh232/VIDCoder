@@ -88,22 +88,7 @@
 				<ul data-menu="main" class="menu__level" tabindex="-1" role="menu" aria-label="All">
 					<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1" aria-owns="submenu-1" href="#">Admin</a></li>
 					<!-- 1 -->
-					<li class="menu__item" role="menuitem">
-						
-							<a class="menu__link" href="#">Kho</a>
-						
-					</li>
-					<li class="menu__item" role="menuitem">
-						
-							<a class="menu__link" href="#">Tài sản phòng ban</a>
-						
-					</li>
-					
-					<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-2" aria-owns="submenu-2" href="#">Quản lý kho</a></li>
-					<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-3" aria-owns="submenu-3" href="#">Thông báo</a></li>
-					<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-4" aria-owns="submenu-4" href="#">Thanh lý giá trị</a></li>
-					<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-5" aria-owns="submenu-5" href="#">Thông tin nhân viên</a></li>
-					<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-6" aria-owns="submenu-6" href="#">Bộ phận bảo trì</a></li>
+				
 					<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-7" aria-owns="submenu-7" href="#">Hoạt động nội bộ</a></li>
 				</ul>
 				<!-- Submenu 1 -->

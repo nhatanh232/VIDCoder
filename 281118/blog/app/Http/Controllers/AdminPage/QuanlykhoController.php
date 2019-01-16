@@ -920,33 +920,11 @@ public function ExportPhieuXuat(Request $Request){
    header('Content-Type: text/html; charset=utf-8');
    $date = getdate();
    $Sophieu = $Request->Sophieu;
-
-        // $data = \DB::table('luutruphieuxn')
-        // ->where("luutruphieuxn.Sophieu",$Sophieu)
-        // ->join('tsphongban','luutruphieuxn.MTB','=','tsphongban.MTB')
-        // ->select('luutruphieuxn.Sophieu','luutruphieuxn.Nguoinhan','luutruphieuxn.Lydoxuat','luutruphieuxn.Bophan','tsphongban.MVT','tsphongban.Ten','tsphongban.dvt','tsphongban.Sl','tsphongban.Location')
-        // ->groupBy('luutruphieuxn.Sophieu','luutruphieuxn.Nguoinhan','luutruphieuxn.Lydoxuat','luutruphieuxn.Bophan','tsphongban.MVT','tsphongban.Ten','tsphongban.dvt','tsphongban.Location')
-        // ->SUM('tsphongban.Sl');
-        // dd($data);
-        // xuât file 
    $data = \DB::select(\DB::raw("SELECT luutruphieuxn.Sophieu,luutruphieuxn.Nguoinhan,luutruphieuxn.Lydoxuat,luutruphieuxn.Bophan,tsphongban.MVT,tsphongban.Ten,tsphongban.dvt,SUM(tsphongban.Sl) as Sl,tsphongban.Location FROM luutruphieuxn,tsphongban where luutruphieuxn.MTB=tsphongban.MTB and luutruphieuxn.Sophieu = N'$Sophieu' group by luutruphieuxn.Sophieu,luutruphieuxn.Nguoinhan,luutruphieuxn.Lydoxuat,luutruphieuxn.Bophan,tsphongban.MVT,tsphongban.Ten,tsphongban.dvt,tsphongban.Location"));
-
    $nguoinhan = $data[0]->Nguoinhan;
    $filename = 'PTNso_'.$Sophieu.'.docx';
-
-
    $phpWord = new \PhpOffice\PhpWord\PhpWord();
-
    $process  = new TemplateProcessor('Form\\phieuxk.docx');
-
-         // $section = $phpWord->createSection();
-         //    $table = $section->addTable();
-         //    $table->addRow(900);
-         //    // Add cells
-         //    $table->addCell(2000)->addText('Col 1');
-         //    $table->addCell(2000)->addText('Col 2');
-         //    $table->addCell(2000)->addText('Col 3');
-         //    $objWriter =  \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
    $process->setValue('PXK', $data[0]->Sophieu);    
    $process->setValue('Nguoinhan', $data[0]->Nguoinhan);
    $process->setValue('Lydo',$data[0]->Lydoxuat);
@@ -957,9 +935,7 @@ public function ExportPhieuXuat(Request $Request){
    
 
    $process->cloneRow('i',sizeof($data));
-              // $process->setValue('MVT#1',$data[0]->MVT);
-              //  $process->setValue('MVT#2',$data[1]->MVT);
-              //   $process->setValue('MVT#3',$data[2]->MVT);
+      
 
 
    $i = 1;

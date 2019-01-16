@@ -49,8 +49,7 @@ if(!empty($countGiaiDB))
   {\DB::Table('sotrungthuong')->where('Ngay',$countGiaiDB->Ngayxo)->update(['Trungdb'=>$countGiaiDB->Sogiaidb]);
 }
         return view('test.quayso')->with(['Sodcchon'=>$Sodcchon,
-                                            'Giaidacbiet'=>$Giaidacbiet,
-                                            
+                                            'Giaidacbiet'=>$Giaidacbiet,                                           
                                             'Giaikhuyenkhich'=>$Giaikhuyenkhich,
                                             'Demnguoichon'=>$Demnguoichon,
                                             'Lichsu1'=>$Lichsu1,
@@ -159,10 +158,8 @@ if(!empty($countGiaiDB))
           
 
       return view('test.history')->with(['Sodcchon'=>$Sodcchon,
-                                            'Giaidacbiet'=>$Giaidacbiet,
-                                            
-                                            'Giaikhuyenkhich'=>$Giaikhuyenkhich,
-                                           
+                                            'Giaidacbiet'=>$Giaidacbiet,                                 
+                                            'Giaikhuyenkhich'=>$Giaikhuyenkhich,                                          
                                             'Lichsu1'=>$Lichsu1,
                                             'Lichsu2'=>$Lichsu2,
                                             ]);
