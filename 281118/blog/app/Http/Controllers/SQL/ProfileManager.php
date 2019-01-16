@@ -46,8 +46,9 @@ class ProfileManager extends Controller
    		// Lấy các giá trị của Staff_ID đã được insert 
    		$all_value_inserted = DIEMDANHHOATDONGmodel::where('Staff_ID',$Staff_ID)->where('id','>=',$id)->get();
    		foreach ($all_value_inserted as $key) {
+         ProfileManager::store_ThongKeCongHien_ThamNien($key->Staff_ID);
    			ProfileManager::trigger_Insert_ThongKeCongHien_GioDaoTao($key->Staff_ID,$key->Ngayhoatdong,$key->Mahoatdong);
-        ProfileManager::store_ThongKeCongHien_ThamNien($key->Staff_ID);
+       
    		}
    	}
 
