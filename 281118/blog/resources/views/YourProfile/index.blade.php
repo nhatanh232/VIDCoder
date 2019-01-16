@@ -167,7 +167,7 @@
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
-              Bảng chi tiết sự kiện đã tham gia</div>
+              Bảng chi tiết các sự kiện nội bộ đã tham gia</div>
               <?php $i = 1 ; ?>
             <div class="card-body">
               <div class="table-responsive">
