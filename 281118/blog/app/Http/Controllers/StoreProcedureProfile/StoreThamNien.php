@@ -12,7 +12,8 @@ use App\Profile\Contribute_point;
 use App\Profile\BangChoDuyetModel;
 use App\Profile\HOATDONGNOIBOmodel;
 use App\Profile\DIEMDANHHOATDONGmodel;
-
+use App\Profile\ThongKeDiemCongHienModel;
+use App\Http\Controllers\SQL\ProfileManager;
 use Carbon\Carbon;
 use Excel;
 class StoreThamNien extends Controller
@@ -72,7 +73,10 @@ class StoreThamNien extends Controller
                 if($ngaybatdau <= $CurrentTime){
                     $find = \DB::table('History')->where(['Staff_ID'=>$STAFFID])->orderBy('Decision_Date','DESC')->get()->first();
                     $Closing_Balance = $find->Closing_Balance;
-                 
+
+                    // Check detail
+                   
+                    // Tính Thâm Niên
                     $his = new HistoryModel;
                     $his->Staff_ID = $STAFFID;
                     $his->Opening_Balance = $Closing_Balance;
@@ -471,12 +475,15 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
                 $update->CD = $CD;
                 $update->TC = $TC;
                 $update->save();
+
+                ProfileManager::Update_EditInDay($id);
                 return 'Đã chỉnh sửa thành công';
 
         }
         public static function deleteDataInDay(Request $Request){
             $id = $Request->id;
             DIEMDANHHOATDONGmodel::find($id)->delete();
+            ProfileManager::Update_EditInDay($id);
             return 'Đã xóa thành công';
         }
         public function khaibaohd(){
@@ -546,6 +553,7 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
 
             return 'Nhập thành công';
     }
+  
 
 }
 class StoreThamNienTotal{
