@@ -581,6 +581,9 @@ function buttonEditData(){
 
                 alert(data);
 
+            },
+            error:function(){
+                alert("Nhập đầy đủ thông tin");
             }
         })
     })
@@ -806,7 +809,10 @@ function FormKhaiBao(){
                  success:function(data){
                    alert(data);
 
-                 }
+                 },
+                 error:function(){
+                alert("Nhập đầy đủ thông tin");
+            }
             })
         });
 
