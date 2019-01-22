@@ -23,6 +23,22 @@
 
     <!-- Custom styles for this template-->
     <link href="{{URL::asset('YourProfile/css/sb-admin.css')}}" rel="stylesheet">
+    <!-- CSS của mình nè ^^ -->
+    <!-- BEGIN VENDOR CSS-->
+  <link rel="stylesheet" type="text/css" href="{{URL::asset('YourProfile/app-assets/css/vendors.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{URL::asset('YourProfile/app-assets/vendors/css/charts/c3.css')}}">
+  <!-- END VENDOR CSS-->
+  <!-- BEGIN ROBUST CSS-->
+  <link rel="stylesheet" type="text/css" href="{{URL::asset('YourProfile/app-assets/css/app.css')}}">
+  <!-- END ROBUST CSS-->
+  <!-- BEGIN Page Level CSS-->
+  <link rel="stylesheet" type="text/css" href="{{URL::asset('YourProfile/app-assets/css/core/menu/menu-types/horizontal-menu.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{URL::asset('YourProfile/app-assets/css/core/colors/palette-gradient.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{URL::asset('YourProfile/app-assets/css/plugins/charts/c3-chart.css')}}">
+  <!-- END Page Level CSS-->
+  <!-- BEGIN Custom CSS-->
+  <link rel="stylesheet" type="text/css" href="{{URL::asset('YourProfile/assets/css/style.css')}}">
+  <!-- END Custom CSS-->
 
   </head>
 
@@ -149,6 +165,26 @@
     <!-- Demo scripts for this page-->
     <script src="{{URL::asset('YourProfile/js/demo/datatables-demo.js')}}"></script>
     <script src="{{URL::asset('YourProfile/js/demo/chart-area-demo.js')}}"></script>
+    <!-- script của mình nè <3 -->
+      <script src="{{URL::asset('YourProfile/app-assets/vendors/js/vendors.min.js')}}" type="text/javascript"></script>
+  <!-- BEGIN VENDOR JS-->
+  <!-- BEGIN PAGE VENDOR JS-->
+  <script type="text/javascript" src="{{URL::asset('YourProfile/app-assets/vendors/js/ui/jquery.sticky.js')}}"></script>
+  <script src="{{URL::asset('YourProfile/app-assets/vendors/js/charts/d3.min.js')}}" type="text/javascript"></script>
+  <script src="{{URL::asset('YourProfile/app-assets/vendors/js/charts/c3.min.js')}}" type="text/javascript"></script>
+  <!-- END PAGE VENDOR JS-->
+  <!-- BEGIN ROBUST JS-->
+  <script src="{{URL::asset('YourProfile/app-assets/js/core/app-menu.js')}}" type="text/javascript"></script>
+  <script src="{{URL::asset('YourProfile/app-assets/js/core/app.js')}}" type="text/javascript"></script>
+  <script src="{{URL::asset('YourProfile/app-assets/js/scripts/customizer.js')}}" type="text/javascript"></script>
+  <!-- END ROBUST JS-->
+  <!-- BEGIN PAGE LEVEL JS-->
+  <script src="{{URL::asset('YourProfile/app-assets/js/scripts/charts/c3/data/category-data.js')}}" type="text/javascript"></script>
+  <script src="{{URL::asset('YourProfile/app-assets/js/scripts/charts/c3/data/column-oriented.js')}}" type="text/javascript"></script>
+  <script src="{{URL::asset('YourProfile/app-assets/js/scripts/charts/c3/data/data-color.js')}}" type="text/javascript"></script>
+  <script src="{{URL::asset('YourProfile/app-assets/js/scripts/charts/c3/data/data-from-url.js')}}" type="text/javascript"></script>
+  <script src="{{URL::asset('YourProfile/app-assets/js/scripts/charts/c3/data/data-order.js')}}" type="text/javascript"></script>
+  <script src="{{URL::asset('YourProfile/app-assets/js/scripts/charts/c3/data/row-oriented.js')}}" type="text/javascript"></script>
 
   </body>
 

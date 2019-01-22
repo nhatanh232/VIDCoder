@@ -203,9 +203,11 @@ Route::group(['middleware'=>['AuthenAdmin']],function(){
 
 Route::get('phanquyen','AdminPage\AdminController@getInformationNV');
 Route::get('AuthenQLkho','AdminPage\AdminController@AuthenQLkho');
+Route::get('AuthenTSPB','AdminPage\AdminController@AuthenTSPB');
 Route::get('AuthenThanhlygt','AdminPage\AdminController@AuthenThanhlygt');
 Route::get('AuthenThongbao','AdminPage\AdminController@AuthenThongbao');
 Route::get('AuthenNhapLieu','AdminPage\AdminController@AuthenNhapLieu');
+Route::get('AuthenTSPB','AdminPage\AdminController@AuthenTSPB');
 Route::get('AuthenAdmin','AdminPage\AdminController@AuthenAdmin');
 Route::get('QuaysoAdmin','AdminPage\AdminController@QuaysoAdmin');
 Route::get("postSo",'AdminPage\AdminController@postSo')->middleware('cors');
@@ -310,3 +312,6 @@ Route::get('getSuatAnTmp','suatan\SuatAnController@getDataSuatAnTmp');
 
 
 Route::get('preKi','AdminPage\ThongBaoController@preQS');
+
+Route::get("t",'SQL\ProfileManager@Update_EditInDay');
+Route::get('u','SQL\ProfileManager@store_ThongKeCongHien_ThamNien');

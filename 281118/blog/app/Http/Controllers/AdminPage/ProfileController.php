@@ -10,6 +10,7 @@ use App\Profile\DiemDanhModel;
 use App\Profile\BangChoDuyetModel;
 use App\Profile\DIEMDANHHOATDONGmodel;
 use App\Profile\HOATDONGNOIBOmodel;
+use App\Http\Controllers\SQL\ProfileManager;
 use Excel;
 use Carbon\Carbon;
 use PHPExcel_Worksheet_Drawing;
@@ -357,11 +358,10 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
             $nhap->CM = $CM;
             $nhap->CD = $CD;
             $nhap->TC = $TC;
-            
             $nhap->save();
-            return 'Nhập thành công';
-           
-            
+          
+           ProfileManager::trigger_Insert_ThongKeCongHien_GioDaoTao($Staff_ID,$Event_Date,$Mahoatdong);
+              return 'Nhập thành công';
         }
 
         public function getDataDiemDanh(Request $Request){
