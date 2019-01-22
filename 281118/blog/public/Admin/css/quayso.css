@@ -3,15 +3,15 @@ body{
 }
 .title{
 	text-align: center;
-	color: white;
-	font-size: 120px;
+	color: red;
+	font-size: 100px;
 	font-family: 'Open Sans', Arial, Helvetice Neue, sans-serif;
 	font-weight: bold;		
 }
 .info{
 	text-align: center;
 	font-size: 35px;
-	color: white;
+	color: red;
 	font-family: 'Open Sans', Arial, Helvetice Neue, sans-serif;
 	font-weight: bold;	
 }
@@ -34,13 +34,13 @@ body{
 	font-size: 50px;
 	/*	background-color: red;*/
 	/*	border: 2px solid red;*/
-	padding-top: 20px;
+	padding-top: 30px;
 	padding-bottom: 5px;
-
+	padding-left: 10px;
 	font-weight: bold;	
 	height: 150px;
 	width: 150px;
-	background-image: url('../../layouts/images/nycircle.png');
+	background-image: url('../../layouts/images/lnny.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -55,7 +55,7 @@ body{
 	font-weight: bold;	
 	height: 45px;
 	width: 45px;
-	background-image: url('../../layouts/images/quaysoevent.png');
+	background-image: url('../../layouts/images/lnny.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -119,7 +119,7 @@ body{
 }
 strong{
 	padding-bottom: 15px;
-	font-size: 75px;
+	font-size: 65px;
 	color: blue;
 }
 #time{
@@ -133,7 +133,6 @@ strong{
 	font-size: 63px;
 	font-family: 'Open Sans', Arial, Helvetice Neue, sans-serif;
 	font-weight: bold;
-	background-color: white;
 }
 
 .giaithuong1{
@@ -150,7 +149,7 @@ strong{
 	margin-left: 50px;
 }
 
-.topweb{
+/*.topweb{
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -170,7 +169,7 @@ strong{
 	right: 0px;
 	width: 340px;
 	height: 350px;
-}
+}*/
 
 .bigdiv{
 	font-family: sans-serif;
@@ -225,7 +224,7 @@ strong{
 	opacity: 1;
 }
 
-.firework1{
+./*firework1{
 	position: absolute;
 	left: 0px;
 	top: 0px;
@@ -263,4 +262,84 @@ strong{
 	left: 0px;
 	width: 350px;
 	height: 300px;
+}*/
+
+/*Event Tết cổ truyền*/
+.topleft{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+
+.topright{
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+
+.midtop{
+	position: absolute;
+	right: 26%;
+	top: 0px;
+}
+
+.midleft{
+	position: absolute;
+	left: 0px;
+	top: 26%;
+}
+
+.midright{
+	position: absolute;
+	right: 0px;
+	top: 26%;
+}
+
+.botleft{
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	width: 200px;
+	height: 200px;
+}
+
+.botright{
+	position: fixed;
+	right: 0px;
+	bottom: 0px;
+	width: 200px;
+	height: 200px;
+}
+
+.botmid1{
+	position: fixed;
+	right: 20%;
+	bottom: 0px;
+	width: 200px;
+	height: 200px;
+}
+
+.botmid2{
+	position: fixed;
+	right: 30%;
+	bottom: 0px;
+	width: 200px;
+	height: 200px;
+}
+
+.botmid3{
+	position: fixed;
+	right: 45%;
+	bottom: 0px;
+	width: 200px;
+	height: 200px;
+}
+
+.botmid4{
+	position: fixed;
+	right: 70%;
+	bottom: 0px;
+	width: 250px;
+	height: 200px;
+	z-index: -1;
 }
