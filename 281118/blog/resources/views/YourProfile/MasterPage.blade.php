@@ -31,14 +31,14 @@
   
   <!-- END ROBUST CSS-->
   <!-- BEGIN Page Level CSS-->
-  <link rel="stylesheet" type="text/css" href="{{URL::asset('YourProfile/app-assets/css/core/menu/menu-types/horizontal-menu.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{URL::asset('YourProfile/app-assets/css/core/colors/palette-gradient.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{URL::asset('YourProfile/app-assets/css/plugins/charts/c3-chart.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{URL::asset('template/app-assets/css/core/menu/menu-types/horizontal-menu.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{URL::asset('template/app-assets/css/core/colors/palette-gradient.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{URL::asset('template/app-assets/css/plugins/charts/c3-chart.css')}}">
   <!-- END Page Level CSS-->
   <!-- BEGIN Custom CSS-->
 
   <!-- END Custom CSS-->
-
+      @yield('css')
   </head>
 
   <body id="page-top">
@@ -147,44 +147,31 @@
 
  
     <!-- Bootstrap core JavaScript-->
-    <script src="{{URL::asset('YourProfile/vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{URL::asset('YourProfile/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="{{URL::asset('YourProfile/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+  
 
     <!-- Page level plugin JavaScript-->
-    <script src="{{URL::asset('YourProfile/vendor/chart.js/Chart.min.js')}}"></script>
-    <script src="{{URL::asset('YourProfile/vendor/datatables/jquery.dataTables.js')}}"></script>
-    <script src="{{URL::asset('YourProfile/vendor/datatables/dataTables.bootstrap4.js')}}"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="{{URL::asset('YourProfile/js/sb-admin.min.js')}}"></script>
 
     <!-- Demo scripts for this page-->
-    <script src="{{URL::asset('YourProfile/js/demo/datatables-demo.js')}}"></script>
-    <script src="{{URL::asset('YourProfile/js/demo/chart-area-demo.js')}}"></script>
-    <!-- script của mình nè <3 -->
-      <script src="{{URL::asset('YourProfile/app-assets/vendors/js/vendors.min.js')}}" type="text/javascript"></script>
+  
+      <script src="{{URL::asset('template/app-assets/vendors/js/vendors.min.js')}}" type="text/javascript"></script>
+      <script src="{{URL::asset('template/app-assets/vendors/js/tables/datatable/datatables.min.js')}}" type="text/javascript"></script>
   <!-- BEGIN VENDOR JS-->
   <!-- BEGIN PAGE VENDOR JS-->
-  <script type="text/javascript" src="{{URL::asset('YourProfile/app-assets/vendors/js/ui/jquery.sticky.js')}}"></script>
-  <script src="{{URL::asset('YourProfile/app-assets/vendors/js/charts/d3.min.js')}}" type="text/javascript"></script>
-  <script src="{{URL::asset('YourProfile/app-assets/vendors/js/charts/c3.min.js')}}" type="text/javascript"></script>
+  <script type="text/javascript" src="{{URL::asset('template/app-assets/vendors/js/ui/jquery.sticky.js')}}"></script>
+  <script src="{{URL::asset('template/app-assets/vendors/js/charts/d3.min.js')}}" type="text/javascript"></script>
+  <script src="{{URL::asset('template/app-assets/vendors/js/charts/c3.min.js')}}" type="text/javascript"></script>
   <!-- END PAGE VENDOR JS-->
   <!-- BEGIN ROBUST JS-->
-  <script src="{{URL::asset('YourProfile/app-assets/js/core/app-menu.js')}}" type="text/javascript"></script>
-  <script src="{{URL::asset('YourProfile/app-assets/js/core/app.js')}}" type="text/javascript"></script>
-  <script src="{{URL::asset('YourProfile/app-assets/js/scripts/customizer.js')}}" type="text/javascript"></script>
+  <script src="{{URL::asset('template/app-assets/js/core/app-menu.js')}}" type="text/javascript"></script>
+  <script src="{{URL::asset('template/app-assets/js/core/app.js')}}" type="text/javascript"></script>
+  
   <!-- END ROBUST JS-->
   <!-- BEGIN PAGE LEVEL JS-->
-  <script src="{{URL::asset('YourProfile/app-assets/js/scripts/charts/c3/data/category-data.js')}}" type="text/javascript"></script>
-  <script src="{{URL::asset('YourProfile/app-assets/js/scripts/charts/c3/data/column-oriented.js')}}" type="text/javascript"></script>
-  <script src="{{URL::asset('YourProfile/app-assets/js/scripts/charts/c3/data/data-color.js')}}" type="text/javascript"></script>
-  <script src="{{URL::asset('YourProfile/app-assets/js/scripts/charts/c3/data/data-from-url.js')}}" type="text/javascript"></script>
-  <script src="{{URL::asset('YourProfile/app-assets/js/scripts/charts/c3/data/data-order.js')}}" type="text/javascript"></script>
-  <script src="{{URL::asset('YourProfile/app-assets/js/scripts/charts/c3/data/row-oriented.js')}}" type="text/javascript"></script>
-
+        @yield('script')
   </body>
 
 

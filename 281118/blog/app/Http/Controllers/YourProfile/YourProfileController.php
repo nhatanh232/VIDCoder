@@ -61,14 +61,26 @@ class YourProfileController extends Controller
         ]);
     }
     public function ChartCH(){
-        $start = \DB::table("STAFF")->where('Staff_ID',Auth::user()->Manv)->select('Start_work')->get()->first();
-        $date = new \DateTime($start->Start_work);
-        $year = $date->format('Y');
-         $month = $date->format('m');
+        $user = Auth::user()->Manv;
+            $data = \DB::select(\DB::raw("
+                select TOP 12 ThamNien,SUM(GioDaoTao) as H , Month(NgayTangThamNien) as T ,Year(NgayTangThamNien) as N
+from ThongKeDiemCongHien 
+where Staff_ID = '$user' 
+and Month(NgayTangThamNien)  in(select Month(NgayTangThamNien) from ThongKeDiemCongHien
+                                    where YEAR(NgayTangThamNien) >= 2016
+                                    group by  Month(NgayTangThamNien),YEAR(NgayTangThamNien)
+                                )
+and Year(NgayTangThamNien) in (
+                                select  YEAR(NgayTangThamNien) as N'Năm' from ThongKeDiemCongHien
+                                    where YEAR(NgayTangThamNien) >= 2016
+                                    group by  Month(NgayTangThamNien),YEAR(NgayTangThamNien)
+                                    
+)
+and  Year(NgayTangThamNien) >= 2018
+group by ThamNien,Month(NgayTangThamNien),Year(NgayTangThamNien)
+order by Year(NgayTangThamNien),Month(NgayTangThamNien) ASC
 
-    		$data = \DB::table('History')->where('Staff_ID',Auth::user()->Manv)
-            ->orderBy('created_at','ASC')->get();
-
+                "));
     		return $data;
     }
     public function Chartpage(){

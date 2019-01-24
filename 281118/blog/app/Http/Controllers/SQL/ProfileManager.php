@@ -175,7 +175,7 @@ class ProfileManager extends Controller
 
         while($ngaybatdau <= $CurrentTime);
   }
-    public function update_CongHien(){
+    public static function update_CongHien(){
       $Staff_ID = Contribute_point::select('Staff_ID')->get();
       foreach ($Staff_ID as $key) {
               $CongHien = ThongKeDiemCongHienModel::select('id','Closing_Balance','ThamNien')->where('Staff_ID',$key->Staff_ID)->orderBy('id','DESC')->get()->first();

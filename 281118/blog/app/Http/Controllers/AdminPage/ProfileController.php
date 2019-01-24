@@ -191,11 +191,11 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
         }
 // Admin_Manager
         public function getInfoAdmin(){
+             ProfileManager::update_CongHien();
             $data = StaffModel::where('Status_WK',1)->join('Contribute_point','STAFF.Staff_ID','=','Contribute_point.Staff_ID')
             ->select('STAFF.Staff_ID','STAFF.Full_name','STAFF.Company','STAFF.Start_work','Contribute_point.Total_point')
             ->get();
-        
-            
+          
             return view('Profile.profileadmin')->with(['data'=>$data]);
         }
 
