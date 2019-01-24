@@ -49,6 +49,12 @@ class AdminController extends Controller
         \DB::table('users')->where('Manv',$Manv)->update(['Nhaplieu'=>$chon]);
         return 'Success';
     }
+    public function AuthenTSPB(Request $Request){
+        $Manv = $Request->Manv;
+        $chon = $Request->chon;
+        \DB::table('users')->where('Manv',$Manv)->update(['TSPB'=>$chon]);
+        return 'Success';
+    }
     public function AuthenAdmin(Request $Request){
     	$Manv = $Request->Manv;
     	$chon = $Request->chon;

@@ -25,6 +25,7 @@
 				<th>Thanh lý giá trị</th>
 				<th>Thông báo</th>
 				<th>Nhập liệu</th>
+				<th>Phòng ban</th>
 			</tr>
 		</thead>
 			<tbody>
@@ -41,6 +42,7 @@
 					<td>@if($key->Thanhlygt == 1 || $key->Authen == 'Admin')<input type="checkbox" name="AuthenThanhlygt" value="{{$key->Manv}}" checked> @else <input type="checkbox" name="AuthenThanhlygt" value="{{$key->Manv}}" > @endif</td>
 					<td>@if($key->Thongbao ==1 || $key->Authen == 'Admin')<input type="checkbox" name="AuthenThongbao" value="{{$key->Manv}}" checked>@else <input type="checkbox" name="AuthenThongbao" value="{{$key->Manv}}" > @endif</td>
 					<td>@if($key->Nhaplieu ==1 || $key->Authen == 'Admin')<input type="checkbox" name="AuthenNhapLieu" value="{{$key->Manv}}" checked>@else <input type="checkbox" name="AuthenNhapLieu" value="{{$key->Manv}}" > @endif</td>
+					<td>@if($key->TSPB ==1 || $key->Authen == 'Admin')<input type="checkbox" name="AuthenTSPB" value="{{$key->Manv}}" checked>@else <input type="checkbox" name="AuthenTSPB" value="{{$key->Manv}}" > @endif</td>
 				</tr>
 				@endforeach
 			</tbody>

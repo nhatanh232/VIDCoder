@@ -207,6 +207,7 @@ Route::get('AuthenTSPB','AdminPage\AdminController@AuthenTSPB');
 Route::get('AuthenThanhlygt','AdminPage\AdminController@AuthenThanhlygt');
 Route::get('AuthenThongbao','AdminPage\AdminController@AuthenThongbao');
 Route::get('AuthenNhapLieu','AdminPage\AdminController@AuthenNhapLieu');
+Route::get('AuthenTSPB','AdminPage\AdminController@AuthenTSPB');
 Route::get('AuthenAdmin','AdminPage\AdminController@AuthenAdmin');
 Route::get('QuaysoAdmin','AdminPage\AdminController@QuaysoAdmin');
 Route::get("postSo",'AdminPage\AdminController@postSo')->middleware('cors');
