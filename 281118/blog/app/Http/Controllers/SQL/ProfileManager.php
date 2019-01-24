@@ -9,6 +9,7 @@ use App\Profile\HOATDONGNOIBOmodel;
 use App\Profile\DIEMDANHHOATDONGmodel;
 use App\Profile\StaffModel;
 use Carbon\Carbon;
+use App\Profile\Contribute_point;
 
 class ProfileManager extends Controller
 {
@@ -173,5 +174,17 @@ class ProfileManager extends Controller
 
         while($ngaybatdau <= $CurrentTime);
   }
+    public function update_CongHien(){
+      $Staff_ID = Contribute_point::select('Staff_ID')->get();
+      foreach ($Staff_ID as $key) {
+              $CongHien = ThongKeDiemCongHienModel::select('id','Closing_Balance','ThamNien')->where('Staff_ID',$key->Staff_ID)->orderBy('id','DESC')->get()->first();
+         
+                $update = Contribute_point::find($key->Staff_ID);
+                $update->Total_point = $CongHien->Closing_Balance;
+                $update->Tham_nien = $CongHien->ThamNien;
+                $update->save();
+              
 
+      }
+    }
 }
