@@ -15,13 +15,14 @@ class ThongBaoController extends Controller
     public function getRe(){
        
           date_default_timezone_set("Asia/Ho_Chi_Minh");
-          $Ngaybatdau = Carbon::create(2018,10,13,11,0,0);
+          // $Ngaybatdau = Carbon::create(2018,10,13,11,0,0);
         $Ky = \DB::table('sotrungthuong')->orderBy('Ki','DESC')->get()->first();
-        $Tinhngay = $Ky->Ki * 7 ;
-
-        $Ngayxo = $Ngaybatdau->modify('+'.$Tinhngay.' day');
+        $Ngaybatdau = Carbon::createFromFormat('Y-m-d H:i:s', $Ky->Ngay);
+     
+        $Ngayxo = $Ngaybatdau;
 
        ThongBaoController::CreateKy($Ngayxo);
+
         $Demnguoichon = \DB::select(\DB::raw('SELECT Sochon, SUM(Bang.Dem) as Dem FROM(SElect Sochon as Sochon,Dem as Dem from LAN1 WHERE Ngayxo =\''.$Ngayxo.'\' UNION ALL SELECT Sochon as Sochon,Dem as Dem FROm LAN2 WHERE Ngayxo=\''.$Ngayxo.'\' UNION ALL SELECT Sochon as Sochon,Dem as Dem FROm LAN3 WHERE Ngayxo=\''.$Ngayxo.'\') as Bang group by Bang.Sochon order by Bang.Sochon ASC'));
         // dd($Demnguoichon);
           $Sodcchon = \DB::table('sotrungthuong')->where('Ngay',$Ngayxo)->get()->first();

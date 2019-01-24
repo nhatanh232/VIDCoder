@@ -193,9 +193,7 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
             $data = StaffModel::where('Status_WK',1)->join('Contribute_point','STAFF.Staff_ID','=','Contribute_point.Staff_ID')
             ->select('STAFF.Staff_ID','STAFF.Full_name','STAFF.Company','STAFF.Start_work','Contribute_point.Total_point')
             ->get();
-           
-            StoreThamNien::Store_main_total();
-            StoreThamNien::Store_main();
+            
             return view('Profile.profileadmin')->with(['data'=>$data]);
         }
 

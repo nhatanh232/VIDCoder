@@ -25,11 +25,10 @@
     <link href="{{URL::asset('YourProfile/css/sb-admin.css')}}" rel="stylesheet">
     <!-- CSS của mình nè ^^ -->
     <!-- BEGIN VENDOR CSS-->
-  <link rel="stylesheet" type="text/css" href="{{URL::asset('YourProfile/app-assets/css/vendors.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{URL::asset('YourProfile/app-assets/vendors/css/charts/c3.css')}}">
+ 
   <!-- END VENDOR CSS-->
   <!-- BEGIN ROBUST CSS-->
-  <link rel="stylesheet" type="text/css" href="{{URL::asset('YourProfile/app-assets/css/app.css')}}">
+  
   <!-- END ROBUST CSS-->
   <!-- BEGIN Page Level CSS-->
   <link rel="stylesheet" type="text/css" href="{{URL::asset('YourProfile/app-assets/css/core/menu/menu-types/horizontal-menu.css')}}">
@@ -37,7 +36,7 @@
   <link rel="stylesheet" type="text/css" href="{{URL::asset('YourProfile/app-assets/css/plugins/charts/c3-chart.css')}}">
   <!-- END Page Level CSS-->
   <!-- BEGIN Custom CSS-->
-  <link rel="stylesheet" type="text/css" href="{{URL::asset('YourProfile/assets/css/style.css')}}">
+
   <!-- END Custom CSS-->
 
   </head>
