@@ -1,11 +1,18 @@
 $(window).on("load", function(){
     // ohter Function 
-
-      $('#dot2').fadeOut();
-      $('#dot3').fadeOut();
+      $('#dot1').load('./YourProfile/js/dot1.html');
+        $('#dot2').load('./YourProfile/js/dot2.html');
+    $('#dot3').load('./YourProfile/js/dot3.html');
+    
     ChangeTable();
     ChartCongHien();
     initTable();
+     loadText();
+     setTimeout(function(){
+         $('#dot1').fadeOut();
+            $('#dot2').fadeOut();
+             $('#dot3').fadeOut();
+     },3000)
 });
 
     // end other Function
@@ -133,3 +140,38 @@ function initTable(){
     $('#dataTable').DataTable();
     
 }
+function loadText(){
+   $('.change').click(function(event){
+    event.preventDefault();
+      var file = $(this).attr('href');
+      var content = prompt('Nhúng script tableau');
+
+         $.ajax({
+
+        type:'post',
+        url:'http://localhost:8888/hehe',
+        data:{
+            file:file,
+            content:content
+        },
+          headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
+        dataType: "jsonp",
+        jsonpCallback: "_res",
+        cache: false,
+        timeout: 5000,
+        success:function(data){
+            console.log(data);
+        }
+
+
+    })
+
+   })
+ 
+ 
+
+
+   
+}   

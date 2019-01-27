@@ -6,10 +6,9 @@
       }
 
   </style>
+  <?php header('Access-Control-Allow-Origin: *'); ?>
 @endsection
 @section('body')
-      <div id="content-wrapper">
-
         <div class="container-fluid">
 
           <!-- Breadcrumbs-->
@@ -152,43 +151,57 @@
 
 
           </div>
-
-  <div class="row">
-    <div class="col-12">
+<div class="card mb-3">
+  
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Tableau</h4>
+                  <h4 class="card-title">Tableau </h4>
                   <a class="heading-elements-toggle">
                     <ol class="breadcrumb tableau">
                           <li class="breadcrumb-item active"><a href="#">Đợt I</a></li>
                           <li class="breadcrumb-item "><a href="#">Đợt II</a></li>
                           <li class="breadcrumb-item "><a href="#">Đợt III</a></li>
                     </ol>
-                  </a>
-            
+                  </a>          
+                </div>
+                <!-- end header -->
+                       <div class="card-header">
+                   <h4 class="card-title">Đợt III @if(Auth::user()->id ==22)<a href="dot3.html" class="float-right change">Change(+) @endif</a></h4>
+                   </div>
+                   <div class="card-body" id='dot3'></div>
+                   <!-- end 1 -->
+                     <div class="card-header">
+                   <h4 class="card-title">Đợt II @if(Auth::user()->id ==22)<a href="dot2.html" class="float-right change">Change(+) @endif</a></h4>
+                </div>
+                    <div class="card-body" id='dot2'></div>
+                    <!-- end2 -->
+                      <div class="card-header">
+                   <h4 class="card-title">Đợt I @if(Auth::user()->id ==22)<a href="dot1.html" class="float-right change">Change(+) @endif</a></h4>
+                </div>
+                     <div class="card-body" id='dot1'></div>
+             
+              </div>
+         
+
+        </div>
+  <!--               <div class="row">
+    <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                   <h4 class="card-title">Đợt I @if(Auth::user()->id ==22)<a href="dot1.html" class="float-right change">Change(+) @endif</a></h4>
                 </div>
                 <div class="card-content collapse show">
-                  <!-- 1 -->
+          
                   <div class="card-body" id='dot1'>
-                    <h1>Đợt I</h1>
-                    <div class='tableauPlaceholder' id='viz1547646717071' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Bo&#47;Bocotnghpotonib2_0&#47;Bocotnghpotonib6thngunm&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Bocotnghpotonib2_0&#47;Bocotnghpotonib6thngunm' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Bo&#47;Bocotnghpotonib2_0&#47;Bocotnghpotonib6thngunm&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1547646717071');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
-                  </div>
-                     <!-- 2 -->
-                  <div class="card-body" id="dot2">
-                    <h1>Đợt II</h1>
-                    <div class='tableauPlaceholder' id='viz1547645675939' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ch&#47;Chititotonib2_0&#47;Bngtnghp&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Chititotonib2_0&#47;Bngtnghp' /><param name='tabs' value='yes' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ch&#47;Chititotonib2_0&#47;Bngtnghp&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1547645675939');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
-                  </div>
-                     <!-- 3 -->
-                  <div class="card-body" id="dot3">
-                    <h1>Đợt 3</h1>
-                    <div class='tableauPlaceholder' id='viz1547646717071' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Bo&#47;Bocotnghpotonib2_0&#47;Bocotnghpotonib6thngunm&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Bocotnghpotonib2_0&#47;Bocotnghpotonib6thngunm' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Bo&#47;Bocotnghpotonib2_0&#47;Bocotnghpotonib6thngunm&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1547646717071');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+                    
                   </div>
                 </div>
+
+                </div>
+
               </div>
-            </div>
-    </div>
-    <br>
-  
+            </div> -->
+
           <!-- Area Chart Example-->
          <!-- Phần của mình hihi <3 -->
           <div class="row">
@@ -281,7 +294,7 @@
                             </div>
                             <div class="card-footer small text-muted">Updated {{$updatetimeDT->updated_at}}</div>
                           </div>
-                        </div>
+
         <!-- /.container-fluid -->
  
                  <!-- Sticky Footer -->

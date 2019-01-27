@@ -40,7 +40,11 @@
   <!-- END Custom CSS-->
       @yield('css')
   </head>
-
+<style type="text/css">
+  .fe{
+    font-weight: 
+  }
+</style>
   <body id="page-top">
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
@@ -114,7 +118,7 @@
             <span>Dashboard</span>
           </a>
         </li>
-     <!--    <li class="nav-item dropdown">
+    <!--     <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-fw fa-folder"></i>
             <span>Pages</span>
@@ -129,7 +133,7 @@
             <a class="dropdown-item" href="404.html">404 Page</a>
             <a class="dropdown-item" href="blank.html">Blank Page</a>
           </div>
-        </li> -->
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="{{URL('Chartpage')}}">
             <i class="fas fa-fw fa-chart-area"></i>
@@ -139,7 +143,7 @@
           <a class="nav-link" href="{{URL('Tableau')}}">
             <i class="fas fa-fw fa-table"></i>
             <span>Tableau</span></a>
-        </li>
+        </li> -->
       </ul>
 
       @yield('body')

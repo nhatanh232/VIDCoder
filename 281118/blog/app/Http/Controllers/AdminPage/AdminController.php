@@ -60,11 +60,10 @@ class AdminController extends Controller
     	return 'Success';
     }
     public function QuaysoAdmin(){
-          $Ngaybatdau = Carbon::create(2018,10,13,11,0,0);
+          
         $Ky = \DB::table('sotrungthuong')->orderBy('Ki','DESC')->get()->first();
-        $Tinhngay = $Ky->Ki * 7 ;
-
-        $Ngayxo = $Ngaybatdau->modify('+'.$Tinhngay.' day');
+    $Ngaybatdau = Carbon::createFromFormat('Y-m-d H:i:s', $Ky->Ngay);
+        $Ngayxo = $Ngaybatdau;
         $data = \DB::table('sotrungthuong')->where('Ngay','=',$Ngayxo)->get();
         $player = \DB::table('quaysotrungthuong')->where('Ngayxo',$Ngayxo)->get();
         return view('Admin.AdminControl.Quayso')->with(['data'=>$data,'player'=>$player]);
@@ -72,11 +71,9 @@ class AdminController extends Controller
     public function postSo(Request $Request){
         $n = $Request->n;
         $value = $Request->value;
-          $Ngaybatdau = Carbon::create(2018,10,13,11,0,0);
         $Ky = \DB::table('sotrungthuong')->orderBy('Ki','DESC')->get()->first();
-        $Tinhngay = $Ky->Ki * 7 ;
-
-        $Ngayxo = $Ngaybatdau->modify('+'.$Tinhngay.' day');
+            $Ngaybatdau = Carbon::createFromFormat('Y-m-d H:i:s', $Ky->Ngay);
+        $Ngayxo = $Ngaybatdau;
 
 
         $nhap = SoTrungThuongModel::find($Ngayxo);

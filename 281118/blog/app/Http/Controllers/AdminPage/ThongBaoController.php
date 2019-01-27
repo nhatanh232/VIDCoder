@@ -35,13 +35,6 @@ and sotrungthuong.Ngay  = quaysotrungthuong.Ngayxo'));
           $Lichsu2 =\DB::select(\DB::raw('SELECT * FROM quaysotrungthuong,sotrungthuong WHERE (quaysotrungthuong.Lan1 = sotrungthuong.Solan1 or quaysotrungthuong.Lan2 = sotrungthuong.Solan1 or quaysotrungthuong.Lan3 = sotrungthuong.Solan1) AND (quaysotrungthuong.Lan1 = sotrungthuong.Solan2 or quaysotrungthuong.Lan2 = sotrungthuong.Solan2 or quaysotrungthuong.Lan3 = sotrungthuong.Solan2) AND quaysotrungthuong.Ngayxo =\''.$Ngayxo.'\' AND quaysotrungthuong.Ngayxo = sotrungthuong.Ngay'));
           
          ini_set('memory_limit','256M');
-  //  \DB::statement('UPDATE quaysotrungthuong,sotrungthuong SET Trangthaidb=1 WHERE quaysotrungthuong.Lan1 = sotrungthuong.Solan1 AND quaysotrungthuong.Lan2 = sotrungthuong.Solan2 AND quaysotrungthuong.Lan3 = sotrungthuong.Solan3 AND sotrungthuong.Ngay = quaysotrungthuong.Ngayxo');
-
-  // $countGiaiDB = \DB::table('quaysotrungthuong')->join('sotrungthuong','sotrungthuong.Ngay','=','quaysotrungthuong.Ngayxo')->select(\DB::raw('count(quaysotrungthuong.Trangthaidb) as Sogiaidb, quaysotrungthuong.Ngayxo'))->where('quaysotrungthuong.Trangthaidb',1)->groupBy('quaysotrungthuong.Ngayxo')->orderBy('quaysotrungthuong.Ngayxo','DESC')->get()->first();
- 
-  // \DB::Table('sotrungthuong')->where('Ngay',$countGiaiDB->Ngayxo)->update(['Trungdb'=>$countGiaiDB->Sogiaidb]);
-
-          // \DB::statement('SELECT * FROM quaysotrungthuong,sotrungthuong WHERE (quaysotrungthuong.Lan1 = sotrungthuong.Solan1 or quaysotrungthuong.Lan2 = sotrungthuong.Solan1 or quaysotrungthuong.Lan3 = sotrungthuong.Solan1) AND (quaysotrungthuong.Lan1 = sotrungthuong.Solan2 or quaysotrungthuong.Lan2 = sotrungthuong.Solan2 or quaysotrungthuong.Lan3 = sotrungthuong.Solan2) AND (quaysotrungthuong.Lan1 = sotrungthuong.Solan3 or quaysotrungthuong.Lan2 = sotrungthuong.Solan3 or quaysotrungthuong.Lan3 = sotrungthuong.Solan3) AND sotrungthuong.Ngay =\''.$Ngayxo.'\'');
 \DB::statement('UPDATE quaysotrungthuong SET Trangthaidb=1 FROM quaysotrungthuong,sotrungthuong WHERE quaysotrungthuong.Lan1 = sotrungthuong.Solan1 AND quaysotrungthuong.Lan2 = sotrungthuong.Solan2 AND quaysotrungthuong.Lan3 = sotrungthuong.Solan3 AND sotrungthuong.Ngay = quaysotrungthuong.Ngayxo');
 
   $countGiaiDB = \DB::table('quaysotrungthuong')->join('sotrungthuong','sotrungthuong.Ngay','=','quaysotrungthuong.Ngayxo')->select(\DB::raw('count(quaysotrungthuong.Trangthaidb) as Sogiaidb, quaysotrungthuong.Ngayxo'))->where('quaysotrungthuong.Trangthaidb',1)->groupBy('quaysotrungthuong.Ngayxo')->orderBy('quaysotrungthuong.Ngayxo','DESC')->get()->first();
@@ -77,11 +70,11 @@ if(!empty($countGiaiDB))
         // return view('test.test')->with(['Sodcchon'=>$Sodcchon]);
     }
     public function Nguoidacbiet(Request $Request){
-        $Ngaybatdau = Carbon::create(2018,10,13,11,0,0);
+       
         $Ky = \DB::table('sotrungthuong')->orderBy('Ki','DESC')->get()->first();
-        $Tinhngay = $Ky->Ki * 7 ;
+        $Ngaybatdau = Carbon::createFromFormat('Y-m-d H:i:s', $Ky->Ngay);
 
-        $Ngayxo = $Ngaybatdau->modify('+'.$Tinhngay.' day');
+        $Ngayxo = $Ngaybatdau;
         if($Request->Solan == 1){
             $Dacbiet = \DB::select(\DB::raw('SELECT * FROM quaysotrungthuong,sotrungthuong WHERE quaysotrungthuong.Lan1 = sotrungthuong.Solan1 or quaysotrungthuong.Lan2 = sotrungthuong.Solan1 or quaysotrungthuong.Lan3 = sotrungthuong.Solan1 AND sotrungthuong.Ngay =\''.$Ngayxo.'\''));
         }elseif($Request->Solan == 2)
@@ -115,7 +108,7 @@ if(!empty($countGiaiDB))
             if($nextKi->Trungdb >= 1)
             {       
             
-                    $Ngayxott = $Ngayxottstring->modify('+7 day');
+                    $Ngayxott = $Ngayxottstring->modify('+4 day');
                     $create = new SoTrungThuongModel;
                     $create->Ki = ++$nextKi->Ki;
                     $create->Ngay = $Ngayxott;
@@ -127,7 +120,7 @@ if(!empty($countGiaiDB))
             else
             {
                 
-                      $Ngayxott = $Ngayxottstring->modify('+7 day');
+                      $Ngayxott = $Ngayxottstring->modify('+4 day');
                     $create = new SoTrungThuongModel;
                     $create->Ki = ++$nextKi->Ki;
                     $create->Ngay = $Ngayxott;
@@ -142,11 +135,11 @@ if(!empty($countGiaiDB))
       $Ky = $Request->Ki;
      
        date_default_timezone_set("Asia/Ho_Chi_Minh");
-          $Ngaybatdau = Carbon::create(2018,10,13,11,0,0);
+          $Ngaybatdau = SoTrungThuongModel::where('Ki',--$Ky)->select('Ngay')->get()->first()->Ngay;
        
-        $Tinhngay = --$Ky * 7 ;
+     
 
-        $Ngayxo = $Ngaybatdau->modify('+'.$Tinhngay.' day');
+        $Ngayxo = $Ngaybatdau;
           $Sodcchon = \DB::table('sotrungthuong')->where('Ngay',$Ngayxo)->get()->first();
          
           $Giaidacbiet =\DB::select(\DB::raw('SELECT * FROM quaysotrungthuong,sotrungthuong WHERE (quaysotrungthuong.Lan1 = sotrungthuong.Solan1 or quaysotrungthuong.Lan2 = sotrungthuong.Solan1 or quaysotrungthuong.Lan3 = sotrungthuong.Solan1) AND (quaysotrungthuong.Lan1 = sotrungthuong.Solan2 or quaysotrungthuong.Lan2 = sotrungthuong.Solan2 or quaysotrungthuong.Lan3 = sotrungthuong.Solan2) AND (quaysotrungthuong.Lan1 = sotrungthuong.Solan3 or quaysotrungthuong.Lan2 = sotrungthuong.Solan3 or quaysotrungthuong.Lan3 = sotrungthuong.Solan3) AND quaysotrungthuong.Ngayxo =\''.$Ngayxo.'\' AND quaysotrungthuong.Ngayxo = sotrungthuong.Ngay'));
