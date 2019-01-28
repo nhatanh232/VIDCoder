@@ -38,9 +38,9 @@ and sotrungthuong.Ngay  = quaysotrungthuong.Ngayxo'));
                 select * FROM quaysotrungthuong,sotrungthuong
               where quaysotrungthuong.Ngayxo = '$Ngayxo'
               and quaysotrungthuong.Ngayxo = sotrungthuong.Ngay
-              and ((Solan1 = Lan1 or Solan1 = Lan2 or Solan1 = Lan3) and (Solan2 = Lan1 or Solan2 = Lan2 or Solan2 = Lan3))
+              and (((Solan1 = Lan1 or Solan1 = Lan2 or Solan1 = Lan3) and (Solan2 = Lan1 or Solan2 = Lan2 or Solan2 = Lan3))
               or  ((Solan2 = Lan1 or Solan2 = Lan2 or Solan2 = Lan3) and (Solan3 = Lan1 or Solan3 = Lan2 or Solan3 = Lan3))
-              or  ((Solan1 = Lan1 or Solan1 = Lan2 or Solan1 = Lan3) and (Solan3 = Lan1 or Solan3 = Lan2 or Solan3 = Lan3))
+              or  ((Solan1 = Lan1 or Solan1 = Lan2 or Solan1 = Lan3) and (Solan3 = Lan1 or Solan3 = Lan2 or Solan3 = Lan3)))
             
             "));
   
