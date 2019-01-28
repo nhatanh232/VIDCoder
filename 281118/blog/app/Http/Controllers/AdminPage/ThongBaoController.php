@@ -33,6 +33,17 @@ and sotrungthuong.Ngay  = quaysotrungthuong.Ngayxo'));
       
            $Lichsu1 =\DB::select(\DB::raw('SELECT * FROM quaysotrungthuong,sotrungthuong WHERE (quaysotrungthuong.Lan1 = sotrungthuong.Solan1 or quaysotrungthuong.Lan2 = sotrungthuong.Solan1 or quaysotrungthuong.Lan3 = sotrungthuong.Solan1) and quaysotrungthuong.Ngayxo =\''.$Ngayxo.'\' AND quaysotrungthuong.Ngayxo = sotrungthuong.Ngay'));
           $Lichsu2 =\DB::select(\DB::raw('SELECT * FROM quaysotrungthuong,sotrungthuong WHERE (quaysotrungthuong.Lan1 = sotrungthuong.Solan1 or quaysotrungthuong.Lan2 = sotrungthuong.Solan1 or quaysotrungthuong.Lan3 = sotrungthuong.Solan1) AND (quaysotrungthuong.Lan1 = sotrungthuong.Solan2 or quaysotrungthuong.Lan2 = sotrungthuong.Solan2 or quaysotrungthuong.Lan3 = sotrungthuong.Solan2) AND quaysotrungthuong.Ngayxo =\''.$Ngayxo.'\' AND quaysotrungthuong.Ngayxo = sotrungthuong.Ngay'));
+
+          $Giaimayman = \DB::select(\DB::raw("
+                select * FROM quaysotrungthuong,sotrungthuong
+              where quaysotrungthuong.Ngayxo = '$Ngayxo'
+              and quaysotrungthuong.Ngayxo = sotrungthuong.Ngay
+              and ((Solan1 = Lan1 or Solan1 = Lan2 or Solan1 = Lan3) and (Solan2 = Lan1 or Solan2 = Lan2 or Solan2 = Lan3))
+              or  ((Solan2 = Lan1 or Solan2 = Lan2 or Solan2 = Lan3) and (Solan3 = Lan1 or Solan3 = Lan2 or Solan3 = Lan3))
+              or  ((Solan1 = Lan1 or Solan1 = Lan2 or Solan1 = Lan3) and (Solan3 = Lan1 or Solan3 = Lan2 or Solan3 = Lan3))
+            
+            "));
+  
           
          ini_set('memory_limit','256M');
 \DB::statement('UPDATE quaysotrungthuong SET Trangthaidb=1 FROM quaysotrungthuong,sotrungthuong WHERE quaysotrungthuong.Lan1 = sotrungthuong.Solan1 AND quaysotrungthuong.Lan2 = sotrungthuong.Solan2 AND quaysotrungthuong.Lan3 = sotrungthuong.Solan3 AND sotrungthuong.Ngay = quaysotrungthuong.Ngayxo');
@@ -48,6 +59,7 @@ if(!empty($countGiaiDB))
                                             'Demnguoichon'=>$Demnguoichon,
                                             'Lichsu1'=>$Lichsu1,
                                             'Lichsu2'=>$Lichsu2,
+                                            'Giaimayman'=>$Giaimayman
                                             ]);
 
     }

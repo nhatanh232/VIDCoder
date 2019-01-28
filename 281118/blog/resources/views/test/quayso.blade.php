@@ -84,24 +84,24 @@
 				</div>
 				<!-- Lần 2 -->
 				<div class="col-md-3">
-					<div class="subTitle">LẦN QUAY 2</div>
+					<div class="subTitle">GIẢI MAY MẮN</div>
 					
 					
 					<!-- start for -->			
-					@foreach($Lichsu2 as $Lichsu2)	
+					@foreach($Giaimayman as $Giaimayman)	
 					<?php $b++ ?>
 					@if($b%2 ==0)	
 					<br/>
-					<div class="t1">{{$Lichsu2->Hoten}}</div>
-					<div class="t1-num"><span>{{$Lichsu2->Lan1}}</span></div>
-					<div class="t1-num"><span>{{$Lichsu2->Lan2}}</span></div>
-					<div class="t1-num"><span>{{$Lichsu2->Lan3}}</span></div>
+					<div class="t1">{{$Giaimayman->Hoten}}</div>
+					<div class="t1-num"><span>{{$Giaimayman->Lan1}}</span></div>
+					<div class="t1-num"><span>{{$Giaimayman->Lan2}}</span></div>
+					<div class="t1-num"><span>{{$Giaimayman->Lan3}}</span></div>
 					
 					@else
-					<div class="t2">{{$Lichsu2->Hoten}}</div>
-					<div class="t2-num"><span>{{$Lichsu2->Lan1}}</span></div>
-					<div class="t2-num"><span>{{$Lichsu2->Lan2}}</span></div>
-					<div class="t2-num"><span>{{$Lichsu2->Lan3}}</span></div>
+					<div class="t2">{{$Giaimayman->Hoten}}</div>
+					<div class="t2-num"><span>{{$Giaimayman->Lan1}}</span></div>
+					<div class="t2-num"><span>{{$Giaimayman->Lan2}}</span></div>
+					<div class="t2-num"><span>{{$Giaimayman->Lan3}}</span></div>
 
 					@endif
 
