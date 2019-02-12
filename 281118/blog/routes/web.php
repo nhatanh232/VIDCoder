@@ -316,3 +316,9 @@ Route::get('preKi','AdminPage\ThongBaoController@preQS');
 Route::get("t",'SQL\ProfileManager@Update_EditInDay');
 Route::get('u','SQL\ProfileManager@store_ThongKeCongHien_ThamNien');
 Route::get('up','SQL\ProfileManager@update_CongHien');
+
+
+// Cửa hàng và để xuất
+Route::group(['prefix'=>'item'],function(){
+	Route::get('/','CuaHang\ViewController@index')->name('CuaHang');
+});
