@@ -31,7 +31,7 @@ $month = date('m');
     <div>
       <div class="noibo">
         <input type="hidden" name="Manv" value="{{$user}}" readonly="true"/>
-        <h1 class="hTitle">SUẤT ĂN <input type="hidden" name="currentMonth" value="{{$month}}"> CỦA PHÒNG MÌNH NÈ ^^</h1>        
+        <h1 class="hTitle">THÔNG TIN SUẤT ĂN <input type="hidden" name="currentMonth" value="{{$month}}"></h1>        
         <div id="noiboCalendar"></div>
         <br/>             
         <Button class="btn btn-primary" id="btnSANext">Tháng Kế</Button> 

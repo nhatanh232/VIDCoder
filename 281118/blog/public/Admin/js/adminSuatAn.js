@@ -110,7 +110,7 @@ function getSuatAnPhong(){
 		dataType:'json',
 		success:function(data){
 			for(var j = 0; j < data.length; j++){
-				table += "<td>"+data[j].Full_name+"</td>";
+				table += "<td>"+data[j].Name+"</td>";
 				for(var k = 1; k <= dayOfMonth; k++){
 					var checkDate1 = new Date(month+" "+k+" "+ year);
 					var checkDay1 = checkDate1.getDay();

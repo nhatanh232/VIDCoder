@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SuatAn;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\SuatAn\SuatAnModel;
+use App\SuatAn\NVDKAnModel;
 use App\Profile\StaffModel;
 use Auth;
 
@@ -165,8 +166,8 @@ class SuatAnController extends Controller
         $thang = $Request->thang;
         $nam = $Request->nam;
         $manv = $Request->manv;
-        $bophan = \DB::table('STAFF')->select('Department')->where('Staff_ID',$manv)->get()->first();
-        $data = \DB::table('SuatAn')->join('STAFF','SuatAn.MaNV','=','STAFF.Staff_ID')->select('SuatAn.*','STAFF.Full_name')->where(['SuatAn.ThangDK'=>$thang,'SuatAn.NamDK'=>$nam,'STAFF.Department'=>$bophan->Department])->get();
+        $bophan = \DB::table('NVDKAn')->select('Department')->where('Staff_ID',$manv)->get()->first();
+        $data = \DB::table('SuatAn')->join('NVDKAn','SuatAn.MaNV','=','NVDKAn.Staff_ID')->select('SuatAn.*','NVDKAn.Name')->where(['SuatAn.ThangDK'=>$thang,'SuatAn.NamDK'=>$nam,'NVDKAn.Department'=>$bophan->Department])->get();
         return $data;
     }
 }

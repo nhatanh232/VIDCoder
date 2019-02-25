@@ -16,15 +16,11 @@
 			</tr>
 			<tr>
 				<td><b><p>Họ & Tên: </p></b></td>
-				<td><input type="text" name="name" readonly="true"/></td>
+				<td><input type="text" name="name" readonly="true" autocomplete="on" onkeyup="getNVDKAn(this)" /></td>
 			</tr>
 			<tr>
 				<td><b><p>Bộ Phận: </p></b></td>
 				<td><input type="text" name="bophan" readonly="true"/></td>
-			</tr>
-			<tr>
-				<td><b><p>Công Ty: </p></b></td>
-				<td><input type="text" name="congty" readonly="true"/></td>
 			</tr>
 			<tr>
 				<td><input type="hidden" name="nam"></td>
@@ -59,6 +55,7 @@
 			createCalendar();
 			getRegisTime();
 			checkDK();
+			checkDelegate();
 		</script>
 	</body>
 	</html>
