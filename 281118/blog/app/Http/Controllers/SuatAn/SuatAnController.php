@@ -8,6 +8,9 @@ use App\SuatAn\SuatAnModel;
 use App\SuatAn\NVDKAnModel;
 use App\Profile\StaffModel;
 use Auth;
+use Carbon\Carbon;
+use PhpOffice\PhpWord\TemplateProcessor;
+use PhpOffice\PhpWord\Writer;
 
 class SuatAnController extends Controller
 {
@@ -155,19 +158,104 @@ class SuatAnController extends Controller
     }
 
     public function getSuatAn(Request $Request){
-        $ngay = $Request->ngay;
-        $thang = $Request->thang;
-        $nam = $Request->nam;
-        $data = \DB::select(("exec suatAnData :Param1, :Param2, :Param3"),[':Param1' => $ngay, ':Param2' => $thang, 'Param3' => $nam]);
+        $today = Carbon::now();
+        if($today->dayOfWeek == 5){
+            $nextDay = $today->addDay(3);
+        }else if($today->dayOfWeek == 6){
+            $nextDay = $today->addDay(2);
+        }else {
+            $nextDay = $today->addDay(1);
+        }
+        $data = \DB::select(\DB::raw("select Type,count(Type) as SL from DangKiSuatAn where Date = '$nextDay' group by Type"));
         return $data; 
     }
 
-    public function getDataSuatAnTmp(Request $Request){
-        $thang = $Request->thang;
-        $nam = $Request->nam;
-        $manv = $Request->manv;
-        $bophan = \DB::table('NVDKAn')->select('Department')->where('Staff_ID',$manv)->get()->first();
-        $data = \DB::table('SuatAn')->join('NVDKAn','SuatAn.MaNV','=','NVDKAn.Staff_ID')->select('SuatAn.*','NVDKAn.Name')->where(['SuatAn.ThangDK'=>$thang,'SuatAn.NamDK'=>$nam,'NVDKAn.Department'=>$bophan->Department])->get();
+    public function getDataSuatAnTmp(){
+        $today = Carbon::now();
+        if($today->dayOfWeek == 5){
+            $nextDay = $today->addDay(3);
+        }else if($today->dayOfWeek == 6){
+            $nextDay = $today->addDay(2);
+        }else {
+            $nextDay = $today->addDay(1);
+        }        
+        $data = \DB::select(\DB::raw("select d.*,nv.Name,nv.Department from DangKiSuatAn d, NVDKAn nv where Date = '$nextDay' and d.Staff_ID = nv.Staff_ID 
+            order by case when nv.Department = N'BGĐ' then 1
+            when nv.Department = N'Ban Trợ Lý' then 2
+            when nv.Department = N'NS-HC VĐ' then 3
+            when nv.Department = N'Kế Toán VĐ' then 4
+            when nv.Department = N'TM VĐ' then 5
+            when nv.Department = N'CSVC VĐ' then 6
+            when nv.Department = N'DACĐ VĐ' then 7
+            when nv.Department = N'NS-HC TL' then 8
+            when nv.Department = N'Kế Toán TL' then 9
+            when nv.Department = N'Nhập Khẩu TL' then 10
+            when nv.Department = N'Kinh Doanh TL' then 11
+            when nv.Department = N'Hồn Việt' then 12
+            when nv.Department = N'PROCI' then 13
+            when nv.Department = N'KHÁNH HỘI' then 14
+            when nv.Department = N'ZEN phục vụ' then 15
+            when nv.Department = N'ZEN Quầy Nước' then 16
+            when nv.Department = N'NH ZEN Tạp vụ' then 17
+            when nv.Department = N'ZEN Bếp' then 18
+            when nv.Department = N'Zen Maketing' then 19
+            when nv.Department = N'Zen Thu Mua' then 20
+            else nv.Department end asc"));
         return $data;
+    }
+
+    public function exportFileSuatAn(){
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        header('Content-Type: text/html; charset=utf-8');
+        $today = Carbon::now();
+        if($today->dayOfWeek == 5){
+            $nextDay = $today->addDay(3);
+        }else if($today->dayOfWeek == 6){
+            $nextDay = $today->addDay(2);
+        }else {
+            $nextDay = $today->addDay(1);
+        }
+        $data = \DB::select(\DB::raw("select d.*,nv.Name,nv.Department from DangKiSuatAn d, NVDKAn nv where Date = '$nextDay' and d.Staff_ID = nv.Staff_ID 
+            order by case when nv.Department = N'BGĐ' then 1
+            when nv.Department = N'Ban Trợ Lý' then 2
+            when nv.Department = N'NS-HC VĐ' then 3
+            when nv.Department = N'Kế Toán VĐ' then 4
+            when nv.Department = N'TM VĐ' then 5
+            when nv.Department = N'CSVC VĐ' then 6
+            when nv.Department = N'DACĐ VĐ' then 7
+            when nv.Department = N'NS-HC TL' then 8
+            when nv.Department = N'Kế Toán TL' then 9
+            when nv.Department = N'Nhập Khẩu TL' then 10
+            when nv.Department = N'Kinh Doanh TL' then 11
+            when nv.Department = N'Hồn Việt' then 12
+            when nv.Department = N'PROCI' then 13
+            when nv.Department = N'KHÁNH HỘI' then 14
+            when nv.Department = N'ZEN phục vụ' then 15
+            when nv.Department = N'ZEN Quầy Nước' then 16
+            when nv.Department = N'NH ZEN Tạp vụ' then 17
+            when nv.Department = N'ZEN Bếp' then 18
+            when nv.Department = N'Zen Maketing' then 19
+            when nv.Department = N'Zen Thu Mua' then 20
+            else nv.Department end asc"));
+        $date = $nextDay->day."-".$nextDay->month."-".$nextDay->year;
+        $filename = 'SuatAn_'.$date.'.docx';
+
+        $phpWord = new \PhpOffice\PhpWord\PhpWord();
+
+        $process  = new TemplateProcessor('Form\\suatan.docx');
+
+        $process->setValue('day',$nextDay->day);
+        $process->setValue('month',$nextDay->month);
+        $process->setValue('year',$nextDay->year);        
+        $process->cloneRow('i',sizeof($data));
+        $i = 1;
+        for($i; $i<= sizeof($data);$i++){
+            $process->setValue('i#'.$i,$i);
+            $process->setValue('name#'.$i,$data[$i-1]->Name);
+            $process->setValue('department#'.$i,htmlspecialchars($data[$i-1]->Department));
+            $process->setValue('type#'.$i,$data[$i-1]->Type);
+        }
+        $process->saveAs(storage_path('app\\public\\'.$date.'.docx'));
+        return response()->download(storage_path('app\\public\\'.$date.'.docx'));
     }
 }

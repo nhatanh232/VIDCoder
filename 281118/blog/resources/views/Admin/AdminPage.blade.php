@@ -512,8 +512,7 @@ $('.ShowImageTSCN').click(function (e) {
         getBDInfo();
         getDataBaoTri();
         quanlytaisan();
-        thongtinsuatantrongngay();
-        thongtinsuatanngaymai();        
+        thongtinsuatantrongngay();       
        	getSuatAnPhong();
        	void_main_Modulejs();
         $('#formNhapCH').DataTable();

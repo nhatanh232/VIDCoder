@@ -310,6 +310,7 @@ Route::get('viewAnAdmin','suatan\SuatAnController@viewAnAdmin');
 Route::get('getSuatAn','suatan\SuatAnController@getSuatAn');
 Route::get('getNVInfo','AdminPage\NhanSuController@getNVInfo');
 Route::get('getSuatAnTmp','suatan\SuatAnController@getDataSuatAnTmp');
+Route::post('exportFileSuatAn','suatan\SuatAnController@exportFileSuatAn')->name('exportFileSuatAn');
 Route::get('checkDelegate','AdminPage\NhanSuController@checkDelegate');
 Route::get('getStaffNotRegis','AdminPage\NhanSuController@getStaffNotRegis');
 

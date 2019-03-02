@@ -15,14 +15,10 @@ $month = date('m');
     <div class="calendar">
       <table class="tada">
         <tr>
-          <td>Hôm Nay</td>
+          <td>Ngày Tới</td>
           <td>Món Mặn:<input type="text" name="tMan" readonly="true"></td>
           <td>Món Chay:<input type="text" name="tChay" readonly="true"></td>
-        </tr>
-        <tr>
-          <td>Ngày Mai</td>
-          <td>Món Mặn:<input type="text" name="nMan" readonly="true"></td>
-          <td>Món Chay:<input type="text" name="nChay" readonly="true"></td>
+          <td>Không:<input type="text" name="tKhong" readonly="true"/></td>
         </tr>
       </table>   
     </div> 
@@ -31,10 +27,13 @@ $month = date('m');
     <div>
       <div class="noibo">
         <input type="hidden" name="Manv" value="{{$user}}" readonly="true"/>
-        <h1 class="hTitle">THÔNG TIN SUẤT ĂN <input type="hidden" name="currentMonth" value="{{$month}}"></h1>        
-        <div id="noiboCalendar"></div>
-        <br/>             
-        <Button class="btn btn-primary" id="btnSANext">Tháng Kế</Button> 
+        <h1 class="hTitle">THÔNG TIN SUẤT ĂN <input type="hidden" name="currentMonth" value="{{$month}}"></h1>
+        <form action="{{Route('exportFileSuatAn')}}" method="post" enctype="multipart/form-data">    
+             {{ csrf_field() }}  
+          <div id="noiboCalendar"></div>
+          <button class="btn btn-info btn-right">Xuất File</button>
+        </form>
+        <br/>
       </div>
     </div>
     <!-- tới đây là kết thúc nè -->
