@@ -17,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('Admin/css/quayso.css')}}">
 </head>
 <body>
-	<img src="{{URL::asset('images/hoamai.png')}}" class="topleft">
+<!-- 	<img src="{{URL::asset('images/hoamai.png')}}" class="topleft">
 	<img src="{{URL::asset('images/hoadao.png')}}" class="topright">
 	<img src="{{URL::asset('images/chucmung.png')}}" class="midtop">
 	<img src="{{URL::asset('images/caudoi1.png')}}" class="midleft">
@@ -27,7 +27,7 @@
 	<img src="{{URL::asset('images/hoatdong5.png')}}" class="botmid1">
 	<img src="{{URL::asset('images/hoatdong4.png')}}" class="botmid2">
 	<img src="{{URL::asset('images/hoatdong3.png')}}" class="botmid3">
-	<img src="{{URL::asset('images/hoatdong6.jpg')}}" class="botmid4">
+	<img src="{{URL::asset('images/hoatdong6.jpg')}}" class="botmid4"> -->
 	<div class="container" id="His">
 		<div>
 			<h1 class="title">CƠ HỘI BẤT NGỜ</h1>			

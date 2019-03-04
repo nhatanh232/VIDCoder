@@ -3,7 +3,7 @@ body{
 }
 .title{
 	text-align: center;
-	color: red;
+	color: #00fede;
 	font-size: 100px;
 	font-family: 'Open Sans', Arial, Helvetice Neue, sans-serif;
 	font-weight: bold;		
@@ -11,16 +11,17 @@ body{
 .info{
 	text-align: center;
 	font-size: 35px;
-	color: red;
+	color: #0bff01;
 	font-family: 'Open Sans', Arial, Helvetice Neue, sans-serif;
 	font-weight: bold;	
 }
 .subTitle{
 	text-align: center;
-	color: #FFFFFF;
+	color: 	#800080;
 	font-size: 20px;
-	background-color: #C50023;
-	border: 2px solid #C50023;
+	background-color: #e83459;
+	border: 2px solid white;
+	box-shadow: 2px 5px black;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	margin-left: 40px;
@@ -40,7 +41,7 @@ body{
 	font-weight: bold;	
 	height: 150px;
 	width: 150px;
-	background-image: url('../../layouts/images/lnny.png');
+	background-image: url('../../images/83circle.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -55,7 +56,7 @@ body{
 	font-weight: bold;	
 	height: 45px;
 	width: 45px;
-	background-image: url('../../layouts/images/lnny.png');
+	background-image: url('../../images/83circle.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -136,12 +137,12 @@ strong{
 }
 
 .giaithuong1{
-	color: black;
+	color: 	#00ff00;
 	float: left;
 }
 
 .value{
-	color: #8f0001;
+	color: white;
 }
 
 .luckyNumber{
@@ -265,7 +266,7 @@ strong{
 }*/
 
 /*Event Tết cổ truyền*/
-.topleft{
+/*.topleft{
 	position: absolute;
 	left: 0px;
 	top: 0px;
@@ -342,4 +343,4 @@ strong{
 	width: 250px;
 	height: 200px;
 	z-index: -1;
-}
+}*/
