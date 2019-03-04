@@ -313,6 +313,7 @@ Route::get('getSuatAnTmp','suatan\SuatAnController@getDataSuatAnTmp');
 Route::post('exportFileSuatAn','suatan\SuatAnController@exportFileSuatAn')->name('exportFileSuatAn');
 Route::get('checkDelegate','AdminPage\NhanSuController@checkDelegate');
 Route::get('getStaffNotRegis','AdminPage\NhanSuController@getStaffNotRegis');
+Route::get('checkNotRegis','suatan\SuatAnController@checkNotRegis');
 
 
 Route::get('preKi','AdminPage\ThongBaoController@preQS');

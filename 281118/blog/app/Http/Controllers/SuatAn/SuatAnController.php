@@ -258,4 +258,17 @@ class SuatAnController extends Controller
         $process->saveAs(storage_path('app\\public\\'.$date.'.docx'));
         return response()->download(storage_path('app\\public\\'.$date.'.docx'));
     }
+
+    public function checkNotRegis(){
+        $today = Carbon::now();
+        if($today->dayOfWeek == 5){
+            $nextDay = $today->addDay(3);
+        }else if($today->dayOfWeek == 6){
+            $nextDay = $today->addDay(2);
+        }else {
+            $nextDay = $today->addDay(1);
+        }
+        $data = \DB::select(\DB::raw("select Department from NVDKAn where Staff_ID not in (select Staff_ID from DangKiSuatAn where Date = '$nextDay') group by Department"));
+        return $data;
+    }
 }
