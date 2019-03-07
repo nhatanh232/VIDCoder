@@ -38,7 +38,7 @@
 
 
   </head>    
-  <body style="background-image: url('{{URL::asset('images/background83.jpg')}}');">
+  <body style="background-image: url('{{URL::asset('images/br831.png')}}');">
     <!-- <audio class="music" controls autoplay loop>
       <source src="{{URL::asset('music/hpny.mp3')}}" type="audio/mpeg">
       </audio> -->

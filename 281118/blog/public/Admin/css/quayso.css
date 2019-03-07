@@ -3,7 +3,7 @@ body{
 }
 .title{
 	text-align: center;
-	color: #00fede;
+	color: #e83459;
 	font-size: 100px;
 	font-family: 'Open Sans', Arial, Helvetice Neue, sans-serif;
 	font-weight: bold;		
@@ -11,7 +11,7 @@ body{
 .info{
 	text-align: center;
 	font-size: 35px;
-	color: #0bff01;
+	color: #800080;
 	font-family: 'Open Sans', Arial, Helvetice Neue, sans-serif;
 	font-weight: bold;	
 }
@@ -137,12 +137,12 @@ strong{
 }
 
 .giaithuong1{
-	color: 	#00ff00;
+	color: #be29ec;
 	float: left;
 }
 
 .value{
-	color: white;
+	color: #ff93ac;
 }
 
 .luckyNumber{
