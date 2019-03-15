@@ -35,13 +35,13 @@ body{
 	font-size: 50px;
 	/*	background-color: red;*/
 	/*	border: 2px solid red;*/
-	padding-top: 30px;
+	padding-top: 65px;
 	padding-bottom: 5px;
-	padding-left: 10px;
+	padding-left: 3px;
 	font-weight: bold;	
-	height: 150px;
-	width: 150px;
-	background-image: url('../../images/83circle.png');
+	height: 200px;
+	width: 200px;
+	background-image: url('../../images/travel-circle.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -119,10 +119,17 @@ body{
 	margin: 1px;
 }
 strong{
-	padding-bottom: 15px;
+	padding-bottom: 20px;
 	font-size: 65px;
-	color: blue;
+	color: 	#ff66cc;
 }
+
+strong{
+	padding-bottom: 20px;
+	font-size: 65px;
+	color: 	blue;
+}
+
 #time{
 	font-size: 30px;
 	text-align: center;
