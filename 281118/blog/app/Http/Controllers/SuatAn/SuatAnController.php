@@ -320,9 +320,27 @@ class SuatAnController extends Controller
             when T1.Company = N'Khánh Hội' then 5
             when T1.Company = N'Nhà hàng Zen' then 6
             else T1.Company end asc"));
+
+        $dataNgay = \DB::select(\DB::raw("select T2.Company, T1.Chay, T2.Man, T3.Khong from
+            (select nv.Company,d.Type,count(d.Type) as Chay from DangKiSuatAn d, NVDKAn nv where Date = '$nextDay' and nv.Staff_ID = d.Staff_ID and d.Type = 'C'
+            group by nv.Company,d.Type) as T1
+            full join
+            (select nv.Company,d.Type,count(d.Type) as Man from DangKiSuatAn d, NVDKAn nv where Date = '$nextDay' and nv.Staff_ID = d.Staff_ID and d.Type = 'M'
+            group by nv.Company,d.Type) as T2 on T1.Company = T2.Company
+            full join
+            (select nv.Company,d.Type,count(d.Type) as Khong from DangKiSuatAn d, NVDKAn nv where Date = '$nextDay' and nv.Staff_ID = d.Staff_ID and d.Type = 'O'
+            group by nv.Company,d.Type) as T3 on T2.Company = T3.Company
+            order by case
+            when T2.Company = N'Viễn Đông' then 1
+            when T2.Company = N'Toàn Lực' then 2
+            when T2.Company = N'Hồn Việt' then 3
+            when T2.Company = N'Proci' then 4
+            when T2.Company = N'Khánh Hội' then 5
+            when T2.Company = N'Nhà hàng Zen' then 6
+            else T2.Company end asc"));
         
         $date = $nextDay->day."-".$nextDay->month."-".$nextDay->year;
-        Excel::create('SuatAn_'.$date,function($excel) use($data, $nextDay, $dataThang){
+        Excel::create('SuatAn_'.$date,function($excel) use($data, $nextDay, $dataThang, $dataNgay){
             $excel->sheet('Suất Ăn',function($sheet) use($data, $nextDay){
                 $sheet->mergeCells('A1:E1');
                 $sheet->row(1, function ($row) {
@@ -352,7 +370,48 @@ class SuatAnController extends Controller
                     $sheet->setBorder('A3:E'.($i+3), 'thin');
                 }
             });
-            $excel->sheet('Thống Kê',function($sheet) use($dataThang, $nextDay){
+            $excel->sheet('Thống Kê Ngày',function($sheet) use($dataNgay, $nextDay){
+                $sheet->mergeCells('A1:E1');
+                $sheet->row(1, function ($row) {
+                    $row->setFontSize(24);
+                    $row->setFontWeight('bold');
+                    $row->setValignment('center');
+                    $row->setAlignment('center');
+                });
+                $sheet->row(1,array('THỐNG KÊ SUẤT ĂN'));
+                $sheet->mergeCells('A2:E2');
+                $sheet->row(2, function ($row) {
+                    $row->setFontSize(12);
+                    $row->setFontWeight('bold');
+                    $row->setValignment('center');
+                    $row->setAlignment('center');
+                });
+                $sheet->row(2,array('Ngày '.$nextDay->day.' Tháng '.$nextDay->month.' Năm'.$nextDay->year));
+                $sheet->row(3, function ($row) {
+                    $row->setFontWeight('bold');
+                    $row->setValignment('center');
+                    $row->setAlignment('center');
+                });
+                $sheet->row(3,array('STT', 'Công Ty', 'Mặn', 'Chay' ,'Không')); 
+                $i = 1;      
+                for($i; $i<=sizeof($dataNgay);$i++){
+                    $man = $dataNgay[$i-1]->Man;
+                    $chay = $dataNgay[$i-1]->Chay;
+                    $khong = $dataNgay[$i-1]->Khong;
+                    if($man == null){
+                        $man = 0;
+                    }
+                    if($chay == null){
+                        $chay = 0;
+                    }
+                    if($khong == null){
+                        $khong = 0;
+                    }
+                    $sheet->row($i+3,array($i, $dataNgay[$i-1]->Company, $man, $chay ,$khong));
+                    $sheet->setBorder('A3:E'.($i+3), 'thin');
+                }
+            });
+            $excel->sheet('Thống Kê Tháng',function($sheet) use($dataThang, $nextDay){
                 $sheet->mergeCells('A1:E1');
                 $sheet->row(1, function ($row) {
                     $row->setFontSize(24);
