@@ -24,7 +24,7 @@
 			<p class="giaithuong1">Giá Trị Giải Thưởng:</p><p class="value">@if(!empty($Sodcchon)) {{number_format($Sodcchon->Giaithuongdb)}}@endif đồng</p>
 		</div>
 
-		<div class="container" style="margin-left: 25%; margin-bottom: 10px;">
+		<div class="container" style="margin-left: 17%; margin-bottom: 10px;">
 			@if(!empty($Sodcchon))					
 			<div class="luckyNumber">
 				<div class="number"  ><STRONG id="Solan1">{{$Sodcchon->Solan1}}</STRONG></div>

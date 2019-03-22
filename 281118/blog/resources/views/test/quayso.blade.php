@@ -42,7 +42,7 @@
 		<div class="container">
 			<p id="time"></p>
 		</div>	
-		<div class="container" style="margin-left: 25%; margin-bottom: 10px; display: none;" id="circle">
+		<div class="container" style="margin-left: 17%; margin-bottom: 10px; display: none;" id="circle">
 			@if(!empty($Sodcchon))					
 			<div class="luckyNumber">
 				<div class="number"  ><STRONG id="Solan1">{{$Sodcchon->Solan1}}</STRONG></div>
