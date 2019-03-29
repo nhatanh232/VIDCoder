@@ -3,7 +3,7 @@ body{
 }
 .title{
 	text-align: center;
-	color: #e83459;
+	color: 	#5588ff;
 	font-size: 100px;
 	font-family: 'Open Sans', Arial, Helvetice Neue, sans-serif;
 	font-weight: bold;		
@@ -11,13 +11,13 @@ body{
 .info{
 	text-align: center;
 	font-size: 35px;
-	color: #800080;
+	color: #1d4c60;
 	font-family: 'Open Sans', Arial, Helvetice Neue, sans-serif;
 	font-weight: bold;	
 }
 .subTitle{
 	text-align: center;
-	color: 	#800080;
+	color: 	#ffc300;
 	font-size: 20px;
 	background-color: #e83459;
 	border: 2px solid white;
@@ -41,7 +41,7 @@ body{
 	font-weight: bold;	
 	height: 200px;
 	width: 200px;
-	background-image: url('../../images/travel-circle.png');
+	background-image: url('../../images/circle-vector-4.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -144,12 +144,14 @@ strong{
 }
 
 .giaithuong1{
-	color: #be29ec;
+	color: #29b758;
 	float: left;
+	text-shadow: 0.2em 0.2em 0.3em black;
 }
 
 .value{
-	color: #ff93ac;
+	color: #61250c;
+	text-shadow: 0.2em 0.2em 0.3em black;
 }
 
 .luckyNumber{
