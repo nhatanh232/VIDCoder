@@ -313,13 +313,13 @@ class SuatAnController extends Controller
             between (SELECT DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) and getdate() and nv.Staff_ID = d.Staff_ID and d.Type = 'O'
             group by nv.Company,d.Type) as T3 on T2.Company = T3.Company
             order by case
-            when T1.Company = N'Viễn Đông' then 1
-            when T1.Company = N'Toàn Lực' then 2
-            when T1.Company = N'Hồn Việt' then 3
-            when T1.Company = N'Proci' then 4
-            when T1.Company = N'Khánh Hội' then 5
-            when T1.Company = N'Nhà hàng Zen' then 6
-            else T1.Company end asc"));
+            when T2.Company = N'Viễn Đông' then 1
+            when T2.Company = N'Toàn Lực' then 2
+            when T2.Company = N'Hồn Việt' then 3
+            when T2.Company = N'Proci' then 4
+            when T2.Company = N'Khánh Hội' then 5
+            when T2.Company = N'Nhà hàng Zen' then 6
+            else T2.Company end asc"));
 
         $dataNgay = \DB::select(\DB::raw("select T2.Company, T1.Chay, T2.Man, T3.Khong from
             (select nv.Company,d.Type,count(d.Type) as Chay from DangKiSuatAn d, NVDKAn nv where Date = '$nextDay' and nv.Staff_ID = d.Staff_ID and d.Type = 'C'
