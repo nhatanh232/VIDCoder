@@ -464,7 +464,7 @@ class SuatAnController extends Controller
         }else {
             $nextDay = $today->addDay(1);
         }
-        $data = \DB::select(\DB::raw("select Department from NVDKAn where Staff_ID not in (select Staff_ID from DangKiSuatAn where Date = '$nextDay') group by Department"));
+        $data = \DB::select(\DB::raw("select Department from NVDKAn where Staff_ID not in (select Staff_ID from DangKiSuatAn where Date = '$nextDay') and status = 1 group by Department"));
         return $data;
     }
 }
