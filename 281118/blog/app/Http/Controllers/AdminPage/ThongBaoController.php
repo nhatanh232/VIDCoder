@@ -120,7 +120,7 @@ if(!empty($countGiaiDB))
             if($nextKi->Trungdb >= 1)
             {       
             
-                    $Ngayxott = $Ngayxottstring->modify('+4 day');
+                    $Ngayxott = $Ngayxottstring->modify('+7 day');
                     $create = new SoTrungThuongModel;
                     $create->Ki = ++$nextKi->Ki;
                     $create->Ngay = $Ngayxott;
@@ -132,7 +132,7 @@ if(!empty($countGiaiDB))
             else
             {
                 
-                      $Ngayxott = $Ngayxottstring->modify('+4 day');
+                      $Ngayxott = $Ngayxottstring->modify('+7 day');
                     $create = new SoTrungThuongModel;
                     $create->Ki = ++$nextKi->Ki;
                     $create->Ngay = $Ngayxott;

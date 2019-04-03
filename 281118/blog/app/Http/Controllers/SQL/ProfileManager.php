@@ -16,11 +16,14 @@ class ProfileManager extends Controller
    	public static function trigger_Insert_ThongKeCongHien_GioDaoTao($Staff_ID , $NgayHoatDong, $Mahoatdong){
    		$getValue = DIEMDANHHOATDONGmodel::where(['Staff_ID'=>$Staff_ID,'Mahoatdong'=>$Mahoatdong,'Ngayhoatdong'=>$NgayHoatDong])
    		->select('Staff_ID','Totalpoint','id')->orderBy('id','DESC')->get()->first();
-   		$lastValue = ThongKeDiemCongHienModel::where("Staff_ID",$Staff_ID)->select("Closing_Balance",'ThamNien','NgayTangThamNien')->orderBy('id','DESC')->get()->first();
+   		$lastValue = ThongKeDiemCongHienModel::where("Staff_ID",$Staff_ID)->select("Closing_Balance",'TraiNghiem','VanHoa','NgayCapNhat')->orderBy('id','DESC')->get()->first();
    		// Thống kê 
+
    		$Opening_Balance = $lastValue->Closing_Balance;
-   		$ThamNien = $lastValue->ThamNien;
-   		$NgayTangThamNien = $lastValue->NgayTangThamNien;
+   		$ThamNien = $lastValue->TraiNghiem;
+      
+   		$NgayCapNhat = $lastValue->NgayCapNhat;
+      $VanHoa = $lastValue->VanHoa;
    		$GioDaoTao = $getValue->Totalpoint;
    		$Closing_Balance = $Opening_Balance + $GioDaoTao;
    		$id_HoatDong = $getValue->id;
@@ -28,9 +31,10 @@ class ProfileManager extends Controller
    		// Insert 
    		$insert = new ThongKeDiemCongHienModel;
    		$insert->Staff_ID = $Staff_ID;
-   		$insert->NgayTangThamNien = $NgayTangThamNien;
+    	$insert->NgayCapNhat = $NgayCapNhat;
    		$insert->Opening_Balance = $Opening_Balance;
-   		$insert->ThamNien = $ThamNien;
+   		$insert->TraiNghiem = $ThamNien;
+      $insert->VanHoa = $VanHoa;
    		$insert->GioDaoTao = $GioDaoTao;
    		$insert->Closing_Balance = $Closing_Balance;
    		$insert->Ngayhoatdong = $NgayHoatDong;
@@ -41,13 +45,15 @@ class ProfileManager extends Controller
    		// Tìm id giá trị được thay đổi
    		$check = ThongKeDiemCongHienModel::where('id_HoatDong',$id)->select('Staff_ID','id','id_HoatDong')->get()->first();
    		$id_Checked = $check->id;
+
    		$Staff_ID = $check->Staff_ID;
    		// Bước 2: Xóa các record được import sau đó
    		ThongKeDiemCongHienModel::where('Staff_ID',$Staff_ID)->where('id','>=',$id_Checked)->delete();
    		// Lấy các giá trị của Staff_ID đã được insert 
    		$all_value_inserted = DIEMDANHHOATDONGmodel::where('Staff_ID',$Staff_ID)->where('id','>=',$id)->get();
+
    		foreach ($all_value_inserted as $key) {
-         ProfileManager::store_ThongKeCongHien_ThamNien($key->Staff_ID);
+        ProfileManager::store_ThongKeCongHien_ThamNien($key->Staff_ID); 
    			ProfileManager::trigger_Insert_ThongKeCongHien_GioDaoTao($key->Staff_ID,$key->Ngayhoatdong,$key->Mahoatdong);
        
    		}
@@ -61,7 +67,22 @@ class ProfileManager extends Controller
             foreach ($Staff_ID as $key){
                if(ThongKeDiemCongHienModel::find($key->Staff_ID)){
                   $getValue = ThongKeDiemCongHienModel::where('Staff_ID',$key->Staff_ID)->orderBy('id','DESC')->get()->first();
-                  ProfileManager::insert_ThongKeCongHien_TinhThamNien($getValue->Staff_ID,$getValue->NgayTangThamNien,$key->End_work);
+                  switch ($key->ThanhVien) {
+                    case 0: 
+                      if($getValue->NgayTangTraiNghiem == null)
+                       ProfileManager::insert_ThongKeCongHien_TinhThamNien($getValue->Staff_ID,$getValue->NgayTangVanHoa,$key->End_work);
+                      else
+                        ProfileManager::insert_ThongKeCongHien_TinhThamNien($getValue->Staff_ID,$getValue->NgayTangTraiNghiem,$key->End_work);
+                      break;
+                    
+                    case 1:
+                    if($getValue->NgayTangVanHoa == null)
+                       ProfileManager::insert_ThongKeCongHien_TinhThamNien($getValue->Staff_ID,$getValue->NgayTangTraiNghiem,$key->End_work);
+                     else
+                      ProfileManager::insert_ThongKeCongHien_TinhThamNien($getValue->Staff_ID,$getValue->NgayTangVanHoa,$key->End_work);
+                      break;
+                  }
+                 
                }
                else{
                   echo $key->Staff_ID;
@@ -70,6 +91,7 @@ class ProfileManager extends Controller
    	}
    public static function insert_ThongKeCongHien_TinhThamNien($Staff_ID,$Start_work,$End_work = null){
       date_default_timezone_set("Asia/Ho_Chi_Minh");
+      $bienche = StaffModel::where('Staff_ID',$Staff_ID)->select('ThanhVien')->get()->first();
       $ngaybatdau =  Carbon::createFromFormat('Y-m-d',$Start_work);
       if($ngaybatdau <= Carbon::create(2016,8,1,0,0,0,'Asia/Ho_Chi_Minh'))
         {
@@ -88,13 +110,30 @@ class ProfileManager extends Controller
               if($ngaybatdau <= $CurrentTime){
                     $Closing_Balance = $find->Closing_Balance;
                     // History   
-                    $his = new ThongKeDiemCongHienModel;
-                    $his->Staff_ID = $Staff_ID;
-                    $his->Opening_Balance = $Closing_Balance;
-                    $his->Closing_Balance = $find->ThamNien + 100 + ($Closing_Balance - $find->ThamNien) ;
-                    $his->ThamNien = $find->ThamNien + 100;
-                    $his->NgayTangThamNien = $ngaybatdau;
-                    $his->save();         
+                    switch ($bienche->ThanhVien) {
+                      case 0:
+                          $his = new ThongKeDiemCongHienModel;
+                          $his->Staff_ID = $Staff_ID;
+                          $his->Opening_Balance = $Closing_Balance;
+                          $his->Closing_Balance = $find->TraiNghiem + 100 + ($Closing_Balance - $find->TraiNghiem) ;
+                          $his->TraiNghiem = $find->TraiNghiem + 100;
+                          $his->VanHoa = $find->VanHoa;
+                          $his->NgayTangTraiNghiem = $ngaybatdau;
+                          $his->save(); 
+                        break;
+                      
+                      case 1:
+                          $his = new ThongKeDiemCongHienModel;
+                          $his->Staff_ID = $Staff_ID;
+                          $his->Opening_Balance = $Closing_Balance;
+                          $his->Closing_Balance = $find->VanHoa + 100 + ($Closing_Balance - $find->VanHoa) ;
+                          $his->TraiNghiem = $find->TraiNghiem;
+                          $his->VanHoa = $find->VanHoa + 100;
+                          $his->NgayTangVanHoa = $ngaybatdau;
+                          $his->save();
+                        break;
+                    }
+                            
                     }
         }
 
@@ -124,13 +163,13 @@ class ProfileManager extends Controller
                       $check = \DB::table('DIEMDANHHOATDONG')->where('Staff_ID',$Staff_ID)
                       ->where('Ngayhoatdong','<', $ngaybatdau)
                       ->where('Ngayhoatdong' ,'>=', $find->NgayTangThamNien)
-                        ->orderBy('Ngayhoatdong','DESC')
+                      ->orderBy('Ngayhoatdong','DESC')
                       ->get();            
                     $his = new ThongKeDiemCongHienModel;
                     $his->Staff_ID = $Staff_ID;
                     $his->Opening_Balance = $Closing_Balance;
-                    $his->Closing_Balance = $find->ThamNien + 100 + ($Closing_Balance - $find->ThamNien) ;
-                    $his->ThamNien = $find->ThamNien + 100;
+                    $his->Closing_Balance = $find->TraiNghiem + 100 + ($Closing_Balance - $find->TraiNghiem) ;
+                    $his->TraiNghiem = $find->TraiNghiem + 100;
                     $his->NgayTangThamNien = $ngaybatdau;
                     $his->save();         
                     if($check->isNotEmpty()){
@@ -142,9 +181,10 @@ class ProfileManager extends Controller
                         $his->Opening_Balance = $find->Closing_Balance;
                         $his->Closing_Balance = $find->Closing_Balance + $key->Totoalpoint ;
                         $his->NgayHoatDong = $key->Ngayhoatdong;
-                        $his->ThamNien = $find->ThamNien;
+                        $his->TraiNghiem = $find->TraiNghiem;
+                        $his->VanHoa = $find->VanHoa;
                         $his->GioDaoTao = $key->Totoalpoint;
-                        $his->NgayTangThamNien = $ngaybatdau;
+                        // $his->NgayTangThamNien = $ngaybatdau;
                         $his->save();  
 
                               
@@ -164,7 +204,7 @@ class ProfileManager extends Controller
                             $his->Opening_Balance = $find->Closing_Balance;
                             $his->Closing_Balance = $find->Closing_Balance + $key->Totoalpoint ;
                             $his->NgayHoatDong = $key->Ngayhoatdong;
-                            $his->ThamNien = $find->ThamNien;
+                            $his->TraiNghiem = $find->TraiNghiem;
                             $his->GioDaoTao = $key->Totoalpoint;
                             $his->NgayTangThamNien = $find->NgayTangThamNien;
                             $his->save();           
@@ -178,11 +218,11 @@ class ProfileManager extends Controller
     public static function update_CongHien(){
       $Staff_ID = Contribute_point::select('Staff_ID')->get();
       foreach ($Staff_ID as $key) {
-              $CongHien = ThongKeDiemCongHienModel::select('id','Closing_Balance','ThamNien')->where('Staff_ID',$key->Staff_ID)->orderBy('id','DESC')->get()->first();
+              $CongHien = ThongKeDiemCongHienModel::select('id','Closing_Balance','TraiNghiem')->where('Staff_ID',$key->Staff_ID)->orderBy('id','DESC')->get()->first();
          
                 $update = Contribute_point::find($key->Staff_ID);
                 $update->Total_point = $CongHien->Closing_Balance;
-                $update->Tham_nien = $CongHien->ThamNien;
+                $update->Tham_nien = $CongHien->TraiNghiem;
                 $update->save();
               
 

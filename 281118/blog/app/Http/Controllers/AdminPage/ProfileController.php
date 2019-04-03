@@ -36,6 +36,7 @@ Diemdanh.Staff_ID group by STAFF.Staff_ID,Full_name"));
     }
 
     public function ImportFile(Request $Request){
+     ;
     	\Excel::load($Request->file,function($reader){
     		$data = $reader->get(array('id','ho_va_ten','dob','ngay_vao_lam','ngay_nghi_viec','cong_ty','tinh_trang','birthplace','current_address','phong_ban'));
     		
@@ -191,6 +192,7 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
         }
 // Admin_Manager
         public function getInfoAdmin(){
+            ProfileManager::store_ThongKeCongHien_ThamNien(null);
              ProfileManager::update_CongHien();
             $data = StaffModel::where('Status_WK',1)->join('Contribute_point','STAFF.Staff_ID','=','Contribute_point.Staff_ID')
             ->select('STAFF.Staff_ID','STAFF.Full_name','STAFF.Company','STAFF.Start_work','Contribute_point.Total_point')
@@ -344,9 +346,10 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
             $TL = $Request->TL;
             $KT = $Request->KT;
             $KN = $Request->KN;
-            $CM = $Request->CM;
+            $NT = $Request->NT;
             $CD = $Request->CD;
             $TC = $Request->TC;
+
             // Function 
             $nhap = new DIEMDANHHOATDONGmodel;
             $nhap->Staff_ID = $Staff_ID;
@@ -355,7 +358,7 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
             $nhap->TL = $TL;
             $nhap->KT = $KT;
             $nhap->KN = $KN;
-            $nhap->CM = $CM;
+            $nhap->NT = $NT;
             $nhap->CD = $CD;
             $nhap->TC = $TC;
             $nhap->save();
