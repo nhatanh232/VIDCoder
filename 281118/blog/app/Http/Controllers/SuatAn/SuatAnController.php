@@ -5,8 +5,14 @@ namespace App\Http\Controllers\SuatAn;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\SuatAn\SuatAnModel;
+use App\SuatAn\NVDKAnModel;
 use App\Profile\StaffModel;
 use Auth;
+use Carbon\Carbon;
+use PhpOffice\PhpWord\TemplateProcessor;
+use PhpOffice\PhpWord\Writer;
+use Excel;
+use PHPExcel_Worksheet_Drawing;
 
 class SuatAnController extends Controller
 {
@@ -154,19 +160,311 @@ class SuatAnController extends Controller
     }
 
     public function getSuatAn(Request $Request){
-        $ngay = $Request->ngay;
-        $thang = $Request->thang;
-        $nam = $Request->nam;
-        $data = \DB::select(("exec suatAnData :Param1, :Param2, :Param3"),[':Param1' => $ngay, ':Param2' => $thang, 'Param3' => $nam]);
+        $today = Carbon::now();
+        if($today->dayOfWeek == 5){
+            $nextDay = $today->addDay(3);
+        }else if($today->dayOfWeek == 6){
+            $nextDay = $today->addDay(2);
+        }else {
+            $nextDay = $today->addDay(1);
+        }
+        $data = \DB::select(\DB::raw("select Type,count(Type) as SL from DangKiSuatAn where Date = '$nextDay' group by Type"));
         return $data; 
     }
 
-    public function getDataSuatAnTmp(Request $Request){
-        $thang = $Request->thang;
-        $nam = $Request->nam;
-        $manv = $Request->manv;
-        $bophan = \DB::table('STAFF')->select('Department')->where('Staff_ID',$manv)->get()->first();
-        $data = \DB::table('SuatAn')->join('STAFF','SuatAn.MaNV','=','STAFF.Staff_ID')->select('SuatAn.*','STAFF.Full_name')->where(['SuatAn.ThangDK'=>$thang,'SuatAn.NamDK'=>$nam,'STAFF.Department'=>$bophan->Department])->get();
+    public function getDataSuatAnTmp(){
+        $today = Carbon::now();
+        if($today->dayOfWeek == 5){
+            $nextDay = $today->addDay(3);
+        }else if($today->dayOfWeek == 6){
+            $nextDay = $today->addDay(2);
+        }else {
+            $nextDay = $today->addDay(1);
+        }        
+        $data = \DB::select(\DB::raw("select d.*,nv.Name,nv.Department from DangKiSuatAn d, NVDKAn nv 
+            where Date = '$nextDay' and d.Staff_ID = nv.Staff_ID 
+            order by case when nv.Department = N'BGĐ' then 1
+            when nv.Department = N'Ban Trợ Lý' then 2
+            when nv.Department = N'NS-HC VĐ' then 3
+            when nv.Department = N'Kế Toán VĐ' then 4
+            when nv.Department = N'TM VĐ' then 5
+            when nv.Department = N'CSVC VĐ' then 6
+            when nv.Department = N'DACĐ VĐ' then 7
+            when nv.Department = N'NS-HC TL' then 8
+            when nv.Department = N'Kế Toán TL' then 9
+            when nv.Department = N'Nhập Khẩu TL' then 10
+            when nv.Department = N'Kinh Doanh TL' then 11
+            when nv.Department = N'Hồn Việt' then 12
+            when nv.Department = N'PROCI' then 13
+            when nv.Department = N'KHÁNH HỘI' then 14
+            when nv.Department = N'ZEN phục vụ' then 15
+            when nv.Department = N'ZEN Quầy Nước' then 16
+            when nv.Department = N'ZEN Tạp vụ' then 17
+            when nv.Department = N'ZEN Bếp' then 18
+            when nv.Department = N'ZEN Marketing' then 19
+            when nv.Department = N'Zen Thu Mua' then 20
+            else nv.Department end asc"));
+        return $data;
+    }
+
+    public function exportFileSuatAn1(){
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        header('Content-Type: text/html; charset=utf-8');
+        $today = Carbon::now();
+        if($today->dayOfWeek == 5){
+            $nextDay = $today->addDay(3);
+        }else if($today->dayOfWeek == 6){
+            $nextDay = $today->addDay(2);
+        }else {
+            $nextDay = $today->addDay(1);
+        }
+        $data = \DB::select(\DB::raw("select d.*,nv.Name,nv.Department from DangKiSuatAn d, NVDKAn nv 
+            where Date = '$nextDay' and d.Staff_ID = nv.Staff_ID 
+            order by case when nv.Department = N'BGĐ' then 1
+            when nv.Department = N'Ban Trợ Lý' then 2
+            when nv.Department = N'NS-HC VĐ' then 3
+            when nv.Department = N'Kế Toán VĐ' then 4
+            when nv.Department = N'TM VĐ' then 5
+            when nv.Department = N'CSVC VĐ' then 6
+            when nv.Department = N'DACĐ VĐ' then 7
+            when nv.Department = N'NS-HC TL' then 8
+            when nv.Department = N'Kế Toán TL' then 9
+            when nv.Department = N'Nhập Khẩu TL' then 10
+            when nv.Department = N'Kinh Doanh TL' then 11
+            when nv.Department = N'Hồn Việt' then 12
+            when nv.Department = N'PROCI' then 13
+            when nv.Department = N'KHÁNH HỘI' then 14
+            when nv.Department = N'ZEN phục vụ' then 15
+            when nv.Department = N'ZEN Quầy Nước' then 16
+            when nv.Department = N'ZEN Tạp vụ' then 17
+            when nv.Department = N'ZEN Bếp' then 18
+            when nv.Department = N'ZEN Marketing' then 19
+            when nv.Department = N'Zen Thu Mua' then 20
+            else nv.Department end asc"));
+        $date = $nextDay->day."-".$nextDay->month."-".$nextDay->year;
+        $filename = 'SuatAn_'.$date.'.docx';
+
+        $phpWord = new \PhpOffice\PhpWord\PhpWord();
+
+        $process  = new TemplateProcessor('Form\\suatan.docx');
+
+        $process->setValue('day',$nextDay->day);
+        $process->setValue('month',$nextDay->month);
+        $process->setValue('year',$nextDay->year);        
+        $process->cloneRow('i',sizeof($data));
+        $i = 1;
+        for($i; $i<= sizeof($data);$i++){
+            $process->setValue('i#'.$i,$i);
+            $process->setValue('name#'.$i,$data[$i-1]->Name);
+            $process->setValue('department#'.$i,htmlspecialchars($data[$i-1]->Department));
+            $process->setValue('type#'.$i,$data[$i-1]->Type);
+        }
+        $process->saveAs(storage_path('app\\public\\'.$date.'.docx'));
+        return response()->download(storage_path('app\\public\\'.$date.'.docx'));
+    }
+
+    public function exportFileSuatAn(){
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        header('Content-Type: text/html; charset=utf-8');
+        $today = Carbon::now();
+        if($today->dayOfWeek == 5){
+            $nextDay = $today->addDay(3);
+        }else if($today->dayOfWeek == 6){
+            $nextDay = $today->addDay(2);
+        }else {
+            $nextDay = $today->addDay(1);
+        }
+        // Thống Kê Theo Ngày
+        $data = \DB::select(\DB::raw("select d.*,nv.Name,nv.Department from DangKiSuatAn d, NVDKAn nv 
+            where Date = '$nextDay' and d.Staff_ID = nv.Staff_ID 
+            order by case when nv.Department = N'BGĐ' then 1
+            when nv.Department = N'Ban Trợ Lý' then 2
+            when nv.Department = N'NS-HC VĐ' then 3
+            when nv.Department = N'Kế Toán VĐ' then 4
+            when nv.Department = N'TM VĐ' then 5
+            when nv.Department = N'CSVC VĐ' then 6
+            when nv.Department = N'DACĐ VĐ' then 7
+            when nv.Department = N'NS-HC TL' then 8
+            when nv.Department = N'Kế Toán TL' then 9
+            when nv.Department = N'Nhập Khẩu TL' then 10
+            when nv.Department = N'Kinh Doanh TL' then 11
+            when nv.Department = N'Hồn Việt' then 12
+            when nv.Department = N'PROCI' then 13
+            when nv.Department = N'KHÁNH HỘI' then 14
+            when nv.Department = N'ZEN phục vụ' then 15
+            when nv.Department = N'ZEN Quầy Nước' then 16
+            when nv.Department = N'ZEN Tạp vụ' then 17
+            when nv.Department = N'ZEN Bếp' then 18
+            when nv.Department = N'ZEN Marketing' then 19
+            when nv.Department = N'Zen Thu Mua' then 20
+            else nv.Department end asc"));
+
+        //Thống Kê Theo Tháng (Tính tới thời điểm hiện tại)
+        $dataThang = \DB::select(\DB::raw("select T2.Company, T1.Chay, T2.Man, T3.Khong from
+            (select nv.Company,d.Type,count(d.Type) as Chay from DangKiSuatAn d, NVDKAn nv where Date 
+            between (SELECT DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) and getdate() and nv.Staff_ID = d.Staff_ID and d.Type = 'C'
+            group by nv.Company,d.Type) as T1
+            full join
+            (select nv.Company,d.Type,count(d.Type) as Man from DangKiSuatAn d, NVDKAn nv where Date 
+            between (SELECT DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) and getdate() and nv.Staff_ID = d.Staff_ID and d.Type = 'M'
+            group by nv.Company,d.Type) as T2 on T1.Company = T2.Company
+            full join
+            (select nv.Company,d.Type,count(d.Type) as Khong from DangKiSuatAn d, NVDKAn nv where Date 
+            between (SELECT DATEADD(month, DATEDIFF(month, 0, getdate()), 0)) and getdate() and nv.Staff_ID = d.Staff_ID and d.Type = 'O'
+            group by nv.Company,d.Type) as T3 on T2.Company = T3.Company
+            order by case
+            when T2.Company = N'Viễn Đông' then 1
+            when T2.Company = N'Toàn Lực' then 2
+            when T2.Company = N'Hồn Việt' then 3
+            when T2.Company = N'Proci' then 4
+            when T2.Company = N'Khánh Hội' then 5
+            when T2.Company = N'Nhà hàng Zen' then 6
+            else T2.Company end asc"));
+
+        $dataNgay = \DB::select(\DB::raw("select T2.Company, T1.Chay, T2.Man, T3.Khong from
+            (select nv.Company,d.Type,count(d.Type) as Chay from DangKiSuatAn d, NVDKAn nv where Date = '$nextDay' and nv.Staff_ID = d.Staff_ID and d.Type = 'C'
+            group by nv.Company,d.Type) as T1
+            full join
+            (select nv.Company,d.Type,count(d.Type) as Man from DangKiSuatAn d, NVDKAn nv where Date = '$nextDay' and nv.Staff_ID = d.Staff_ID and d.Type = 'M'
+            group by nv.Company,d.Type) as T2 on T1.Company = T2.Company
+            full join
+            (select nv.Company,d.Type,count(d.Type) as Khong from DangKiSuatAn d, NVDKAn nv where Date = '$nextDay' and nv.Staff_ID = d.Staff_ID and d.Type = 'O'
+            group by nv.Company,d.Type) as T3 on T2.Company = T3.Company
+            order by case
+            when T2.Company = N'Viễn Đông' then 1
+            when T2.Company = N'Toàn Lực' then 2
+            when T2.Company = N'Hồn Việt' then 3
+            when T2.Company = N'Proci' then 4
+            when T2.Company = N'Khánh Hội' then 5
+            when T2.Company = N'Nhà hàng Zen' then 6
+            else T2.Company end asc"));
+        
+        $date = $nextDay->day."-".$nextDay->month."-".$nextDay->year;
+        Excel::create('SuatAn_'.$date,function($excel) use($data, $nextDay, $dataThang, $dataNgay){
+            $excel->sheet('Suất Ăn',function($sheet) use($data, $nextDay){
+                $sheet->mergeCells('A1:E1');
+                $sheet->row(1, function ($row) {
+                    $row->setFontSize(30);
+                    $row->setFontWeight('bold');
+                    $row->setValignment('center');
+                    $row->setAlignment('center');
+                });
+                $sheet->row(1,array('ĐĂNG KÝ SUẤT ĂN'));
+                $sheet->mergeCells('A2:E2');
+                $sheet->row(2, function ($row) {
+                    $row->setFontSize(13);
+                    $row->setFontWeight('bold');
+                    $row->setValignment('center');
+                    $row->setAlignment('center');
+                });
+                $sheet->row(2,array('Ngày '.$nextDay->day.' Tháng '.$nextDay->month.' Năm'.$nextDay->year));
+                $sheet->row(3, function ($row) {
+                    $row->setFontWeight('bold');
+                    $row->setValignment('center');
+                    $row->setAlignment('center');
+                });
+                $sheet->row(3,array('STT', 'Họ & Tên', 'Bộ Phận', 'Món' ,'Ký Nhận')); 
+                $i = 1;      
+                for($i; $i<=sizeof($data);$i++){
+                    $sheet->row($i+3,array($i, $data[$i-1]->Name, $data[$i-1]->Department, $data[$i-1]->Type ,''));
+                    $sheet->setBorder('A3:E'.($i+3), 'thin');
+                }
+            });
+            $excel->sheet('Thống Kê Ngày',function($sheet) use($dataNgay, $nextDay){
+                $sheet->mergeCells('A1:E1');
+                $sheet->row(1, function ($row) {
+                    $row->setFontSize(24);
+                    $row->setFontWeight('bold');
+                    $row->setValignment('center');
+                    $row->setAlignment('center');
+                });
+                $sheet->row(1,array('THỐNG KÊ SUẤT ĂN'));
+                $sheet->mergeCells('A2:E2');
+                $sheet->row(2, function ($row) {
+                    $row->setFontSize(12);
+                    $row->setFontWeight('bold');
+                    $row->setValignment('center');
+                    $row->setAlignment('center');
+                });
+                $sheet->row(2,array('Ngày '.$nextDay->day.' Tháng '.$nextDay->month.' Năm'.$nextDay->year));
+                $sheet->row(3, function ($row) {
+                    $row->setFontWeight('bold');
+                    $row->setValignment('center');
+                    $row->setAlignment('center');
+                });
+                $sheet->row(3,array('STT', 'Công Ty', 'Mặn', 'Chay' ,'Không')); 
+                $i = 1;      
+                for($i; $i<=sizeof($dataNgay);$i++){
+                    $man = $dataNgay[$i-1]->Man;
+                    $chay = $dataNgay[$i-1]->Chay;
+                    $khong = $dataNgay[$i-1]->Khong;
+                    if($man == null){
+                        $man = 0;
+                    }
+                    if($chay == null){
+                        $chay = 0;
+                    }
+                    if($khong == null){
+                        $khong = 0;
+                    }
+                    $sheet->row($i+3,array($i, $dataNgay[$i-1]->Company, $man, $chay ,$khong));
+                    $sheet->setBorder('A3:E'.($i+3), 'thin');
+                }
+            });
+            $excel->sheet('Thống Kê Tháng',function($sheet) use($dataThang, $nextDay){
+                $sheet->mergeCells('A1:E1');
+                $sheet->row(1, function ($row) {
+                    $row->setFontSize(24);
+                    $row->setFontWeight('bold');
+                    $row->setValignment('center');
+                    $row->setAlignment('center');
+                });
+                $sheet->row(1,array('THỐNG KÊ SUẤT ĂN'));
+                $sheet->mergeCells('A2:E2');
+                $sheet->row(2, function ($row) {
+                    $row->setFontSize(12);
+                    $row->setFontWeight('bold');
+                    $row->setValignment('center');
+                    $row->setAlignment('center');
+                });
+                $sheet->row(2,array('Tính đến: Ngày '.$nextDay->day.' Tháng '.$nextDay->month.' Năm'.$nextDay->year));
+                $sheet->row(3, function ($row) {
+                    $row->setFontWeight('bold');
+                    $row->setValignment('center');
+                    $row->setAlignment('center');
+                });
+                $sheet->row(3,array('STT', 'Công Ty', 'Mặn', 'Chay' ,'Không')); 
+                $i = 1;      
+                for($i; $i<=sizeof($dataThang);$i++){
+                    $man = $dataThang[$i-1]->Man;
+                    $chay = $dataThang[$i-1]->Chay;
+                    $khong = $dataThang[$i-1]->Khong;
+                    if($man == null){
+                        $man = 0;
+                    }
+                    if($chay == null){
+                        $chay = 0;
+                    }
+                    if($khong == null){
+                        $khong = 0;
+                    }
+                    $sheet->row($i+3,array($i, $dataThang[$i-1]->Company, $man, $chay ,$khong));
+                    $sheet->setBorder('A3:E'.($i+3), 'thin');
+                }
+            });
+        })->export('xlsx');
+    }
+
+    public function checkNotRegis(){
+        $today = Carbon::now();
+        if($today->dayOfWeek == 5){
+            $nextDay = $today->addDay(3);
+        }else if($today->dayOfWeek == 6){
+            $nextDay = $today->addDay(2);
+        }else {
+            $nextDay = $today->addDay(1);
+        }
+        $data = \DB::select(\DB::raw("select Department from NVDKAn where Staff_ID not in (select Staff_ID from DangKiSuatAn where Date = '$nextDay') and status = 1 group by Department"));
         return $data;
     }
 }

@@ -3,7 +3,15 @@ function createCalendar(){
 	var month = new Date(date.setMonth(date.getMonth()));
 	var fmonth = (month.getMonth()+1).toString();	
 	var year = date.getFullYear();
-	var check3Days = new Date(addDate(date,2));
+	var checkNextDay = new Date(addDate(date,1));
+	if(date.getDay() == 5){
+		checkNextDay = new Date(addDate(date,3));
+	}else if(date.getDay() == 6){
+		checkNextDay = new Date(addDate(date,2));
+	}else if (date.getDay() == 0){
+		checkNextDay = new Date(addDate(date,1));
+	}
+	var checkNextDayTime = new Date((checkNextDay.getMonth()+1)+" "+checkNextDay.getDate()+" "+checkNextDay.getFullYear()+" 15:00:00 GMT+0700");
 	var daysOfMonth = daysInMonth(fmonth,year);	
 	var calendar = "<table class='tRegis'><tr><td><b>Thứ Hai</b></td><td><b>Thứ Ba</b></td><td><b>Thứ Tư</b></td><td><b>Thứ Năm</b></td><td><b>Thứ Sáu</b></td></tr><tr>";
 	var firstDay = new Date(fmonth+" 1 "+year);
@@ -20,7 +28,7 @@ function createCalendar(){
 		var checkDate = new Date(fmonth+" "+i+" "+ year);
 		var checkDay = checkDate.getDay();
 		if(checkDay !== 0 && checkDay !== 6){
-			if(checkDate<check3Days){
+			if(checkDate<checkNextDayTime){
 				if(checkDay === 1){
 					calendar += "<td>Ngày "+i+": <select name='Ngay"+i+"' disabled='true'><option value='M'>Mặn</option><option value='C'>Chay</option><option value='O'>Không</option></select></td>";
 				} else if(checkDay === 5){
@@ -99,8 +107,12 @@ function checkDK(){
 							if(data.length !== 0){
 								document.getElementById('chuaDK').style.display="none";
 								document.getElementById('daDK').style.display="block";
-							} else {
-								var check3Days = new Date(addDate(cDate,2));
+							} else { //check update ngày tiếp theo
+								var checkNextDay = new Date(addDate(cDate,1));
+								if(date.getDay() == 5){
+									checkNextDay = new Date(addDate(cDate,3));
+								}
+								var checkNextDayTime = new Date((checkNextDay.getMonth()+1)+" "+checkNextDay.getDate()+" "+checkNextDay.getFullYear()+" 15:00:00 GMT+0700");
 								var daysOfMonth = daysInMonth(fmonth,year);	
 								var calendar = "<table class='tRegis'><tr><td><b>Thứ Hai</b></td><td><b>Thứ Ba</b></td><td><b>Thứ Tư</b></td><td><b>Thứ Năm</b></td><td><b>Thứ Sáu</b></td></tr><tr>";
 								var firstDay = new Date(fmonth+" 1 "+year);
@@ -117,7 +129,7 @@ function checkDK(){
 		var checkDate = new Date(fmonth+" "+i+" "+ year);
 		var checkDay = checkDate.getDay();
 		if(checkDay !== 0 && checkDay !== 6){
-			if(checkDate<check3Days){
+			if(checkDate<checkNextDayTime){
 				if(checkDay === 1){
 					calendar += "<td>Ngày "+i+": <select name='Ngay"+i+"' disabled='true'><option value='M'>Mặn</option><option value='C'>Chay</option><option value='O'>Không</option></select></td>";
 				} else if(checkDay === 5){
@@ -165,8 +177,15 @@ function getSuatAnData(){
 	var month = date.getMonth()+1;
 	var year = date.getFullYear();
 
-	var check3Days = new Date(addDate(date,2));
-
+	var checkNextDay = new Date(addDate(date,1));
+	if(date.getDay() == 5){
+		checkNextDay = new Date(addDate(date,3));
+	}else if(date.getDay() == 6){
+		checkNextDay = new Date(addDate(date,2));
+	}else if (date.getDay() == 0){
+		checkNextDay = new Date(addDate(date,1));
+	}
+	var checkNextDayTime = new Date((checkNextDay.getMonth()+1)+" "+checkNextDay.getDate()+" "+checkNextDay.getFullYear()+" 15:00:00 GMT+0700");
 	var daysOfMonth = daysInMonth(month,year);	
 	var calendar = "<table class='tRegis'><tr><td><b>Thứ Hai</b></td><td><b>Thứ Ba</b></td><td><b>Thứ Tư</b></td><td><b>Thứ Năm</b></td><td><b>Thứ Sáu</b></td></tr><tr>";
 	var firstDay = new Date(month+" 1 "+year);
@@ -260,7 +279,7 @@ function getSuatAnData(){
 				var checkDay = checkDate.getDay();
 				if(checkDay !== 0 && checkDay !== 6){
 					if(dateData[i-1] == "M"){
-						if(checkDate<check3Days){
+						if(checkDate<checkNextDayTime){
 							if(checkDay === 1){
 								calendar += "<td>Ngày "+i+": <select name='Ngay"+i+"' disabled='true'><option value='M' selected='selected'>Mặn</option><option value='C'>Chay</option><option value='O'>Không</option></select></td>";
 							} else if(checkDay === 5){
@@ -278,7 +297,7 @@ function getSuatAnData(){
 							}
 						}
 					} else if(dateData[i-1] == "C"){
-						if(checkDate<check3Days){
+						if(checkDate<checkNextDayTime){
 							if(checkDay === 1){
 								calendar += "<td>Ngày "+i+": <select name='Ngay"+i+"' disabled='true'><option value='M'>Mặn</option><option value='C' selected='selected'>Chay</option><option value='O'>Không</option></select></td>";
 							} else if(checkDay === 5){
@@ -296,7 +315,7 @@ function getSuatAnData(){
 							}
 						}						
 					} else{
-						if(checkDate<check3Days){
+						if(checkDate<checkNextDayTime){
 							if(checkDay === 1){
 								calendar += "<td>Ngày "+i+": <select name='Ngay"+i+"' disabled='true'><option value='M'>Mặn</option><option value='C'>Chay</option><option value='O' selected='selected'>Không</option></select></td>";
 							} else if(checkDay === 5){
@@ -343,7 +362,16 @@ function nextMonth(){
 	date.setMonth(date.getMonth()+1); // next month
 	var fmonth = date.getMonth()+1;
 	var fyear = date.getFullYear();
-	var check3Days = new Date(addDate(cDate,2));
+	console.log(cDate);
+	var checkNextDay = new Date(addDate(cDate,1));
+	if(date.getDay() == 5){
+		checkNextDay = new Date(addDate(date,3));
+	}else if(date.getDay() == 6){
+		checkNextDay = new Date(addDate(date,2));
+	}else if (date.getDay() == 0){
+		checkNextDay = new Date(addDate(date,1));
+	}
+	var checkNextDayTime = new Date((checkNextDay.getMonth()+1)+" "+checkNextDay.getDate()+" "+checkNextDay.getFullYear()+" 15:00:00 GMT+0700");
 	var daysOfMonth = daysInMonth(fmonth,fyear);	
 	var calendar = "<table class='tRegis'><tr><td><b>Thứ Hai</b></td><td><b>Thứ Ba</b></td><td><b>Thứ Tư</b></td><td><b>Thứ Năm</b></td><td><b>Thứ Sáu</b></td></tr><tr>";
 	var firstDay = new Date(fmonth+" 1 "+fyear);
@@ -438,7 +466,7 @@ function nextMonth(){
 					var checkDay = checkDate.getDay();
 					if(checkDay !== 0 && checkDay !== 6){
 						if(dateData[i-1] == "M"){
-							if(checkDate<check3Days){
+							if(checkDate<checkNextDayTime){
 								if(checkDay === 1){
 									calendar += "<td>Ngày "+i+": <select name='Ngay"+i+"' disabled='true'><option value='M' selected='selected'>Mặn</option><option value='C'>Chay</option><option value='O'>Không</option></select></td>";
 								} else if(checkDay === 5){
@@ -456,7 +484,7 @@ function nextMonth(){
 								}
 							}
 						} else if(dateData[i-1] == "C"){
-							if(checkDate<check3Days){
+							if(checkDate<checkNextDayTime){
 								if(checkDay === 1){
 									calendar += "<td>Ngày "+i+": <select name='Ngay"+i+"' disabled='true'><option value='M'>Mặn</option><option value='C' selected='selected'>Chay</option><option value='O'>Không</option></select></td>";
 								} else if(checkDay === 5){
@@ -474,7 +502,7 @@ function nextMonth(){
 								}
 							}						
 						} else{
-							if(checkDate<check3Days){
+							if(checkDate<checkNextDayTime){
 								if(checkDay === 1){
 									calendar += "<td>Ngày "+i+": <select name='Ngay"+i+"' disabled='true'><option value='M'>Mặn</option><option value='C'>Chay</option><option value='O' selected='selected'>Không</option></select></td>";
 								} else if(checkDay === 5){
@@ -518,7 +546,15 @@ function preMonth(){
 	date.setMonth(date.getMonth()-1); // pre month
 	var fmonth = date.getMonth()+1;
 	var fyear = date.getFullYear();	
-	var check3Days = new Date(addDate(cDate,2));
+	var checkNextDay = new Date(addDate(date,1));
+	if(date.getDay() == 5){
+		checkNextDay = new Date(addDate(date,3));
+	}else if(date.getDay() == 6){
+		checkNextDay = new Date(addDate(date,2));
+	}else if (date.getDay() == 0){
+		checkNextDay = new Date(addDate(date,1));
+	}
+	var checkNextDayTime = new Date((checkNextDay.getMonth()+1)+" "+checkNextDay.getDate()+" "+checkNextDay.getFullYear()+" 15:00:00 GMT+0700");
 	var daysOfMonth = daysInMonth(fmonth,fyear);	
 	var calendar = "<table class='tRegis'><tr><td><b>Thứ Hai</b></td><td><b>Thứ Ba</b></td><td><b>Thứ Tư</b></td><td><b>Thứ Năm</b></td><td><b>Thứ Sáu</b></td></tr><tr>";
 	var firstDay = new Date(fmonth+" 1 "+fyear);
@@ -613,7 +649,7 @@ function preMonth(){
 					var checkDay = checkDate.getDay();
 					if(checkDay !== 0 && checkDay !== 6){
 						if(dateData[i-1] == "M"){
-							if(checkDate<check3Days){
+							if(checkDate<checkNextDayTime){
 								if(checkDay === 1){
 									calendar += "<td>Ngày "+i+": <select name='Ngay"+i+"' disabled='true'><option value='M' selected='selected'>Mặn</option><option value='C'>Chay</option><option value='O'>Không</option></select></td>";
 								} else if(checkDay === 5){
@@ -631,7 +667,7 @@ function preMonth(){
 								}
 							}
 						} else if(dateData[i-1] == "C"){
-							if(checkDate<check3Days){
+							if(checkDate<checkNextDayTime){
 								if(checkDay === 1){
 									calendar += "<td>Ngày "+i+": <select name='Ngay"+i+"' disabled='true'><option value='M'>Mặn</option><option value='C' selected='selected'>Chay</option><option value='O'>Không</option></select></td>";
 								} else if(checkDay === 5){
@@ -649,7 +685,7 @@ function preMonth(){
 								}
 							}						
 						} else{
-							if(checkDate<check3Days){
+							if(checkDate<checkNextDayTime){
 								if(checkDay === 1){
 									calendar += "<td>Ngày "+i+": <select name='Ngay"+i+"' disabled='true'><option value='M'>Mặn</option><option value='C'>Chay</option><option value='O' selected='selected'>Không</option></select></td>";
 								} else if(checkDay === 5){

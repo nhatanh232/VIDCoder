@@ -239,6 +239,7 @@ Route::group(['middleware'=>['AuthenThongbao']],function(){
 //Thông tin nhân sự
 Route::get('ShowInfo','AdminPage\NhanSuController@ShowInfo');
 Route::get('GetInfo','Adminpage\NhanSuController@getInfo');
+Route::get('getStaffInDepartment','Adminpage\NhanSuController@getStaffInDepartment');
 // Thông tin tài sản cá nhân
 Route::get('GetTstlcn','AdminPage\NhanSuController@GetTstlcn');
 
@@ -312,6 +313,10 @@ Route::get('viewAnAdmin','suatan\SuatAnController@viewAnAdmin');
 Route::get('getSuatAn','suatan\SuatAnController@getSuatAn');
 Route::get('getNVInfo','AdminPage\NhanSuController@getNVInfo');
 Route::get('getSuatAnTmp','suatan\SuatAnController@getDataSuatAnTmp');
+Route::post('exportFileSuatAn','suatan\SuatAnController@exportFileSuatAn')->name('exportFileSuatAn');
+Route::get('checkDelegate','AdminPage\NhanSuController@checkDelegate');
+Route::get('getStaffNotRegis','AdminPage\NhanSuController@getStaffNotRegis');
+Route::get('checkNotRegis','suatan\SuatAnController@checkNotRegis');
 
 
 Route::get('preKi','AdminPage\ThongBaoController@preQS');

@@ -6,68 +6,38 @@ function thongtinsuatantrongngay(){
 	$.ajax({
 		type:'get',
 		url:'getSuatAn',
-		data:{
-			ngay: "Ngay"+day,
-			thang: month,
-			nam: year,
-		},
 		dataType:'json',
 		success:function(data){
+			console.log(data);
 			for(var i = 0; i < data.length; i++){
-				if(data[i].Mon === "M"){
-					$('input[name="tMan"]').val(data[i].Soluong);
+				if(data[i].Type === "M"){
+					$('input[name="tMan"]').val(data[i].SL);
 					break;
 				} else {
 					$('input[name="tMan"]').val(0);
 				}
 			}
 			for(var j = 0; j < data.length; j++){				
-				if(data[j].Mon === "C"){
-					$('input[name="tChay"]').val(data[j].Soluong);
+				if(data[j].Type === "C"){
+					$('input[name="tChay"]').val(data[j].SL);
 					break;
 				}else {
 					$('input[name="tChay"]').val(0);
+				}
+			}
+			for(var k = 0; k < data.length; k++){
+				if(data[k].Type === "O"){
+					$('input[name="tKhong"]').val(data[k].SL);
+					break;
+				}else {
+					$('input[name="tKhong"]').val(0);
 				}
 			}
 		}
 	})
 }
 
-function thongtinsuatanngaymai(){
-	var cDate = new Date();
-	var nDate = addDate(cDate,1);
-	var month = nDate.getMonth()+1;
-	var year = nDate.getFullYear();
-	var day = nDate.getDate();
-	$.ajax({
-		type:'get',
-		url:'getSuatAn',
-		data:{
-			ngay: "Ngay"+day,
-			thang: month,
-			nam: year,
-		},
-		dataType:'json',
-		success:function(data){
-			for(var i = 0; i < data.length; i++){
-				if(data[i].Mon === "M"){
-					$('input[name="nMan"]').val(data[i].Soluong);
-					break;
-				} else {
-					$('input[name="nMan"]').val(0);
-				}
-			}
-			for(var j = 0; j < data.length; j++){				
-				if(data[j].Mon === "C"){
-					$('input[name="nChay"]').val(data[j].Soluong);
-					break;
-				}else {
-					$('input[name="nChay"]').val(0);
-				}
-			}
-		}
-	})
-}
+
 
 function daysInMonth (month, year) {
 	return new Date(year, month, 0).getDate();
@@ -79,61 +49,16 @@ function addDate(date, days){
 	return result;
 }
 
-function getSuatAnPhong(){
-	var manv = $('input[name="Manv"]').val();
-	var cDate = new Date();
-	var month = cDate.getMonth() + 1;
-	var year = cDate.getFullYear();
-	var dayOfMonth = daysInMonth(month,year);
-
-	var first = cDate.getDate() - cDate.getDay() + 1;
-	var firstDay = new Date(cDate.setDate(first));
-	var lastDay = addDate(cDate,5);
-
-	var table = "<table class='tNoiBo'><tr><td>Tên &#8726; Ngày</td>";
-	for(var i = 1; i <= dayOfMonth; i++){
-		var checkDate = new Date(month+" "+i+" "+ year);
-		var checkDay = checkDate.getDay();
-		if(checkDay !== 0 && checkDay !== 6){
-			table += "<td>"+i+"</td>";
-		}
-	}
+function getSuatAnPhong(){	
+	var table = "<table class='tNoiBo'><tr><td>STT</td><td>Tên</td><td>Phòng Ban</td><td>Món</td>";
 	table += "<tr/>";
 	$.ajax({
 		type:'get',
 		url:'getSuatAnTmp',
-		data:{
-			thang:month,
-			nam:year,
-			manv:manv,
-		},
 		dataType:'json',
 		success:function(data){
-			for(var j = 0; j < data.length; j++){
-				table += "<td>"+data[j].Full_name+"</td>";
-				for(var k = 1; k <= dayOfMonth; k++){
-					var checkDate1 = new Date(month+" "+k+" "+ year);
-					var checkDay1 = checkDate1.getDay();
-					if(checkDay1 !== 0 && checkDay1 !== 6){
-						var mon = "data[j].Ngay"+k;
-						var checkCurrent = new Date(month+" "+k+" "+year);
-						if(checkCurrent <= lastDay && checkCurrent >= addDate(firstDay,-1)){							
-							if(eval(mon)===null){
-								table += "<td class='highlight'>O</td>";
-							}else {
-								table += "<td class='highlight'>"+eval(mon)+"</td>";
-							}	
-						}else{
-							if(eval(mon)===null){
-								table += "<td>O</td>";
-							}else {
-								table += "<td>"+eval(mon)+"</td>";
-							}	
-						}
-
-					}
-				}
-				table += "</tr>";
+			for(var i = 0; i < data.length; i++){
+				table += "<tr><td>"+(i+1)+"</td><td>"+data[i].Name+"</td><td>"+data[i].Department+"</td><td>"+data[i].Type+"</td></tr>"
 			}
 			table += "</table>";
 			document.getElementById("noiboCalendar").innerHTML = table;

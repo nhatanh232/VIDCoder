@@ -3,7 +3,7 @@ body{
 }
 .title{
 	text-align: center;
-	color: red;
+	color: 	#5588ff;
 	font-size: 100px;
 	font-family: 'Open Sans', Arial, Helvetice Neue, sans-serif;
 	font-weight: bold;		
@@ -11,16 +11,17 @@ body{
 .info{
 	text-align: center;
 	font-size: 35px;
-	color: red;
+	color: #1d4c60;
 	font-family: 'Open Sans', Arial, Helvetice Neue, sans-serif;
 	font-weight: bold;	
 }
 .subTitle{
 	text-align: center;
-	color: #FFFFFF;
+	color: 	#ffc300;
 	font-size: 20px;
-	background-color: #C50023;
-	border: 2px solid #C50023;
+	background-color: #e83459;
+	border: 2px solid white;
+	box-shadow: 2px 5px black;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	margin-left: 40px;
@@ -34,13 +35,13 @@ body{
 	font-size: 50px;
 	/*	background-color: red;*/
 	/*	border: 2px solid red;*/
-	padding-top: 30px;
+	padding-top: 65px;
 	padding-bottom: 5px;
-	padding-left: 10px;
+	padding-left: 3px;
 	font-weight: bold;	
-	height: 150px;
-	width: 150px;
-	background-image: url('../../layouts/images/lnny.png');
+	height: 200px;
+	width: 200px;
+	background-image: url('../../images/circle-vector-4.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -55,7 +56,7 @@ body{
 	font-weight: bold;	
 	height: 45px;
 	width: 45px;
-	background-image: url('../../layouts/images/lnny.png');
+	background-image: url('../../images/83circle.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -118,10 +119,17 @@ body{
 	margin: 1px;
 }
 strong{
-	padding-bottom: 15px;
+	padding-bottom: 20px;
 	font-size: 65px;
-	color: blue;
+	color: 	#ff66cc;
 }
+
+strong{
+	padding-bottom: 20px;
+	font-size: 65px;
+	color: 	white;
+}
+
 #time{
 	font-size: 30px;
 	text-align: center;
@@ -136,17 +144,19 @@ strong{
 }
 
 .giaithuong1{
-	color: black;
+	color: #29b758;
 	float: left;
+	text-shadow: 0.2em 0.2em 0.3em black;
 }
 
 .value{
-	color: #8f0001;
+	color: #61250c;
+	text-shadow: 0.2em 0.2em 0.3em black;
 }
 
 .luckyNumber{
 	float: left;
-	margin-left: 50px;
+	margin-left: 20px;
 }
 
 /*.topweb{
@@ -265,7 +275,7 @@ strong{
 }*/
 
 /*Event Tết cổ truyền*/
-.topleft{
+/*.topleft{
 	position: absolute;
 	left: 0px;
 	top: 0px;
@@ -342,4 +352,4 @@ strong{
 	width: 250px;
 	height: 200px;
 	z-index: -1;
-}
+}*/
