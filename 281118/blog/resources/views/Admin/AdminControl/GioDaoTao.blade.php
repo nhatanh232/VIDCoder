@@ -1,67 +1,77 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
-<body>
-	<div class="container" style="border: 1px solid black; background: #EEEEEE;">
+
+	<div class="content-body" style="border: 1px solid black; background: white;
+	box-shadow: 0 2px 1px rgba(0, 0, 0, 0.05);
+	">
 	
 	
-		<div class="col-md-12">
-			<h1 style="text-align: center; border-bottom: 1px solid black">ĐIỂM DANH</h1>
+		<div class="col-md-12 border-bottom " >
+			<h1 >GHI NHẬN THAM GIA HOẠT ĐỘNG</h1>
 		</div>	
-		
-		<label>Mã Nhân Viên: </label>
-		<input type="text" name="Staff_ID" required="" />
-		<br/>		
-		<label>Họ Tên: </label>
-		<input type="text" name="Full_name" required="" autocomplete="on" onkeyup="getDataDiemDanh_Ten(this)" />
-		<br/>
-		<label>Mã hoạt động: </label>
-		<input type="text" name="Mahoatdong" required="" />
+		<br>
+		<div class="clearfix"></div>
+		<div class="row pt-3">
+		<label for="Staff_ID" class="col-md-2 text-right">Mã Nhân Viên</label>
+		<input type="text" name="Staff_ID" required=""  class="form-control col-md-2" placeholder="Mã nhân viên" />
+		</div>
 		<br/>	
-		<label>Tên hoạt động: </label>
-		<input type="text" name="Event_Name" required="" autocomplete="on" onkeyup="getMahoatdong_Ten(this)" />
-		<br/>		
-		<label>Số giờ theo phân loại: </label>		
+
+		<div class="row">
+		<label class="col-md-2 text-right">Họ và tên</label>
+		<input type="text" name="Full_name" required="" autocomplete="on" onkeyup="getDataDiemDanh_Ten(this)"  class="form-control col-md-2" placeholder="Họ tên nhân viên" />
+		</div>
 		<br/>
 		<div class="row">
+		<label class="col-md-2 text-right">Mã hoạt động</label>
+		<input type="text" name="Mahoatdong" required="" class="form-control col-md-2" placeholder="Mã hoạt động" />
+		</div>
+		<br/>	
+		<div class="row">
+		<label class="col-md-2 text-right">Tên hoạt động</label>
+		<input type="text" name="Event_Name" required="" autocomplete="on" onkeyup="getMahoatdong_Ten(this)" class="form-control col-md-2" placeholder="Tên hoạt động" />
+		</div>
+		<br/>	
+		<div class="row">
+		<label class="col-md-2 text-right">Ngày Tham Gia: </label>
+		<input type="date" name="Event_Date" required=""  class="col-md-2 form-control " />
+		</div>
+		<br/>
+		<div class="row " >
+		<label class="col-md-3 text-right"><h2>Số giờ theo phân loại:</h2> </label>
+		</div>			
+		<br/>
+		<div class="row col-md-12">
 		<div class="col-md-2">
 			<label class="col-md-12">Tâm lý</label>
-			<input type="double" name="TL" class="col-md-12" value="0">
+			<input type="double" name="TL" class="col-md-12 form-control " value="0">
 		</div>
 		<div class="col-md-2">
 			<label class="col-md-12">Kiến thức</label>
-			<input type="double" name="KT" class="col-md-12" value="0">
+			<input type="double" name="KT" class="col-md-12 form-control " value="0">
 		</div>
 		<div class="col-md-2">
 			<label class="col-md-12">Kỹ năng</label>
-			<input type="double" name="KN" class="col-md-12" value="0">
+			<input type="double" name="KN" class="col-md-12 form-control " value="0">
 		</div>
 		<div class="col-md-2">
-			<label class="col-md-12">Chuyên môn</label>
-			<input type="double" name="CM" class="col-md-12" value="0">
+			<label class="col-md-12">Nghệ thuật</label>
+			<input type="double" name="NT" class="col-md-12 form-control" value="0">
 		</div>
 		<div class="col-md-2">
 			<label class="col-md-12">Cộng đông</label>
-			<input type="double" name="CD" class="col-md-12" value="0">
+			<input type="double" name="CD" class="col-md-12 form-control " value="0">
 		</div><div class="col-md-2">
 			<label class="col-md-12">Thể chất</label>
-			<input type="double" name="TC" class="col-md-12" value="0">
+			<input type="double" name="TC" class="col-md-12 form-control " value="0">
 		</div>
-				<!-- <input type="double" name="KN" class="col-md-1">
-		<input type="double" name="KT" class="col-md-1">
-		<input type="double" name="CM" class="col-md-1">
-		<input type="double" name="CD" class="col-md-1">
-		<input type="double" name="TC" class="col-md-1"> -->
+
 		</div>
 		<br/>
-		<label>Ngày Tham Gia: </label>
-		<input type="date" name="Event_Date" required="" />
-		<br/>
-		
-		<button class="btn btn-primary float-right" style="margin-bottom: 10px;" id="FormNhapLieu">Xác Nhận</button>
-	
+		<div class="clearfix"></div>
+		<div class="col-md-12 pb-2 pt-4">
+		<button class="btn btn-primary float-right " id="FormNhapLieu">Xác Nhận</button>
+		</div>
+		<div class="clearfix"></div>
+
 </div>
 
 <br/>
@@ -117,5 +127,3 @@
       		
       	</div>
       </div>
-</body>
-</html>

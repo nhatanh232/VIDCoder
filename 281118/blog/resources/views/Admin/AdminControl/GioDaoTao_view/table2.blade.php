@@ -44,10 +44,10 @@
 			<td ><input type="double" name="KN" value="{{$key->KN}}" class="form-control"></td>	
 			@endif
 
-			@if($key->CM > 0 )
-			<td ><input type="double" name="CM" value="{{$key->CM}}" class="form-control text-success"></td>	
+			@if($key->NT > 0 )
+			<td ><input type="double" name="NT" value="{{$key->NT}}" class="form-control text-success"></td>	
 			@else
-			<td ><input type="double" name="CM" value="{{$key->CM}}" class="form-control"></td>	
+			<td ><input type="double" name="NT" value="{{$key->NT}}" class="form-control"></td>	
 			@endif
 
 			@if($key->CD > 0 )
