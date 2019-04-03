@@ -3,7 +3,7 @@ body{
 }
 .title{
 	text-align: center;
-	color: 	#5588ff;
+	color: 	#e0b64f;
 	font-size: 100px;
 	font-family: 'Open Sans', Arial, Helvetice Neue, sans-serif;
 	font-weight: bold;		
@@ -11,7 +11,7 @@ body{
 .info{
 	text-align: center;
 	font-size: 35px;
-	color: #1d4c60;
+	color: #e0b64f;
 	font-family: 'Open Sans', Arial, Helvetice Neue, sans-serif;
 	font-weight: bold;	
 }
@@ -41,7 +41,7 @@ body{
 	font-weight: bold;	
 	height: 200px;
 	width: 200px;
-	background-image: url('../../images/circle-vector-4.png');
+	background-image: url('../../images/circle-orange.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -127,7 +127,7 @@ strong{
 strong{
 	padding-bottom: 20px;
 	font-size: 65px;
-	color: 	white;
+	color: 	red;
 }
 
 #time{
@@ -144,13 +144,13 @@ strong{
 }
 
 .giaithuong1{
-	color: #29b758;
+	color: #e0b64f;
 	float: left;
 	text-shadow: 0.2em 0.2em 0.3em black;
 }
 
 .value{
-	color: #61250c;
+	color: #e0b64f;
 	text-shadow: 0.2em 0.2em 0.3em black;
 }
 
