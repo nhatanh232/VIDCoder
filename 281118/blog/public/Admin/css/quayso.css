@@ -3,7 +3,7 @@ body{
 }
 .title{
 	text-align: center;
-	color: 	#e0b64f;
+	color: 	#fca811;
 	font-size: 100px;
 	font-family: 'Open Sans', Arial, Helvetice Neue, sans-serif;
 	font-weight: bold;		
@@ -11,7 +11,7 @@ body{
 .info{
 	text-align: center;
 	font-size: 35px;
-	color: #e0b64f;
+	color: #fca811;
 	font-family: 'Open Sans', Arial, Helvetice Neue, sans-serif;
 	font-weight: bold;	
 }
@@ -41,7 +41,7 @@ body{
 	font-weight: bold;	
 	height: 200px;
 	width: 200px;
-	background-image: url('../../images/circle-orange.png');
+	background-image: url('../../images/travel-circle.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -127,7 +127,7 @@ strong{
 strong{
 	padding-bottom: 20px;
 	font-size: 65px;
-	color: 	red;
+	color: 	#fca811;
 }
 
 #time{
@@ -144,13 +144,13 @@ strong{
 }
 
 .giaithuong1{
-	color: #e0b64f;
+	color: #fca811;
 	float: left;
 	text-shadow: 0.2em 0.2em 0.3em black;
 }
 
 .value{
-	color: #e0b64f;
+	color: #fca811;
 	text-shadow: 0.2em 0.2em 0.3em black;
 }
 
