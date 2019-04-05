@@ -50,6 +50,7 @@ and sotrungthuong.Ngay  = quaysotrungthuong.Ngayxo'));
 
   $countGiaiDB = \DB::table('quaysotrungthuong')->join('sotrungthuong','sotrungthuong.Ngay','=','quaysotrungthuong.Ngayxo')->select(\DB::raw('count(quaysotrungthuong.Trangthaidb) as Sogiaidb, quaysotrungthuong.Ngayxo'))->where('quaysotrungthuong.Trangthaidb',1)->groupBy('quaysotrungthuong.Ngayxo')->orderBy('quaysotrungthuong.Ngayxo','DESC')->get()->first();
 
+                  
 if(!empty($countGiaiDB))
   {\DB::Table('sotrungthuong')->where('Ngay',$countGiaiDB->Ngayxo)->update(['Trungdb'=>$countGiaiDB->Sogiaidb]);
 }
@@ -120,7 +121,7 @@ if(!empty($countGiaiDB))
             if($nextKi->Trungdb >= 1)
             {       
             
-                    $Ngayxott = $Ngayxottstring->modify('+4 day');
+                    $Ngayxott = $Ngayxottstring->modify('+7 day');
                     $create = new SoTrungThuongModel;
                     $create->Ki = ++$nextKi->Ki;
                     $create->Ngay = $Ngayxott;
@@ -131,12 +132,22 @@ if(!empty($countGiaiDB))
             }
             else
             {
-                
-                      $Ngayxott = $Ngayxottstring->modify('+4 day');
+                    $songuoimayman =  \DB::select(\DB::raw("
+                select count('*') as songuoi FROM quaysotrungthuong,sotrungthuong
+              where quaysotrungthuong.Ngayxo = '$Ngayxo'
+              and quaysotrungthuong.Ngayxo = sotrungthuong.Ngay
+              and (((Solan1 = Lan1 or Solan1 = Lan2 or Solan1 = Lan3) and (Solan2 = Lan1 or Solan2 = Lan2 or Solan2 = Lan3))
+              or  ((Solan2 = Lan1 or Solan2 = Lan2 or Solan2 = Lan3) and (Solan3 = Lan1 or Solan3 = Lan2 or Solan3 = Lan3))
+              or  ((Solan1 = Lan1 or Solan1 = Lan2 or Solan1 = Lan3) and (Solan3 = Lan1 or Solan3 = Lan2 or Solan3 = Lan3)))
+            "))[0]->songuoi;
+                    $giatrimayman = -1000000;
+                   $giatricongthem = 1500000 + (int)$songuoimayman * $giatrimayman;
+
+                      $Ngayxott = $Ngayxottstring->modify('+7 day');
                     $create = new SoTrungThuongModel;
                     $create->Ki = ++$nextKi->Ki;
                     $create->Ngay = $Ngayxott;
-                    $create->Giaithuongdb = $nextKi->Giaithuongdb + 1500000;
+                    $create->Giaithuongdb = $nextKi->Giaithuongdb + $giatricongthem;
                     $create->Trungdb = 0;
                     $create->Trungkk = 0;
                     $create->save();

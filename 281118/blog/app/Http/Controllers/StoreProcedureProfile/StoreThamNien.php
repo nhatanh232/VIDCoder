@@ -173,7 +173,10 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
                 $GioiTinh = array('Nam'=> 0 , 'Nữ'=> 1);
                 $CongDoan = array('Có'=>1 , "Không" => 0);
 
+        
                 foreach($data as $key){
+                    if($key->ma_nhan_vien == '181008295M')
+                        dd($key);
                     $check = StaffModel::where('Staff_ID',$key->ma_nhan_vien)->get();
                 //      $datetime = (string)$key->ngay_sinh;
                 // if($datetime != null)
@@ -460,7 +463,7 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
             $TL = $Request->TL;
             $KT = $Request->KT;
             $KN = $Request->KN;
-            $CM = $Request->CM;
+            $NT = $Request->NT;
             $CD = $Request->CD;
             $TC = $Request->TC;
             $id = $Request->id;
@@ -471,7 +474,7 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
                 $update->TL = $TL;
                 $update->KT = $KT;
                 $update->KN = $KN;
-                $update->CM = $CM;
+                $update->NT = $NT;
                 $update->CD = $CD;
                 $update->TC = $TC;
                 $update->save();
@@ -482,8 +485,23 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
         }
         public static function deleteDataInDay(Request $Request){
             $id = $Request->id;
-            DIEMDANHHOATDONGmodel::find($id)->delete();
-            ProfileManager::Update_EditInDay($id);
+        $check = ThongKeDiemCongHienModel::where('id_HoatDong',$id)->select('Staff_ID','id','id_HoatDong')->get()->first();
+
+        $id_Checked = $check->id;
+
+         
+        $Staff_ID = $check->Staff_ID;
+        // Bước 2: Xóa các record được import sau đó
+        ThongKeDiemCongHienModel::where('Staff_ID',$Staff_ID)->where('id','>=',$id_Checked)->delete();
+        DIEMDANHHOATDONGmodel::where('id',$id)->delete();
+        // Lấy các giá trị của Staff_ID đã được insert 
+        $all_value_inserted = DIEMDANHHOATDONGmodel::where('Staff_ID',$Staff_ID)->where('id','>=',$id)->get();
+
+        foreach ($all_value_inserted as $key) {
+            ProfileManager::store_ThongKeCongHien_ThamNien($key->Staff_ID);
+            ProfileManager::trigger_Insert_ThongKeCongHien_GioDaoTao($key->Staff_ID,$key->Ngayhoatdong,$key->Mahoatdong);
+       
+        }
             return 'Đã xóa thành công';
         }
         public function khaibaohd(){
@@ -497,7 +515,7 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
             $TL = $Request->TL;
             $KT = $Request->KT;
             $KN = $Request->KN;
-            $CM = $Request->CM;
+            $NT = $Request->NT;
             $CD = $Request->CD;
             $TC = $Request->TC;
             $Mahoatdong = $Request->Mahoatdong;
@@ -516,7 +534,7 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
                     $nhap->TL = $TL;
                     $nhap->KT = $KT;
                     $nhap->KN = $KN;
-                    $nhap->CM = $CM;
+                    $nhap->NT = $NT;
                     $nhap->CD = $CD;
                     $nhap->TC = $TC;
                     $nhap->Mahoatdong = $Mahoatdong;
@@ -536,7 +554,7 @@ date_default_timezone_set("Asia/Ho_Chi_Minh");
                     $update->TL = $TL;
                     $update->KT = $KT;
                     $update->KN = $KN;
-                    $update->CM = $CM;
+                    $update->NT = $NT;
                     $update->CD = $CD;
                     $update->TC = $TC;
                     $update->Mahoatdong = $Mahoatdong;

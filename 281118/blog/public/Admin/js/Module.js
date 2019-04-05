@@ -427,7 +427,7 @@ function FormNhapLieu(url){
         var TL = $('input[name="TL"]').val();
          var KT = $('input[name="KT"]').val();  
           var KN = $('input[name="KN"]').val();
-           var CM = $('input[name="CM"]').val();
+           var NT = $('input[name="NT"]').val();
             var CD = $('input[name="CD"]').val();
              var TC = $('input[name="TC"]').val();
              var Mahoatdong = $('input[name="Mahoatdong"]').val();
@@ -446,7 +446,7 @@ function FormNhapLieu(url){
                 TL:TL,
                 KT:KT,
                 KN:KN,
-                CM:CM,
+                NT:NT,
                 CD:CD,
                 TC:TC
             },
@@ -461,7 +461,7 @@ function FormNhapLieu(url){
                   $('input[name="TL"]').val(0);
                   $('input[name="KT"]').val(0);
                   $('input[name="KN"]').val(0);
-                  $('input[name="CM"]').val(0);
+                  $('input[name="NT"]').val(0);
                   $('input[name="CD"]').val(0);
                   $('input[name="TC"]').val(0);
             },
@@ -545,7 +545,7 @@ function buttonEditData(){
                 Result['KN'] = $(this).find('input').val();
                 break;
          case 7:
-                Result['CM'] = $(this).find('input').val();
+                Result['NT'] = $(this).find('input').val();
                 break; 
          case 8:
                 Result['CD'] = $(this).find('input').val();
@@ -572,7 +572,7 @@ function buttonEditData(){
                 TL:Result['TL'],
                 KT:Result['KT'],
                 KN:Result['KN'],
-                CM:Result['CM'],
+                NT:Result['NT'],
                 CD:Result['CD'],
                 TC:Result['TC'],
                 id:id
@@ -593,7 +593,7 @@ function deleteData(){
     $('.deleteData').click(function(){
 
         var id = this.value;
-        alert(id);
+      
         var row = jQuery(this).closest('tr');
         $.ajax({
             type:'get',
@@ -770,7 +770,7 @@ function FormKhaiBao(){
                var TL = $('input[name="TL"]').val();
         var KT = $('input[name="KT"]').val();  
         var KN = $('input[name="KN"]').val();
-        var CM = $('input[name="CM"]').val();
+        var NT = $('input[name="NT"]').val();
         var CD = $('input[name="CD"]').val();
         var TC = $('input[name="TC"]').val();
         var Mahoatdong = $('input[name="Mahoatdong"]').val();
@@ -793,7 +793,7 @@ function FormKhaiBao(){
                         TL:TL,
                         KT:KT,
                         KN:KN,
-                        CM:CM,
+                        NT:NT,
                         CD:CD,
                         TC:TC,
                         Mahoatdong:Mahoatdong,

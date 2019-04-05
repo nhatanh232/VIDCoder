@@ -1,16 +1,9 @@
 <?php $i = 1; 
 	$Trangthai = array("0"=>"Đã nghỉ việc","1"=>"Đang làm việc");
 ?>
-<h1 class="text-default">INFORMATION & COMMUNICATION TECHNOLOGIES</h1>
-
 	<div class="panel panel-primary">
           <div class="panel-heading">
-            <h3  class="panel-title" id="title">Thông tin nhân sự</h3>
-            <!-- <div class="pull-right">
-              <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
-              <i class="glyphicon glyphicon-filter"></i>
-               </span>
-            </div> --> 
+            <h3  class="panel-title" id="title">Thông tin nhân sự</h3> 
           </div>    
 	<table id="ICT" class="table table-bordered">
 		<thead>

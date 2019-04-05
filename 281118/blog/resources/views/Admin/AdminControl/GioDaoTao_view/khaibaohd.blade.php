@@ -10,59 +10,93 @@
 		<div class="col-md-12">
 			<h1 style="text-align: center; border-bottom: 1px solid black">KHAI BÁO SỰ KIỆN</h1>
 		</div>	
+		<div class="clearfix"></div>
+		<div class="row">
+		<div class="col-md-5">
+		<div class="row">
+		<label class="col-md-6 text-right">Mã hoạt động </label>
+		<input type="text" name="Mahoatdong" required="" class="form-control col-md-6" />
+		</div>
+		<br/>
+		<div class="row">		
+		<label class="col-md-6 text-right">Tên hoạt động: </label>
+		<input type="text" name="Tenhoatdong" required=""  class="form-control col-md-6" />
+		</div>
+		<br/>
+
+		<div class="row">
+		<label class="col-md-6 text-right">Ngày diễn ra hoạt động: </label>
+		<input type="datetime-local" name="Ngaydienra" required=""  class="form-control col-md-6" />
+		</div>
+		<br/>
+
+		<div class="row">	
+		<label class="col-md-6 text-right">Ngày đề xuất: </label>
+		<input type="date" name="Ngaydexuat" required=""   class="form-control col-md-6" />
+		</div>
+		<br/>
+
+		<div class="row">		
+		<label class="col-md-6 text-right">Người đề xuât: </label>	
+		<input type="text" name="Nguoidexuat" required=""  class="form-control col-md-6"  />	
+		</div>
+		<br/>
+		</div>
 		
-		<label>Mã hoạt động </label>
-		<input type="text" name="Mahoatdong" required="" />
-		<br/>		
-		<label>Tên hoạt động: </label>
-		<input type="text" name="Tenhoatdong" required="" />
+		
+			<div class="col-md-5">
+			<div class="row">
+		<label class="col-md-6 text-right">Thời gian bắt đầu: </label>	
+		<input type="datetime-local" name="Thoigianbd" required=""   class="form-control col-md-6" />	
+		</div>
 		<br/>
-		<label>Ngày diễn ra hoạt động: </label>
-		<input type="datetime-local" name="Ngaydienra" required="" />
-		<br/>	
-		<label>Ngày đề xuất: </label>
-		<input type="date" name="Ngaydexuat" required=""  />
-		<br/>		
-		<label>Người đề xuât: </label>	
-		<input type="text" name="Nguoidexuat" required=""  />	
+
+		<div class="row">
+		<label class="col-md-6 text-right">Thời gian kết thúc: </label>	
+		<input type="datetime-local" name="Thoigiankt" required=""  class="form-control col-md-6" />	
+		</div>
 		<br/>
-		<label>Thời gian bắt đầu: </label>	
-		<input type="datetime-local" name="Thoigianbd" required=""  />	
+
+		<div class="row">
+		<label class="col-md-6 text-right">Ngân sách dự tính: </label>	
+		<input type="text" name="Ngansachdutinh"  class="form-control col-md-6"  />	
+		</div>
 		<br/>
-		<label>Thời gian kết thúc: </label>	
-		<input type="datetime-local" name="Thoigiankt" required=""  />	
+
+		<div class="row">
+		<label class="col-md-6 text-right">Số người tham gia: </label>	
+		<input type="number" name="Songuoithamdu"  class="form-control col-md-6"  />	
+		</div>
+			</div>		<!-- end right -->
+
+			</div><!-- end row -->
 		<br/>
-		<label>Ngân sách dự tính: </label>	
-		<input type="text" name="Ngansachdutinh"  />	
-		<br/>
-		<label>Số người tham gia: </label>	
-		<input type="number" name="Songuoithamdu"  />	
-		<br/>
+		<div class="clearfix"></div>
 		<label>Số giờ theo phân loại: </label>		
 		<br/>
 		<div class="row">
 		<div class="col-md-2">
 			<label class="col-md-12">Tâm lý</label>
-			<input type="double" name="TL" class="col-md-12" value="0">
+			<input type="double" name="TL" class="col-md-12 form-control" value="0">
 		</div>
 		<div class="col-md-2">
 			<label class="col-md-12">Kiến thức</label>
-			<input type="double" name="KT" class="col-md-12" value="0">
+			<input type="double" name="KT" class="col-md-12 form-control" value="0">
 		</div>
 		<div class="col-md-2">
 			<label class="col-md-12">Kỹ năng</label>
-			<input type="double" name="KN" class="col-md-12" value="0">
+			<input type="double" name="KN" class="col-md-12 form-control" value="0">
 		</div>
 		<div class="col-md-2">
-			<label class="col-md-12">Chuyên môn</label>
-			<input type="double" name="CM" class="col-md-12" value="0">
+			<label class="col-md-12">Nghệ thuật</label>
+			<input type="double" name="NT" class="col-md-12 form-control" value="0">
 		</div>
 		<div class="col-md-2">
 			<label class="col-md-12">Cộng đông</label>
-			<input type="double" name="CD" class="col-md-12" value="0">
+			<input type="double" name="CD" class="col-md-12 form-control" value="0">
 		</div><div class="col-md-2">
 			<label class="col-md-12">Thể chất</label>
-			<input type="double" name="TC" class="col-md-12" value="0">
+			<input type="double" name="TC" class="col-md-12 form-control" value="0">
 		</div>
 
 	</div>
