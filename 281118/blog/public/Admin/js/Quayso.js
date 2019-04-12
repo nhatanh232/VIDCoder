@@ -199,6 +199,7 @@ function Countdown(Time){
     	document.getElementById("time").style.display = "none";
     	document.getElementById("circle").style.display = "block";
     	document.getElementById("ShowContent").style.display = "block";
+    	document.getElementById("ShowContent1").style.display = "block";
     }
 }, 1000);
   }
