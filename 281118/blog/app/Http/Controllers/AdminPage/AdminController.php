@@ -13,6 +13,9 @@ use App\Profile\DiemDanhModel;
 use App\Profile\StaffModel;
 use Auth;
 use Excel;
+use Mail;
+use App\Mail\KetQuaQuaySoMail;
+use Spatie\Browsershot\Browsershot;
 class AdminController extends Controller
 {
     public function getInformationNV(){
@@ -79,10 +82,31 @@ class AdminController extends Controller
         $nhap = SoTrungThuongModel::find($Ngayxo);
         $nhap->$n = $value;
         $nhap->save();
+       
         event(
                 $e = new Redis($nhap)
             );
-        return 'OK';
+         if($n == 'Solan3' )
+            {
+                    $Giaikhuyenkhich = \DB::select(\DB::raw('select * from quaysotrungthuong,sotrungthuong where quaysotrungthuong.Lan3  = sotrungthuong.Solan3 and quaysotrungthuong.Ngayxo = \''.$Ngayxo.'\' and sotrungthuong.Ngay  = quaysotrungthuong.Ngayxo'));
+                    $Giaimayman = \DB::select(\DB::raw("
+                select * FROM quaysotrungthuong,sotrungthuong
+              where quaysotrungthuong.Ngayxo = '$Ngayxo'
+              and quaysotrungthuong.Ngayxo = sotrungthuong.Ngay
+              and (((Solan1 = Lan1 or Solan1 = Lan2 or Solan1 = Lan3) and (Solan2 = Lan1 or Solan2 = Lan2 or Solan2 = Lan3))
+              or  ((Solan2 = Lan1 or Solan2 = Lan2 or Solan2 = Lan3) and (Solan3 = Lan1 or Solan3 = Lan2 or Solan3 = Lan3))
+              or  ((Solan1 = Lan1 or Solan1 = Lan2 or Solan1 = Lan3) and (Solan3 = Lan1 or Solan3 = Lan2 or Solan3 = Lan3)))
+            "));
+                  $Giaidacbiet =\DB::select(\DB::raw('SELECT * FROM quaysotrungthuong,sotrungthuong WHERE (quaysotrungthuong.Lan1 = sotrungthuong.Solan1 or quaysotrungthuong.Lan2 = sotrungthuong.Solan1 or quaysotrungthuong.Lan3 = sotrungthuong.Solan1) AND (quaysotrungthuong.Lan1 = sotrungthuong.Solan2 or quaysotrungthuong.Lan2 = sotrungthuong.Solan2 or quaysotrungthuong.Lan3 = sotrungthuong.Solan2) AND (quaysotrungthuong.Lan1 = sotrungthuong.Solan3 or quaysotrungthuong.Lan2 = sotrungthuong.Solan3 or quaysotrungthuong.Lan3 = sotrungthuong.Solan3) AND quaysotrungthuong.Ngayxo =\''.$Ngayxo.'\' AND quaysotrungthuong.Ngayxo = sotrungthuong.Ngay'));  
+        $result = [
+                'Kyquay' => $Ky,
+                'Giaimayman' => $Giaimayman,
+                'Giaidacbiet' => $Giaidacbiet,
+                'Giaikhuyenkhich' => $Giaikhuyenkhich
+        ];
+            Mail::to('toan.bui@dautuviendong.vn')
+            ->cc(['cosovatchat@dautuviendong.vn', 'hanhchinh@dautuviendong.vn','bien.nguyen@dautuviendong.vn', 'anh.ly@dautuviendong.vn'])->send(new KetQuaQuaySoMail($result));
+            }
     }
      public function deleteSo(Request $Request){
         $Ky = \DB::table('sotrungthuong')->orderBy('Ki','DESC')->get()->first();
@@ -175,5 +199,8 @@ class AdminController extends Controller
 
                 return 'Đã phản hồi';
             }
+    }
+    public function et(){      
+        Browsershot::html('<h1>Hello world!!</h1>')->save('example.pdf');
     }
 }

@@ -8,7 +8,8 @@ use Auth;
 use App\CustomerProvider\SoTrungThuongModel;
 use App\CustomerProvider\TaiSanPhongBanModel;
 use Carbon\Carbon;
-
+use Mail;
+use App\Mail\KetQuaQuaySoMail;
 use App\Events\CustomerProvider\Redis;
 class ThongBaoController extends Controller
 {
@@ -109,7 +110,6 @@ if(!empty($countGiaiDB))
   $countGiaiDB = \DB::table('quaysotrungthuong')->join('sotrungthuong','sotrungthuong.Ngay','=','quaysotrungthuong.Ngayxo')->select(\DB::raw('count(quaysotrungthuong.Trangthaidb) as Sogiaidb, quaysotrungthuong.Ngayxo'))->where('quaysotrungthuong.Trangthaidb',1)->groupBy('quaysotrungthuong.Ngayxo')->orderBy('quaysotrungthuong.Ngayxo','DESC')->get()->first();
   
   \DB::Table('sotrungthuong')->where('Ngay',$countGiaiDB->Ngayxo)->update(['Trungdb'=>$countGiaiDB->Sogiaidb]);
-           
         }
 
         return view('test.Nguoidb',compact('Dacbiet'));

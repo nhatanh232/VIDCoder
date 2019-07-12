@@ -36,7 +36,7 @@ function postNhapso(){
 				n:Kiemtraval,
 				value:value,
 			},
-			success:function(){
+			success:function(data){
 
 				$('input[name="postSo"]').val("");
 				$('[data-action="'+n+'"]').html(value);

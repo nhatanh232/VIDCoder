@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('et','AdminPage\AdminController@et');
 Route::get('/', function () {
     return view('welcome');
 });

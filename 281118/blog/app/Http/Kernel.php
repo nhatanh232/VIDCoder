@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'AuthenNhapLieu'=> \App\Http\Middleware\AuthenNhapLieu::class,
         'AuthenTSPB'=> \App\Http\Middleware\AuthenTSPB::class,
           'cors' => \App\Http\Middleware\Cors::class,
+          
     ];
 }
