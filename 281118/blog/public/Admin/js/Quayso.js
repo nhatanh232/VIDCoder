@@ -206,7 +206,7 @@ function Countdown(Time){
 
   function preResult(){
   	var Ki = $('.info').text();
-  	var result = --Ki.split(" ")[3].split('#')[1];
+  	var result = --Ki.split(" ")[1].split('#')[1];
   	if(result > 0){
   		$.ajax({
   			type:'get',
@@ -227,7 +227,7 @@ function Countdown(Time){
 
   function nextResult(){
   	var Ki = $('.info').text();
-  	var result = ++Ki.split(" ")[3].split('#')[1];
+  	var result = ++Ki.split(" ")[1].split('#')[1];
   	$.ajax({
   		type:'get',
   		url:'preKi',

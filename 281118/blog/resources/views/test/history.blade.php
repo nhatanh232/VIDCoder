@@ -13,17 +13,29 @@
 		<br/>
 		<br/>
 		<br/> -->
-		<div>
-			<h1 class="title">CƠ HỘI BẤT NGỜ</h1>			
+		<div class="row">
+			<div class="col-md-8" style="background: linear-gradient(to right,#0083c4, #0256c1); border: solid #0256c1 1px;">
+				<p class="head-title">Kết quả</p>
+				<p class="head-title-name">CƠ HỘI BẤT NGỜ</p>
+				<hr width="70%" />
+			</div>
+			<div class="col-md-4" style="background: #0256c1; border: solid #0256c1 1px;">
+				<P class="info">Kỳ #@if(!empty($Sodcchon)){{++$Sodcchon->Ki}} @endif</P>
+				<p class="head-date">
+					@if(!empty($Sodcchon)){{date('d/m/Y',strtotime($Sodcchon->Ngay))}} @else Đang cập nhật @endif
+				</p>
+				<hr width="10%" />
+			</div>
 		</div>
-		<div>
-			
-			<h1 class="info">Kỳ quay thưởng: #@if(!empty($Sodcchon)){{++$Sodcchon->Ki}} @endif| Ngày quay thưởng: @if(!empty($Sodcchon)){{date('d-m-Y',strtotime($Sodcchon->Ngay))}} @else Kì quay được cập nhật vào ngày mai @endif </h1>
+		<br/>
+		<br/>
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-7 body-price">
+				<p>&nbsp;&nbsp;Giá Trị Giải Thưởng:@if(!empty($Sodcchon)) {{number_format($Sodcchon->Giaithuongdb)}}@endif VNĐ
+			</div>
 		</div>
-		<div class="giaithuong">
-			<p class="giaithuong1">Giá Trị Giải Thưởng:</p><p class="value">@if(!empty($Sodcchon)) {{number_format($Sodcchon->Giaithuongdb)}}@endif đồng</p>
-		</div>
-
+		<br/>
 		<div class="container" style="margin-left: 17%; margin-bottom: 10px;">
 			@if(!empty($Sodcchon))					
 			<div class="luckyNumber">
@@ -38,12 +50,13 @@
 			
 			@endif
 		</div>	
+		<br/>
 		<!-- Giải thưởng -->
 		<div class="container" id="ShowContent">
 			<div class="rows">
 				<!-- Giải Khuyến Khích -->
 				<div class="col-md-4">
-					<div class="subTitle">KHUYẾN KHÍCH</div>			
+					<div class="subTitleKK">KHUYẾN KHÍCH</div>			
 					<!-- start for -->			
 					@foreach($Giaikhuyenkhich as $Nguoikk)	
 					<?php $z++ ?>

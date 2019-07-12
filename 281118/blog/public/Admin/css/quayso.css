@@ -9,19 +9,17 @@ body{
 	font-weight: bold;		
 }
 .info{
+	color: white;
 	text-align: center;
-	font-size: 35px;
-	color: #fca811;
-	font-family: 'Open Sans', Arial, Helvetice Neue, sans-serif;
-	font-weight: bold;	
+	font-size: 400%;
+	font-family: "Dancing Script";	
 }
 .subTitle{
 	text-align: center;
-	color: 	#ffc300;
+	color: 	white;
 	font-size: 20px;
-	background-color: #e83459;
+	background-color: #0256c1;
 	border: 2px solid white;
-	box-shadow: 2px 5px black;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	margin-left: 40px;
@@ -29,19 +27,34 @@ body{
 	font-family: 'Open Sans', Arial, Helvetice Neue, sans-serif;
 	font-weight: bold;	
 }
+
+.subTitleKK{
+	text-align: center;
+	color: 	yellow;
+	font-size: 20px;
+	background-color: #0256c1;
+	border: 2px solid white;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-left: 40px;
+	margin-right: 40px;
+	font-family: 'Open Sans', Arial, Helvetice Neue, sans-serif;
+	font-weight: bold;	
+}
+
 .number{
 	text-align: center;
 	color: blue;
 	font-size: 50px;
 	/*	background-color: red;*/
 	/*	border: 2px solid red;*/
-	padding-top: 65px;
+	padding-top: 30px;
 	padding-bottom: 5px;
 	padding-left: 3px;
 	font-weight: bold;	
 	height: 200px;
 	width: 200px;
-	background-image: url('../../images/travel-circle.png');
+	background-image: url('../../images/blue-circle.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -63,40 +76,44 @@ body{
 
 }
 .t1{
-	background-color: #F6B297;
+	background-color: #84c4e9;
 	font-weight: bold;
 	font-size: 13px;
 	width: 70%;
 	float: left;
+	color: white;
+	text-align: center;
 }	
 .t1-num{
-	background-color: #F6B297;
+	background-color: #84c4e9;
 	font-weight: bold;
 	font-size: 13px;
 	color: red;
 	width: 10%;
-	float: left;			
+	float: left;	
+	text-align: center;		
 }
 .t1-num span{
-	margin-left: 7px;
 }
 .t2{
-	background-color: #FCD9C4;
+	background-color: #84c4e9;
 	font-weight: bold;
 	font-size: 13px;
 	width: 70%;
 	float: left;
+	color: white;
+	text-align: center;
 }	
 .t2-num{
-	background-color: #FCD9C4;
+	background-color: #84c4e9;
 	font-weight: bold;
 	font-size: 13px;
 	color: red;
 	width: 10%;
 	float: left;
+	text-align: center;
 }
 .t2-num span{
-	margin-left: 7px;
 }	
 .test{
 	float: left;
@@ -118,16 +135,10 @@ body{
 	font-weight: bold;
 	margin: 1px;
 }
-strong{
-	padding-bottom: 20px;
-	font-size: 65px;
-	color: 	#ff66cc;
-}
 
 strong{
-	padding-bottom: 20px;
-	font-size: 65px;
-	color: 	#fca811;
+	font-size: 200%;
+	color: 	white;
 }
 
 #time{
@@ -159,31 +170,9 @@ strong{
 	margin-left: 20px;
 }
 
-/*.topweb{
-	position: absolute;
-	top: 0px;
-	left: 0px;
-}
-
-.leftbot{
-	position: fixed;
-	bottom: 0px;
-	left: 0px;
-	width: 350px;
-	height: 250px;
-}
-
-.rightbot{
-	position: fixed;
-	bottom: 0px;
-	right: 0px;
-	width: 340px;
-	height: 350px;
-}*/
-
 .bigdiv{
 	font-family: sans-serif;
-	color: #faeb97;
+	color: white;
 	display: inline-block;
 	font-weight: 100;
 	text-align: center;
@@ -194,14 +183,14 @@ strong{
 .bigdiv > div{
 	padding: 10px;
 	border-radius: 3px;
-	background: #8f0001;
+	background: #0256c1;
 	display: inline-block;
 }
 
 .text-time{
 	padding: 15px;
 	border-radius: 3px;
-	background: #C50023;
+	background: #84c4e9;
 	display: inline-block;
 }
 
@@ -234,122 +223,32 @@ strong{
 	opacity: 1;
 }
 
-./*firework1{
-	position: absolute;
-	left: 0px;
-	top: 0px;
+.head-title{
+	color: white;
+	text-align: center;
+	font-size: 400%;
+	font-family: "Dancing Script";
 }
 
-.firework2{
-	position: absolute;
-	right: 0px;
-	top: 0px;
+.head-title-name{
+	color: white;
+	text-align: center;
+	font-weight: bold;
+	font-size: 500%;
 }
 
-.firework3{
-	position: absolute;
-	left: 0px;
-	bottom: 50%;
+.head-date{
+	color: white;
+	text-align: center;
+	font-weight: bold;
+	font-size: 500%;
 }
 
-.firework4{
-	position: absolute;
-	right: 0px;
-	bottom: 50%;
+.body-price{
+	color: white;
+	font-size: 300%;
+	font-style: italic;
+	font-weight: bold;
+	background: #84c4e9;
+	transform:rotate(-3deg);
 }
-
-.botleft{
-	position: fixed;
-	bottom: 0px;
-	right: 0px;
-	width: 300px;
-	height: 350px;
-}
-
-.botright{
-	position: fixed;
-	bottom: 0px;
-	left: 0px;
-	width: 350px;
-	height: 300px;
-}*/
-
-/*Event Tết cổ truyền*/
-/*.topleft{
-	position: absolute;
-	left: 0px;
-	top: 0px;
-}
-
-.topright{
-	position: absolute;
-	right: 0px;
-	top: 0px;
-}
-
-.midtop{
-	position: absolute;
-	right: 26%;
-	top: 0px;
-}
-
-.midleft{
-	position: absolute;
-	left: 0px;
-	top: 26%;
-}
-
-.midright{
-	position: absolute;
-	right: 0px;
-	top: 26%;
-}
-
-.botleft{
-	position: fixed;
-	left: 0px;
-	bottom: 0px;
-	width: 200px;
-	height: 200px;
-}
-
-.botright{
-	position: fixed;
-	right: 0px;
-	bottom: 0px;
-	width: 200px;
-	height: 200px;
-}
-
-.botmid1{
-	position: fixed;
-	right: 20%;
-	bottom: 0px;
-	width: 200px;
-	height: 200px;
-}
-
-.botmid2{
-	position: fixed;
-	right: 30%;
-	bottom: 0px;
-	width: 200px;
-	height: 200px;
-}
-
-.botmid3{
-	position: fixed;
-	right: 45%;
-	bottom: 0px;
-	width: 200px;
-	height: 200px;
-}
-
-.botmid4{
-	position: fixed;
-	right: 70%;
-	bottom: 0px;
-	width: 250px;
-	height: 200px;
-	z-index: -1;
-}*/
