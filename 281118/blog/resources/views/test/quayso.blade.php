@@ -15,34 +15,34 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
 	<script type="text/javascript" src="{{asset('Admin/js/Quayso.js')}}"></script>
 	<link rel="stylesheet" type="text/css" href="{{asset('Admin/css/quayso.css')}}">
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Dancing+Script" />
 </head>
 <body>
-<!-- 	<img src="{{URL::asset('images/hoamai.png')}}" class="topleft">
-	<img src="{{URL::asset('images/hoadao.png')}}" class="topright">
-	<img src="{{URL::asset('images/chucmung.png')}}" class="midtop">
-	<img src="{{URL::asset('images/caudoi1.png')}}" class="midleft">
-	<img src="{{URL::asset('images/caudoi2.png')}}" class="midright">
-	<img src="{{URL::asset('images/hoatdong1.gif')}}" class="botleft">
-	<img src="{{URL::asset('images/hoatdong2.png')}}" class="botright">
-	<img src="{{URL::asset('images/hoatdong5.png')}}" class="botmid1">
-	<img src="{{URL::asset('images/hoatdong4.png')}}" class="botmid2">
-	<img src="{{URL::asset('images/hoatdong3.png')}}" class="botmid3">
-	<img src="{{URL::asset('images/hoatdong6.jpg')}}" class="botmid4"> -->
-	<br/>
-	<br/>
-	<br/>
-	<br/>
+	<br/><br/>
 	<div class="container" id="His">
-		<div>
-			<h1 class="title">CƠ HỘI BẤT NGỜ</h1>			
+		<div class="row">
+			<div class="col-md-8" style="background: linear-gradient(to right,#0083c4, #0256c1); border: solid #0256c1 1px;">
+				<p class="head-title">Kết quả</p>
+				<p class="head-title-name">CƠ HỘI BẤT NGỜ</p>
+				<hr width="70%" />
+			</div>
+			<div class="col-md-4" style="background: #0256c1; border: solid #0256c1 1px;">
+				<P class="info">Kỳ #@if(!empty($Sodcchon)){{++$Sodcchon->Ki}} @endif</P>
+				<p class="head-date">
+					@if(!empty($Sodcchon)){{date('d/m/Y',strtotime($Sodcchon->Ngay))}} @else Đang cập nhật @endif
+				</p>
+				<hr width="10%" />
+			</div>
 		</div>
-		<div>
-
-			<h1 class="info">Kỳ quay thưởng: #@if(!empty($Sodcchon)){{++$Sodcchon->Ki}} @endif| Ngày quay thưởng: @if(!empty($Sodcchon)){{date('d-m-Y',strtotime($Sodcchon->Ngay))}} @else Kì quay được cập nhật vào ngày mai @endif </h1>
+		<br/>
+		<br/>
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-7 body-price">
+				<p>&nbsp;&nbsp;Giá Trị Giải Thưởng:@if(!empty($Sodcchon)) {{number_format($Sodcchon->Giaithuongdb)}}@endif VNĐ
+			</div>
 		</div>
-		<div class="giaithuong">
-			<p class="giaithuong1">Giá Trị Giải Thưởng:</p><p class="value">@if(!empty($Sodcchon)) {{number_format($Sodcchon->Giaithuongdb)}}@endif đồng</p>
-		</div>
+		<br/>
 		<div class="container">
 			<p id="time"></p>
 		</div>	
@@ -60,12 +60,13 @@
 			
 			@endif
 		</div>	
+		<br/>
 		<!-- Giải thưởng -->
 		<div class="container" id="ShowContent" style="display: none;">
 			<div class="rows">
 				<!-- Giải Khuyến Khích -->
 				<div class="col-md-4">
-					<div class="subTitle">KHUYẾN KHÍCH</div>			
+					<div class="subTitleKK">KHUYẾN KHÍCH</div>			
 					<!-- start for -->			
 					@foreach($Giaikhuyenkhich as $Nguoikk)	
 					<?php $z++ ?>
@@ -153,11 +154,12 @@
 					<?php $i++ ?>
 					@if($i%2 ==0)	
 					<br/>
+					<div class="row">
 					<div class="t1">{{$Lichsu1->Hoten}}</div>
 					<div class="t1-num"><span>{{$Lichsu1->Lan1}}</span></div>
 					<div class="t1-num"><span>{{$Lichsu1->Lan2}}</span></div>
 					<div class="t1-num"><span>{{$Lichsu1->Lan3}}</span></div>
-					
+					</div>
 					@else
 					<div class="t2">{{$Lichsu1->Hoten}}</div>
 					<div class="t2-num"><span>{{$Lichsu1->Lan1}}</span></div>
